@@ -7,7 +7,7 @@ const StyledItem = styled.div`
   jusify-content: flex-start;
   align-items: flex-start;
   width: 100%;
-  margin-top: 20px;
+  margin: 0 0 36px 0;
 `
 
 const Column = styled.div`
@@ -15,8 +15,7 @@ const Column = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  flex: 5 1 auto;
-  width: 120px;
+  width: 144px;
   height: 140px;
 `
 
@@ -28,12 +27,12 @@ const ColumnQuantity = styled(Column)`
 
 const ColumnImage = styled(Column)`
   align-items: stretch;
-  flex: 4 1 auto;
-  width: 86px;
+  width: 105px;
 `
 
 const Title = styled.div`
-  height: 38px;
+  width: 144px;
+  height: 52px;
 `
 
 const Brand = styled.div`
@@ -45,17 +44,16 @@ const Product = styled(Brand)`
 `
 
 const Price = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 38px;
   font-weight: 500;
   text-align: left;
 `
 
-const AddQuantity = styled(Title)`
-`
-
-const Sizes = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+const Sizes = styled(Price)`
   align-items: flex-end;
   height: 38px;
 
@@ -64,8 +62,21 @@ const Sizes = styled.div`
   }
 `
 
-const DecQuantity = styled.div`
+const AddQuantity = styled(Title)`
   width: 24px;
+`
+
+const Quantity = styled(Price)`
+  width: 24px;
+  justify-content: center;
+`
+
+const DecQuantity = styled(Sizes)`
+  width: 24px;
+
+  & button {
+    margin-right: 0;
+  }
 `
 
 const Button = styled.button`
@@ -107,7 +118,9 @@ export default class Item extends React.Component {
             <Brand>Apollo</Brand>
             <Product>Running Short</Product>
           </Title>
-          <Price>$50.00</Price>
+          <Price>
+            <div>$50.00</div>
+          </Price>
           <Sizes>
             <Button disabled value='s'>S</Button>
             <Button value='m' className='checked'>M</Button>
@@ -115,7 +128,7 @@ export default class Item extends React.Component {
         </Column>
         <ColumnQuantity>
           <AddQuantity><Button>+</Button></AddQuantity>
-          <div>1</div>
+          <Quantity>1</Quantity>
           <DecQuantity><Button>-</Button></DecQuantity>
         </ColumnQuantity>
         <ColumnImage>

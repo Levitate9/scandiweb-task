@@ -10,10 +10,10 @@ const StyledHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 80px;
-  width: 80vw;
+  width: 1240px;
 `
 
-class Header extends React.Component {
+export default class Header extends React.Component {
   render() {
     return (
       <StyledHeader>
@@ -22,11 +22,10 @@ class Header extends React.Component {
         <Actions 
           currencies={this.props.currencies}
           currentCurrency={this.props.currentCurrency}
-          toggleCurrency={this.props.toggleCurrency} 
+          toggleCurrency={this.props.toggleCurrency}
+          cartItems={this.props.cartItems} 
         />
       </StyledHeader>
     )
   }
 }
-
-export default Header

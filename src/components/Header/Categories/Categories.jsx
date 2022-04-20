@@ -40,14 +40,14 @@ class Categories extends React.Component {
   render() {
     return (
       <StyledUl>
-            { this.props.categories.map((el, id) => 
-              <StyledLi key={id}>
-                <StyledNavLink 
-                  to={`/${el.name}`}
-                  className={(navData) => (navData.isActive ? 'active' : '')}
-                ><span>{el.name}</span></StyledNavLink> 
-              </StyledLi>
-            )}  
+        {this.props.categories.map((el, id) =>
+          <StyledLi key={id}>
+            <StyledNavLink
+              to={`/${el.name}`}
+              className={(navData) => (navData.isActive ? 'active' : '')}
+            ><span>{el.name}</span></StyledNavLink>
+          </StyledLi>
+        )}
       </StyledUl>
     )
   }
