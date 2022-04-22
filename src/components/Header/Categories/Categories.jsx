@@ -13,15 +13,15 @@ const StyledUl = styled.ul`
 `
 
 const StyledLi = styled.li`
+  display: inline-block;
+  padding: 0 10px;
+
   &:first-child {
     padding-left: 0;
   }
   &:last-child {
     padding-right: 0;
   }
-
-  display: inline-block;
-  padding: 0 10px;
 `
 
 const StyledNavLink = styled(NavLink)`
@@ -33,10 +33,25 @@ const StyledNavLink = styled(NavLink)`
 
   text-decoration: none;
   text-transform: uppercase;
-  color: black;
+  color: #1D1F22;
+
+  & span {
+    margin: 0 7px;
+    padding: 0 7px 20px 7px;
+  }
 `
 
-class Categories extends React.Component {
+export default class Categories extends React.Component {
+
+  componentDidMount() {
+    console.log(this.props)
+  }
+
+  onCategoryChange(e) {
+    console.log(e.target.innerHTML)
+    this.props.setCategory(e.target.innerHTML)
+  }
+
   render() {
     return (
       <StyledUl>
@@ -45,12 +60,10 @@ class Categories extends React.Component {
             <StyledNavLink
               to={`/${el.name}`}
               className={(navData) => (navData.isActive ? 'active' : '')}
-            ><span>{el.name}</span></StyledNavLink>
+            ><span value={el.name} onClick={this.onCategoryChange.bind(this)}>{el.name}</span></StyledNavLink>
           </StyledLi>
         )}
       </StyledUl>
     )
   }
 }
-
-export default Categories

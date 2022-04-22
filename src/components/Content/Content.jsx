@@ -4,7 +4,7 @@ import Product from './Product/Product'
 
 const StyledContent = styled.div`
   width: 100%;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 97px);
   overflow-y: auto;
 `
 
@@ -13,6 +13,7 @@ const StyledCategory = styled.div`
   font-weight: 400;
   text-align: left;
   margin: 80px 0 103px 100px;
+  color: #1D1F22;
 `
 
 const StyledProducts = styled.div`
@@ -24,20 +25,27 @@ const StyledProducts = styled.div`
 
 export default class Content extends React.Component {
   render() {
-    const products = this.props.categories.filter((el) => el.name === 'all')[0].products
-    const category = 'all'
+    console.log(this.props)
+    const category = this.props.currentCategory
+    const upperCaseFunc = (text) => text.substring(0, 1).toUpperCase() + text.substring(1)
+    const categoryText = category.replace(/^\w/, upperCaseFunc)
+    const products = this.props.categories.filter((el) => el.name === category)[0].products
     const mappedProducts = products.map((el) => <Product 
       key={el.id}
-      category={el.category}
-      description={el.description}
-      gallery={el.gallery}
       id={el.id}
+      name={el.name}
       inStock={el.inStock}
-      name={el.name} 
+      gallery={el.gallery}
+      description={el.description}
+      category={el.category}
+      attributes={el.attributes}
+      prices={el.prices}
+      brand={el.brand}
+      currentCurrency={el.currentCurrency}
     />)
     return (
       <StyledContent>
-        <StyledCategory>{category}</StyledCategory>
+        <StyledCategory>{categoryText}</StyledCategory>
         <StyledProducts>{mappedProducts}</StyledProducts>
       </StyledContent>
     )

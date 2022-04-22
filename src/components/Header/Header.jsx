@@ -17,7 +17,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <StyledHeader>
-        <Categories categories={this.props.categories} />
+        <Categories categories={this.props.categories} setCategory={this.props.setCategory} />
         <Logo />
         <Actions 
           currencies={this.props.currencies}

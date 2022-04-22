@@ -11,6 +11,24 @@ export const GET_START_DATA = gql`
       gallery
       description
       category
+      attributes {
+        id
+        name
+        type
+        items {
+          displayValue
+          value
+          id
+        }
+      }
+      prices {
+        currency {
+          label
+          symbol
+        }
+        amount
+      }
+      brand
     }
   }
   currencies {
@@ -19,7 +37,11 @@ export const GET_START_DATA = gql`
   }
 }
 `
-
-// export const GET_CURRENCIES = gql`
-
+// export const GET_CATEGORIES = gql`
+// {
+// 	categories {
+//     name
+//   }
+// }
 // `
+

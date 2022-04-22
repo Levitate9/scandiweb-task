@@ -38,7 +38,7 @@ export default class Product extends React.Component {
         <StyledImg>
           <img src={imgSrc} alt='product' />
         </StyledImg>
-        <div>{this.props.name}</div>
+        <div>Brand & name</div>
         <div>Price</div>
       </StyledProductCard>
     )

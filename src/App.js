@@ -24,9 +24,11 @@ export default class App extends React.Component {
       categories: [],
       currencies: [],
       cartItems: [],
-      currentCurrency: {}
+      currentCategory: '',
+      currentCurrency: {},
     }
     this.toggleCurrency = this.toggleCurrency.bind(this)
+    this.setCategory = this.setCategory.bind(this)
   }
 
   toggleCurrency(newCurrency) {
@@ -38,10 +40,18 @@ export default class App extends React.Component {
     })
   }
 
+  setCategory(newCategory) {
+    this.setState({
+      ...this.state,
+      currentCategory: newCategory
+    })
+  }
+
   componentDidMount() {
     this.props.client
       .query({ query: GET_START_DATA })
-      .then((result) => this.setState({ 
+      .then((result) => this.setState({
+        ...this.state, 
         categories: result.data.categories,
         currencies: result.data.currencies,
         currentCurrency: result.data.currencies[0],
@@ -51,7 +61,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    const categories = this.state.categories
     if (this.state.isLoaded) {
       return <Preloader />
     }
@@ -60,17 +69,24 @@ export default class App extends React.Component {
       <BrowserRouter>
         <StyledApp>
           <Header 
-            categories={this.state.categories} 
+            categories={this.state.categories}
             currencies={this.state.currencies} 
             currentCurrency={this.state.currentCurrency}
+            setCategory={this.setCategory}
             toggleCurrency={this.toggleCurrency}
             cartItems={this.state.cartItems} 
           />
           <Routes>
-            <Route path='/' element={<Content categories={categories} />} />
+            <Route path='/' element={<Navigate to='/all' />} />
             <Route path='*' element={<Navigate to='/' />} />
-            { this.state.categories.map(el =>
-              <Route path={`/${el.name}`} element={<Content categories={this.state.categories} />} key={el.name} />
+            { this.state.categories.map(el => <Route 
+                path={`/${el.name}`} 
+                element={<Content 
+                  categories={this.state.categories} 
+                  currentCategory={el.name} 
+                  currentCurrency={this.state.currentCurrency}
+                />} 
+                key={el.name} />
             ) }
           </Routes>
         </StyledApp>
