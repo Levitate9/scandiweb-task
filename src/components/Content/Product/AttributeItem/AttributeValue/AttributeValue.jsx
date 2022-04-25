@@ -123,6 +123,12 @@ export default class AttributeValue extends React.Component {
     if (this.props.id === 'White') {
       document.getElementById('White').style.outline = '1px solid #bababa'
     }
+    this.addSelected('color')
+    this.addSelected('capacity')
+  }
+
+  addSelected(className) {
+    document.getElementsByClassName(className)[0].classList.add('selected')
   }
 
   onItemSelected(e) {
@@ -138,18 +144,6 @@ export default class AttributeValue extends React.Component {
     }
 
     handler(this.props.className.toLowerCase())
-  }
-
-  onCapacitySelected(e) {
-    let divs = document.getElementsByClassName('capacity')
-    Array.from(divs).map((el) => el.classList.contains('selected') && el.classList.remove('selected'))
-    document.getElementById(e.target.id).classList.add('selected')
-  }
-
-  onSizeSelected(e) {
-    let divs = document.getElementsByClassName('size')
-    Array.from(divs).map((el) => el.classList.contains('selected') && el.classList.remove('selected'))
-    document.getElementById(e.target.id).classList.add('selected')
   }
 
   render() {

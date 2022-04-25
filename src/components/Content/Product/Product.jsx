@@ -146,7 +146,7 @@ class Product extends React.Component {
     }
 
     const mappedGalleryItems = !this.state.isLoading && 
-      this.state.gallery.map((el) => <GalleryItem src={el} key={el} />)
+      this.state.gallery.map((el) => <GalleryItem src={el} key={el} id={el} />)
 
     const mappedAttributeItems = !this.state.isLoading &&
       this.state.attributes.map((el) => <AttributeItem name={el.name} items={el.items} key={el.id} />)
@@ -164,7 +164,7 @@ class Product extends React.Component {
           { mappedGalleryItems }
         </StyledGallery>
         <StyledMainPhoto>
-          <img src={this.state.gallery[0]} alt='main' />
+          <img src={this.state.gallery[0]} alt='main' id='mainPhoto' />
         </StyledMainPhoto>
         <StyledAttributes>
           <StyledBrand>{this.state.brand}</StyledBrand>
