@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Product from './Product/Product'
+import ProductCard from './ProductCard/ProductCard'
 
 const StyledContent = styled.div`
   width: 100%;
@@ -30,7 +30,7 @@ export default class Content extends React.Component {
     const upperCaseFunc = (text) => text.substring(0, 1).toUpperCase() + text.substring(1)
     const categoryText = category.replace(/^\w/, upperCaseFunc)
     const products = this.props.categories.filter((el) => el.name === category)[0].products
-    const mappedProducts = products.map((el) => <Product 
+    const mappedProducts = products.map((el) => <ProductCard 
       key={el.id}
       id={el.id}
       name={el.name}
@@ -41,7 +41,7 @@ export default class Content extends React.Component {
       attributes={el.attributes}
       prices={el.prices}
       brand={el.brand}
-      currentCurrency={el.currentCurrency}
+      currentCurrency={this.props.currentCurrency}
     />)
     return (
       <StyledContent>

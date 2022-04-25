@@ -1,46 +1,185 @@
 import React from 'react'
 import styled from 'styled-components'
+import AttributeItem from './AttributeItem/AttributeItem'
+import withParams from '../../../hocs/hocs'
+import GalleryItem from './GalleryItem/GalleryItem'
+import { GET_PRODUCT } from '../../../graphql/Queries'
+import Preloader from '../../common/Preloader'
 
-const StyledProductCard = styled.div`
+const StyledProduct = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 1240px;
+  margin: 80px 100px 0 100px;
+`
+
+const StyledGallery = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 79px;
+  max-height: 
+`
+
+const StyledMainPhoto = styled.div`
+  width: 610px;
+  height: 511px;
+  margin: 0 100px 0 40px;
+
+  & img {
+    width: 610px;
+    height: 511px;
+  }
+`
+
+const StyledAttributes = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  flex: 1 1 386px;
-  flex-grow: 0;
-  height: 444px;
-  margin-bottom: 103px;
-  background-color: #F7F06D;
+  width: 292px;
+`
 
-  &:nth-child(3n+1) {
-    margin-left: 100px;
+const StyledBrand = styled.div`
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+  color: #1D1F22;
+`
+
+const StyledProductName = styled.div`
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 27px;
+  color: #1D1F22;
+  margin: 16px 0;
+`
+
+const StyledPrice = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+`
+
+const StyledPriceCategory = styled.div`
+  font-family: 'Roboto Condensed';
+  font-style: 'normal';
+  font-weight: 700;
+  font-size: 18px;
+  margin: 24px 0 0 0;
+  line-height: 18px;
+  color: #1D1F22;
+  text-transform: uppercase;
+`
+
+const StyledAmount = styled.div`
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 18px;
+  color: #1D1F22;
+  margin: 10px 0 20px 0;
+`
+
+const StyledAddToCart = styled.button`
+  width: 292px;
+  height: 52px;
+  margin: 0 0 20px 0;
+  padding: 16px 32px;
+  text-transform: uppercase;
+  border: none;
+  color: #ffffff;
+  background-color: #5ECE7B;
+
+  &:hover {
+    cursor: pointer;
   }
 
-  &:nth-child(3n+2) {
-    margin: 0 40px;
+  & span {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
   }
 `
 
-const StyledImg = styled.div`
-  margin: 16px 16px 24px 16px;
-  & img {
-    width: 356px;
-    height: 338px;
-  }
+const StyledProductDescription = styled.div`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #1D1F22;
+  text-align: left;
 `
 
-export default class Product extends React.Component {
+class Product extends React.Component {
+  state = { isLoading: true }
+
+  componentDidMount() {
+    this.props.client
+      .query({ 
+        query: GET_PRODUCT,
+        variables: { id: this.props.params.id }
+       })
+      .then((result) => this.setState({
+        ...this.state,
+        product: result.data.product,
+        id: result.data.product.id,
+        name: result.data.product.name,
+        gallery: result.data.product.gallery,
+        description: result.data.product.description,
+        category: result.data.product.category,
+        attributes: result.data.product.attributes,
+        prices: result.data.product.prices,
+        brand: result.data.product.brand,
+        isLoading: false
+      }))
+  }
+
   render() {
-    const imgSrc= this.props.gallery[0]
+    
+    if (this.state.isLoading) {
+      return <Preloader />
+    }
+
+    const mappedGalleryItems = !this.state.isLoading && 
+      this.state.gallery.map((el) => <GalleryItem src={el} key={el} />)
+
+    const mappedAttributeItems = !this.state.isLoading &&
+      this.state.attributes.map((el) => <AttributeItem name={el.name} items={el.items} key={el.id} />)
+
+    const symbol = this.props.currentCurrency.symbol
+
+    const amount = !this.state.isLoading &&
+      this.state.prices.filter((el) => el.currency.label === this.props.currentCurrency.label)[0].amount
+
+    const parse = require('html-react-parser')
 
     return (
-      <StyledProductCard>
-        <StyledImg>
-          <img src={imgSrc} alt='product' />
-        </StyledImg>
-        <div>Brand & name</div>
-        <div>Price</div>
-      </StyledProductCard>
+      <StyledProduct>
+        <StyledGallery>
+          { mappedGalleryItems }
+        </StyledGallery>
+        <StyledMainPhoto>
+          <img src={this.state.gallery[0]} alt='main' />
+        </StyledMainPhoto>
+        <StyledAttributes>
+          <StyledBrand>{this.state.brand}</StyledBrand>
+          <StyledProductName>{this.state.name}</StyledProductName>
+          { mappedAttributeItems }
+          <StyledPrice>
+            <StyledPriceCategory>price:</StyledPriceCategory>
+            <StyledAmount>{`${symbol}${amount}`}</StyledAmount>
+          </StyledPrice>
+          <StyledAddToCart><span>add to cart</span></StyledAddToCart>
+          <StyledProductDescription>{ parse(this.state.description) }</StyledProductDescription>
+        </StyledAttributes>
+      </StyledProduct>
     )
   }
 }
+
+export default withParams(Product)

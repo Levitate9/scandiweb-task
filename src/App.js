@@ -5,6 +5,7 @@ import Preloader from './components/common/Preloader'
 import Header from './components/Header/Header'
 import Content from './components/Content/Content'
 import styled from 'styled-components'
+import Product from './components/Content/Product/Product'
 
 const StyledApp = styled.div`
   font-family: 'Raleway', sans-serif;
@@ -54,6 +55,7 @@ export default class App extends React.Component {
         ...this.state, 
         categories: result.data.categories,
         currencies: result.data.currencies,
+        currentCategory: result.data.categories[0].name,
         currentCurrency: result.data.currencies[0],
         cartItems: result.data.categories[0].products,
         isLoaded: false 
@@ -79,15 +81,23 @@ export default class App extends React.Component {
           <Routes>
             <Route path='/' element={<Navigate to='/all' />} />
             <Route path='*' element={<Navigate to='/' />} />
-            { this.state.categories.map(el => <Route 
-                path={`/${el.name}`} 
-                element={<Content 
+            { 
+              this.state.categories.map(el => 
+                <Route exact path={`/${el.name}/*`} key={el.name} element={<Content
                   categories={this.state.categories} 
                   currentCategory={el.name} 
                   currentCurrency={this.state.currentCurrency}
-                />} 
-                key={el.name} />
-            ) }
+                />} />
+              )
+            } 
+            {
+              this.state.categories.map(el =>
+                <Route path={`/${el.name}/:id`} key={el.name} element={<div><Product 
+                  client={this.props.client}
+                  currentCurrency={this.state.currentCurrency}
+                /></div>} />  
+              )
+            }
           </Routes>
         </StyledApp>
       </BrowserRouter>
