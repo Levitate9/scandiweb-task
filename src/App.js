@@ -6,6 +6,7 @@ import Header from './components/Header/Header'
 import Content from './components/Content/Content'
 import styled from 'styled-components'
 import Product from './components/Content/Product/Product'
+import Cart from './components/Cart/Cart';
 
 const StyledApp = styled.div`
   font-family: 'Raleway', sans-serif;
@@ -92,12 +93,16 @@ export default class App extends React.Component {
             } 
             {
               this.state.categories.map(el =>
-                <Route path={`/${el.name}/:id`} key={el.name} element={<div><Product 
+                <Route path={`/${el.name}/:id`} key={el.name} element={<Product 
                   client={this.props.client}
                   currentCurrency={this.state.currentCurrency}
-                /></div>} />  
+                />} />  
               )
             }
+            <Route exact path={`/cart`} element={<Cart
+              items={this.state.cartItems} 
+              currentCurrency={this.state.currentCurrency} 
+            />} />
           </Routes>
         </StyledApp>
       </BrowserRouter>

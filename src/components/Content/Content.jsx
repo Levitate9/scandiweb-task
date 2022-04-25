@@ -25,7 +25,6 @@ const StyledProducts = styled.div`
 
 export default class Content extends React.Component {
   render() {
-    console.log(this.props)
     const category = this.props.currentCategory
     const upperCaseFunc = (text) => text.substring(0, 1).toUpperCase() + text.substring(1)
     const categoryText = category.replace(/^\w/, upperCaseFunc)

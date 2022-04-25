@@ -9,7 +9,7 @@ const StyledPreloader = styled.div`
   top: 50%;
   left: 50%;
 
-  &::before,
+  &:before,
   &:after {
     content: '';
     position: absolute;

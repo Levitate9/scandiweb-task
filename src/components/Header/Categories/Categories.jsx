@@ -43,12 +43,7 @@ const StyledNavLink = styled(NavLink)`
 
 export default class Categories extends React.Component {
 
-  componentDidMount() {
-    console.log(this.props)
-  }
-
   onCategoryChange(e) {
-    console.log(e.target.innerHTML)
     this.props.setCategory(e.target.innerHTML)
   }
 

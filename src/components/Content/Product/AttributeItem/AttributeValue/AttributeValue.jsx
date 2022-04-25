@@ -123,8 +123,16 @@ export default class AttributeValue extends React.Component {
     if (this.props.id === 'White') {
       document.getElementById('White').style.outline = '1px solid #bababa'
     }
-    this.addSelected('color')
-    this.addSelected('capacity')
+
+    switch (this.props.className) {
+      case 'Color':
+        return this.addSelected('color')
+      case 'Capacity':
+        return this.addSelected('capacity')
+      case 'Size':
+        return this.addSelected('size')
+      default:
+    }
   }
 
   addSelected(className) {
