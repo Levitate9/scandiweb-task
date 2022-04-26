@@ -4,8 +4,6 @@ import ProductCard from './ProductCard/ProductCard'
 
 const StyledContent = styled.div`
   width: 100%;
-  height: calc(100vh - 97px);
-  overflow-y: auto;
 `
 
 const StyledCategory = styled.div`

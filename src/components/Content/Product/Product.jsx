@@ -28,11 +28,8 @@ const StyledMainPhoto = styled.div`
   width: 610px;
   height: 511px;
   margin: 0 100px 0 40px;
-
-  & img {
-    width: 610px;
-    height: 511px;
-  }
+  background-image: url(${props => props.src});
+  background-size: cover;
 `
 
 const StyledAttributes = styled.div`
@@ -116,7 +113,11 @@ const StyledProductDescription = styled.div`
 `
 
 class Product extends React.Component {
-  state = { isLoading: true }
+  constructor(props) {
+    super(props)
+    this.state = { isLoading: true }
+    this.setMainPhoto = this.setMainPhoto.bind(this)
+  }
 
   componentDidMount() {
     this.props.client
@@ -135,18 +136,22 @@ class Product extends React.Component {
         attributes: result.data.product.attributes,
         prices: result.data.product.prices,
         brand: result.data.product.brand,
+        mainPhoto: result.data.product.gallery[0],
         isLoading: false
       }))
   }
 
+  setMainPhoto(src) {
+    this.setState({ ...this.state, mainPhoto: src })
+  }
+
   render() {
-    
     if (this.state.isLoading) {
       return <Preloader />
     }
 
     const mappedGalleryItems = !this.state.isLoading && 
-      this.state.gallery.map((el) => <GalleryItem src={el} key={el} id={el} />)
+      this.state.gallery.map((el) => <GalleryItem src={el} key={el} id={el} setMainPhoto={this.setMainPhoto} />)
 
     const mappedAttributeItems = !this.state.isLoading &&
       this.state.attributes.map((el) => <AttributeItem name={el.name} items={el.items} key={el.id} />)
@@ -163,9 +168,7 @@ class Product extends React.Component {
         <StyledGallery>
           { mappedGalleryItems }
         </StyledGallery>
-        <StyledMainPhoto>
-          <img src={this.state.gallery[0]} alt='main' id='mainPhoto' />
-        </StyledMainPhoto>
+        <StyledMainPhoto src={this.state.mainPhoto} id='mainPhoto'></StyledMainPhoto>
         <StyledAttributes>
           <StyledBrand>{this.state.brand}</StyledBrand>
           <StyledProductName>{this.state.name}</StyledProductName>

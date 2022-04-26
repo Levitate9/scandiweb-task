@@ -41,20 +41,40 @@ const StyledNavLink = styled(NavLink)`
 
 const StyledImg = styled.div`
   margin: 16px 16px 24px 16px;
-  & img {
-    width: 356px;
-    height: 338px;
-  }
+`
+
+const ProductImg = styled.div`
+  position: absolute;
+  width: 356px;
+  height: 338px;
+  background-image: url(${props => props.src});
+  background-size: cover;
+  z-index: 9;
+`
+
+const StyledContent = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 354px;
+  height: 58px;
+  left: 16px;
+  top: 370px;
+  margin: 0;
+  padding: 0;
 `
 
 const StyledName = styled.div`
-  margin: 0 16px;
+  align-self: stretch;
   color: #1D1F22;
   font-weight: 300;
+  font-size: 18px;
+  line-height: 29px;
+  text-align: left;
 `
 
 const StyledPrice = styled(StyledName)`
-  margin-top: 5px;
   font-weight: 500;
 `
 
@@ -91,24 +111,24 @@ export default class ProductCard extends React.Component {
     const imgSrc = this.props.gallery[0]
     const brand = this.props.brand
     const name = this.props.name
-    const price = Math.round(
-      this.props.prices.filter((el) => el.currency.label === this.props.currentCurrency.label)[0].amount
-    )
+    const price = this.props.prices.filter((el) => el.currency.label === this.props.currentCurrency.label)[0].amount
+    
     const symbol = this.props.currentCurrency.symbol
     const category = this.props.category
     const id = this.props.id
-
     return (
       <StyledProductCard>
         <StyledImg>
           <StyledNavLink to={`/${category}/${id}`} />
-          <img src={imgSrc} alt='product' />
+          <ProductImg src={imgSrc}></ProductImg>
         </StyledImg>
         <StyledButton className='cart'>
           <img src={cart} alt='cart' />
         </StyledButton>
-        <StyledName>{`${brand} ${name}`}</StyledName>
-        <StyledPrice>{`${symbol} ${price}`}</StyledPrice>
+        <StyledContent>
+          <StyledName>{`${brand} ${name}`}</StyledName>
+          <StyledPrice>{`${symbol} ${price}`}</StyledPrice>
+        </StyledContent>
       </StyledProductCard>
     )
   }
