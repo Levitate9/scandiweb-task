@@ -20,11 +20,11 @@ const StyledGalleryItem = styled.div`
 export default class GalleryItem extends React.Component {
 
   componentDidMount() {
-   if (document.getElementsByClassName('galleryImage')[0].classList.contains('selected')) {
-     return null
-   } else {
-     return document.getElementsByClassName('galleryImage')[0].classList.add('selected') 
-   }
+    if (document.getElementsByClassName('galleryImage')[0].classList.contains('selected')) {
+      return null
+    } else {
+      return document.getElementsByClassName('galleryImage')[0].classList.add('selected') 
+    }
   }
   
   onItemSelected(e) {
@@ -41,7 +41,7 @@ export default class GalleryItem extends React.Component {
         src={this.props.src}
         className='galleryImage' 
         id={this.props.id}
-        onClick={this.onItemSelected.bind(this)}>
+        onClick={this.onItemSelected.bind(this)} >
       </StyledGalleryItem>
     )
   }

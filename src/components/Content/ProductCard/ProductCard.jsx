@@ -30,6 +30,20 @@ const StyledProductCard = styled.div`
   &:hover > .cart {
     display: flex;
   }
+
+  &.outOfStock {
+    box-shadow: none;
+  }
+
+  &.inStock > div > .info {
+    display: none;
+  }
+
+  &.outOfStock > div > .info {
+    display: flex;
+    background-color: #ffffff;
+    opacity: 0.5;
+  }
 `
 
 const StyledNavLink = styled(NavLink)`
@@ -37,6 +51,30 @@ const StyledNavLink = styled(NavLink)`
   width: 356px;
   height: 338px;
   z-index: 10;
+`
+
+const StyledWrapper = styled.div`
+  &.info {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    & span {
+      position: absolute;
+      top: 35%;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 38px;
+      color: #8D8F9A;
+      text-transform: uppercase;
+      opacity: 1;
+      user-select: none;
+    }
+  }
 `
 
 const StyledImg = styled.div`
@@ -49,7 +87,7 @@ const ProductImg = styled.div`
   height: 338px;
   background-image: url(${props => props.src});
   background-size: cover;
-  z-index: 9;
+  z-index: 8;
 `
 
 const StyledContent = styled.div`
@@ -117,14 +155,15 @@ export default class ProductCard extends React.Component {
     const category = this.props.category
     const id = this.props.id
     return (
-      <StyledProductCard>
+      <StyledProductCard className={this.props.inStock ? 'inStock' : 'outOfStock'}>
         <StyledImg>
-          <StyledNavLink to={`/${category}/${id}`} />
+          { this.props.inStock && <StyledNavLink to={`/${category}/${id}`} /> }
+          <StyledWrapper className='info'><span>out of stock</span></StyledWrapper>
           <ProductImg src={imgSrc}></ProductImg>
         </StyledImg>
-        <StyledButton className='cart'>
-          <img src={cart} alt='cart' />
-        </StyledButton>
+        { this.props.inStock && <StyledButton className='cart'>
+            <img src={cart} alt='cart' />
+          </StyledButton> }
         <StyledContent>
           <StyledName>{`${brand} ${name}`}</StyledName>
           <StyledPrice>{`${symbol} ${price}`}</StyledPrice>
