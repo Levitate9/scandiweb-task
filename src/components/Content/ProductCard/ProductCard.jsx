@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { NavLink } from 'react-router-dom'
 import cart from '../../../images/whiteCart.png'
+import ProductCardImage from './ProductCardImage/ProductCardImage'
+import AddToCartIcon from './AddToCartIcon/AddToCartIcon'
+import ProductCardContent from './ProductCardContent/ProductCardContent'
 
 const StyledProductCard = styled.div`
   position: relative;
@@ -46,104 +48,6 @@ const StyledProductCard = styled.div`
   }
 `
 
-const StyledNavLink = styled(NavLink)`
-  position: absolute;
-  width: 356px;
-  height: 338px;
-  z-index: 10;
-`
-
-const StyledWrapper = styled.div`
-  &.info {
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    z-index: 9;
-    & span {
-      position: absolute;
-      top: 35%;
-      font-size: 24px;
-      font-weight: 400;
-      line-height: 38px;
-      color: #8D8F9A;
-      text-transform: uppercase;
-      opacity: 1;
-      user-select: none;
-    }
-  }
-`
-
-const StyledImg = styled.div`
-  margin: 16px 16px 24px 16px;
-`
-
-const ProductImg = styled.div`
-  position: absolute;
-  width: 356px;
-  height: 338px;
-  background-image: url(${props => props.src});
-  background-size: cover;
-  z-index: 8;
-`
-
-const StyledContent = styled.div`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 354px;
-  height: 58px;
-  left: 16px;
-  top: 370px;
-  margin: 0;
-  padding: 0;
-`
-
-const StyledName = styled.div`
-  align-self: stretch;
-  color: #1D1F22;
-  font-weight: 300;
-  font-size: 18px;
-  line-height: 29px;
-  text-align: left;
-`
-
-const StyledPrice = styled(StyledName)`
-  font-weight: 500;
-`
-
-const StyledButton = styled.button`
-  position: absolute;
-  right: 31px;
-  bottom: 64px;
-  display: none;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  border: none;
-  background-color: #1D1F22;
-  z-index: 11;
-
-  &:hover {
-    cursor: pointer;
-    background-color: #5ECE7B
-  }
-
-  & img {
-    width: 24px;
-    height: 24px;
-    margin-left: -2px;
-  }
-`
-
 export default class ProductCard extends React.Component {
   render() {
     const imgSrc = this.props.gallery[0]
@@ -156,18 +60,10 @@ export default class ProductCard extends React.Component {
     const id = this.props.id
     return (
       <StyledProductCard className={this.props.inStock ? 'inStock' : 'outOfStock'}>
-        <StyledImg>
-          { this.props.inStock && <StyledNavLink to={`/${category}/${id}`} /> }
-          <StyledWrapper className='info'><span>out of stock</span></StyledWrapper>
-          <ProductImg src={imgSrc}></ProductImg>
-        </StyledImg>
-        { this.props.inStock && <StyledButton className='cart'>
-            <img src={cart} alt='cart' />
-          </StyledButton> }
-        <StyledContent>
-          <StyledName>{`${brand} ${name}`}</StyledName>
-          <StyledPrice>{`${symbol} ${price}`}</StyledPrice>
-        </StyledContent>
+        <ProductCardImage inStock={this.props.inStock} category={category} id={id} src={imgSrc} />
+        { this.props.inStock && <AddToCartIcon cart={cart} /> }
+        <ProductCardContent inStock={this.props.inStock} category={category} id={id} brand={brand} name={name}
+          symbol={symbol} price={price} />
       </StyledProductCard>
     )
   }
