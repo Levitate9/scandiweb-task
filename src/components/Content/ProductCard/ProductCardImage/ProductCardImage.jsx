@@ -54,13 +54,12 @@ const ProductImg = styled.div`
 
 export default class ProductCardImage extends React.Component {
   render() {
-    console.log(this.props.src)
     return (
       <StyledImg>
         { this.props.inStock && <StyledNavLink to={`/${this.props.category}/${this.props.id}`} /> }
         <StyledWrapper className='info'><span>out of stock</span></StyledWrapper>
         <ProductImg src={this.props.src}></ProductImg>
-    </StyledImg>
+      </StyledImg>
     )
   }
 }
