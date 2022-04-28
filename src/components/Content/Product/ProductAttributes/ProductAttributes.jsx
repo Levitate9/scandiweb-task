@@ -17,8 +17,9 @@ const StyledAttributes = styled.div`
 export default class ProductAttributes extends React.Component {
   render() {
     const mappedAttributeItems = 
-      this.props.attributes.map((el) => <AttributeItem name={el.name} items={el.items} key={el.id} />)
-
+      this.props.attributes.map((el) => {
+        return <AttributeItem name={el.name} items={el.items} key={el.id} id={el.id} className={el.name} />
+      })
     return (
       <StyledAttributes>
         <ProductName brand={this.props.brand} name={this.props.name} />

@@ -1,6 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import AttributeValue from './AttributeValue/AttributeValue'
+import Color from './Color/Color'
+import Size from './Size/Size'
+import Capacity from './Capacity/Capacity'
+import Usb3 from './Usb3/Usb3'
+import TouchID from './TouchID/TouchID'
 
 const StyledAttributeItem = styled.div`
   display: flex;
@@ -29,15 +33,48 @@ const StyledAttributesValues = styled.div`
 `
 
 export default class AttributeItem extends React.Component {
+
+  componentDidMount() {
+    switch (this.props.className) {
+      case 'Color':
+        return this.addSelected('color')
+      case 'Capacity':
+        console.log()
+        return this.addSelected('capacity')
+      case 'Size':
+        return this.addSelected('size')
+      case 'With USB 3 ports':
+        return this.addSelected('usb3')
+      case 'Touch ID in keyboard':
+        return this.addSelected('touchID')
+      default:
+    }
+  }
+
+  addSelected(className) {
+    document.getElementsByClassName(className)[0].classList.add('selected')
+  }
+
   render() {
     const mappedValues = this.props.items.map((el) => {
-      return <AttributeValue 
-        key={el.id}
-        className={this.props.name} 
-        displayValue={el.displayValue}
-        value={el.value}
-        id={el.id}
+
+      const createAttr = (Component, className) => <Component 
+        key={el.id} displayValue={el.displayValue} value={el.value} id={el.id} className={className} 
       />
+    
+      switch (this.props.name) {
+        case 'Size':
+          return createAttr(Size, 'size')
+        case 'Color':
+          return createAttr(Color, 'color')
+        case 'Capacity':
+          return createAttr(Capacity, 'capacity')
+        case 'With USB 3 ports':
+          return createAttr(Usb3, 'usb3')
+        case 'Touch ID in keyboard':
+          return createAttr(TouchID, 'touchID')
+        default:
+      }
     })
 
     return (
