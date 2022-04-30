@@ -24,19 +24,13 @@ const StyledCapacity = styled.div`
 
 export default class Capacity extends React.Component {
 
-  onSelected(e) {
-    let divs = document.getElementsByClassName(this.props.className)
-    Array.from(divs).map((el) => el.classList.contains('selected') && el.classList.remove('selected'))
-    document.getElementById(e.target.id).classList.add('selected')
-  }
-
   render() {
     return (
       <StyledCapacity
         id={this.props.id} 
         className={this.props.className}
         value={this.props.value}
-        onClick={this.onSelected.bind(this)}
+        onClick={this.props.onSelect.bind(this)}
       >{this.props.value}</StyledCapacity>
     )
   }

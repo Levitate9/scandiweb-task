@@ -20,19 +20,13 @@ const StyledUsb3 = styled.div`
 
 export default class Usb3 extends React.Component {
 
-  onSelected(e) {
-    let divs = document.getElementsByClassName(this.props.className)
-    Array.from(divs).map((el) => el.classList.contains('selected') && el.classList.remove('selected'))
-    document.getElementById(e.target.id).classList.add('selected')
-  }
-
   render() {
     return (
       <StyledUsb3 
         id={`${this.props.className}-${this.props.id}`}
         className={this.props.className} 
         value={this.props.value}
-        onClick={this.onSelected.bind(this)}
+        onClick={this.props.onSelect.bind(this)}
       >{this.props.displayValue}</StyledUsb3>
     )
   }

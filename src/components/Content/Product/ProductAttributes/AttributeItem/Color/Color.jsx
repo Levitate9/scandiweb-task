@@ -73,12 +73,6 @@ export default class Color extends React.Component {
     }
   }
 
-  onSelected(e) {
-    let divs = document.getElementsByClassName(this.props.className)
-    Array.from(divs).map((el) => el.classList.contains('selected') && el.classList.remove('selected'))
-    document.getElementById(e.target.id).classList.add('selected')
-  }
-
   render() {
     return (
       <Background>
@@ -86,7 +80,7 @@ export default class Color extends React.Component {
           id={this.props.id} 
           className={this.props.className} 
           value={this.props.value}
-          onClick={this.onSelected.bind(this)}
+          onClick={this.props.onSelect.bind(this)}
         ><Tooltip className={`tooltip${this.props.className}`}>{this.props.displayValue}</Tooltip>
         </StyledColor>
       </Background>

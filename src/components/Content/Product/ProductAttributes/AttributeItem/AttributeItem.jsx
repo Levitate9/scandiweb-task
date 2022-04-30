@@ -55,11 +55,17 @@ export default class AttributeItem extends React.Component {
     document.getElementsByClassName(className)[0].classList.add('selected')
   }
 
+  onSelect(e) {
+    let divs = document.getElementsByClassName(this.props.className)
+    Array.from(divs).map((el) => el.classList.contains('selected') && el.classList.remove('selected'))
+    document.getElementById(e.target.id).classList.add('selected')
+  }
+
   render() {
     const mappedValues = this.props.items.map((el) => {
 
-      const createAttr = (Component, className) => <Component 
-        key={el.id} displayValue={el.displayValue} value={el.value} id={el.id} className={className} 
+      const createAttr = (Component, className) => <Component key={el.id} displayValue={el.displayValue} 
+        value={el.value} id={el.id} className={className} onSelect={this.onSelect}
       />
     
       switch (this.props.name) {
