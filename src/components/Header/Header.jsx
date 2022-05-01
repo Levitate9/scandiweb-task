@@ -22,7 +22,7 @@ export default class Header extends React.Component {
         <Actions 
           currencies={this.props.currencies}
           currentCurrency={this.props.currentCurrency}
-          toggleCurrency={this.props.toggleCurrency}
+          setCurrency={this.props.setCurrency}
           cartItems={this.props.cartItems} 
         />
       </StyledHeader>

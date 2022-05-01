@@ -29,16 +29,16 @@ export default class App extends React.Component {
       currentCategory: '',
       currentCurrency: {},
     }
-    this.toggleCurrency = this.toggleCurrency.bind(this)
+    this.setCurrency = this.setCurrency.bind(this)
     this.setCategory = this.setCategory.bind(this)
   }
 
-  toggleCurrency(newCurrency) {
+  setCurrency(newCurrency) {
     const currencies = this.state.currencies
     const currentCurrency = currencies.filter((el) => el.label === newCurrency)
     this.setState({
       ...this.state,
-      currentCurrency: currentCurrency
+      currentCurrency: currentCurrency[0]
     })
   }
 
@@ -67,7 +67,7 @@ export default class App extends React.Component {
     if (this.state.isLoaded) {
       return <Preloader />
     }
-
+    console.log(this.state.currentCurrency)
     return (
       <BrowserRouter>
         <StyledApp>
@@ -76,12 +76,11 @@ export default class App extends React.Component {
             currencies={this.state.currencies} 
             currentCurrency={this.state.currentCurrency}
             setCategory={this.setCategory}
-            toggleCurrency={this.toggleCurrency}
+            setCurrency={this.setCurrency}
             cartItems={this.state.cartItems} 
           />
           <Routes>
-            <Route path='/' element={<Navigate to='/all' />} />
-            <Route path='*' element={<Navigate to='/' />} />
+            <Route path='*' element={<Navigate to='/all' />} />
             { 
               this.state.categories.map(el => 
                 <Route exact path={`/${el.name}/*`} key={el.name} element={<Content

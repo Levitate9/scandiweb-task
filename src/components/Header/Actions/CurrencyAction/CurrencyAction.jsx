@@ -1,13 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import arrowDown from '../../../../images/arrowDown.png'
-import arrowUp from '../../../../images/arrowUp.png'
+import CurrencyItem from './CurrencyItem/CurrencyItem'
 
 const StyledCurrencyAction = styled.div`
   display: block
 `
 
-const StyledCurrencyContainer = styled.div`
+const CurrencyContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -16,73 +15,86 @@ const StyledCurrencyContainer = styled.div`
   color: black;
   text-decoration: none;
 
+  & .switcher {
+    display: none;
+  }
+
   &.open > .switcher {
     display: flex
   }
 
-  &.closed > .switcher {
-    display: none;
+  &.open > .currencyNavigation > .currencySymbol:after {
+    transform: rotate(-135deg);
   }
+`
+
+const CurrencyNavigation = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  user-select: none;
 
   &:hover {
     cursor: pointer;
   }
 `
 
-const StyledCurrencyNavigation = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
+const CurrencySymbol = styled.div`
+  &:after {
+    content: '';
+    border: solid black;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    margin-left: 5px;
+    padding: 2px;
+    transform: rotate(45deg);
+  }
 `
 
-const StyledImg = styled.img`
-  padding-left: 5px;
-`
-
-const StyledCurrencySwitcher = styled.div`
+const CurrencySwitcher = styled.div`
   position: absolute;
   top: 65px;
-  right: calc(10vw + 10px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
+  width: 114px;
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
   z-index: 1001;
-  border: 1px solid black;
 `
 
 class CurrencyAction extends React.Component {
-  toggleSwitcher() {
-    let arrow = document.getElementById('arrow')
-    let target = document.getElementById('currencyAction')
-    if (target.classList.contains('closed')) {
-      arrow.setAttribute('src', arrowUp)
-      target.classList.remove('closed')
-      target.classList.add('open')
-      target.setAttribute('value', 'open')
-    } else {
-      arrow.setAttribute('src', arrowDown)
-      target.classList.remove('open')
-      target.classList.add('closed')
-      target.setAttribute('value', 'closed')
-    } 
+  constructor(props) {
+    super(props)
+    this.state = { isOpen: false }
+    this.toggleIsOpen = this.toggleIsOpen.bind(this)
   }
+
+  toggleIsOpen() {
+    this.setState({ isOpen: this.state.isOpen ? false : true })
+  }
+
   render() {
+    console.log(this.props)
     return (
       <StyledCurrencyAction>
-        <StyledCurrencyContainer id='currencyAction' className='closed' onClick={this.toggleSwitcher} value='closed'>
-          <StyledCurrencyNavigation>
-            <span>{this.props.currentCurrency.symbol}</span><StyledImg src={arrowDown} alt='arrow' id='arrow' />
-          </StyledCurrencyNavigation>
-          <StyledCurrencySwitcher className='switcher'>
-            { this.props.currencies.map((el) => <div 
+        <CurrencyContainer className={this.state.isOpen ? 'open' : ''} >
+          <CurrencyNavigation onClick={this.toggleIsOpen} className='currencyNavigation'>
+            <CurrencySymbol className='currencySymbol'>
+              {this.props.currentCurrency.symbol}
+            </CurrencySymbol>
+          </CurrencyNavigation>
+          <CurrencySwitcher className='switcher'>
+            { this.props.currencies.map((el) => <CurrencyItem 
                 key={el.label}
-                value={`${el.symbol} ${el.label}`}
-                onClick={(e) => console.log(e.currentTarget.value)}
-              >{`${el.symbol} ${el.label}`}</div>) }
-          </StyledCurrencySwitcher>
-        </StyledCurrencyContainer>
+                symbol={el.symbol}
+                label={el.label}
+                setCurrency={this.props.setCurrency}
+                toggleIsOpen={this.toggleIsOpen}
+              /> )}
+          </CurrencySwitcher>
+        </CurrencyContainer>
       </StyledCurrencyAction>
     )
   }

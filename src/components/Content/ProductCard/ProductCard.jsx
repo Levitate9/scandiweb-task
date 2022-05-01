@@ -53,8 +53,8 @@ export default class ProductCard extends React.Component {
     const imgSrc = this.props.gallery[0]
     const brand = this.props.brand
     const name = this.props.name
+    console.log(this.props.currentCurrency)
     const price = this.props.prices.filter((el) => el.currency.label === this.props.currentCurrency.label)[0].amount
-    
     const symbol = this.props.currentCurrency.symbol
     const category = this.props.category
     const id = this.props.id
