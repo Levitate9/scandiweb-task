@@ -18,9 +18,21 @@ const StyledColor = styled.div`
     outline: 2px solid #5ECE7B !important;
   }
 
+  &.disabled {
+    capacity: 0.2;
+    outline: 2px solid #A6A6A6;
+  }
+
+  &:hover.disabled {
+    cursor: default;
+  }
 
   &:hover .tooltipcolor {
     visibility: visible;
+  }
+
+  &:hover.disabled .tooltipcolor {
+    visibility: hidden;
   }
 }
 `

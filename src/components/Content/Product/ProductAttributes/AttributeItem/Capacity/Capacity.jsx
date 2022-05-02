@@ -20,6 +20,16 @@ const StyledCapacity = styled.div`
     color: #ffffff;
     background-color: #1D1F22;
   }
+
+  &.disabled {
+    color: #A6A6A6;
+    background-color: rgba(166, 166, 166, 0.2);
+    outline: 1px solid #A6A6A6;
+  }
+
+  &:hover.disabled {
+    cursor: default;
+  }
 `
 
 export default class Capacity extends React.Component {

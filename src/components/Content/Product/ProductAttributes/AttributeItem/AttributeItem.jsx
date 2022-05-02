@@ -55,6 +55,10 @@ export default class AttributeItem extends React.Component {
     document.getElementsByClassName(className)[0].classList.add('selected')
   }
 
+  addDisabled(className) {
+    document.getElementsByClassName(className)[0].classList.add('disabled')
+  }
+
   onSelect(e) {
     let divs = document.getElementsByClassName(this.props.className)
     Array.from(divs).map((el) => el.classList.contains('selected') && el.classList.remove('selected'))
