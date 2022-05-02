@@ -27,19 +27,23 @@ export default class Content extends React.Component {
     const upperCaseFunc = (text) => text.substring(0, 1).toUpperCase() + text.substring(1)
     const categoryText = category.replace(/^\w/, upperCaseFunc)
     const products = this.props.categories.filter((el) => el.name === category)[0].products
-    const mappedProducts = products.map((el) => <ProductCard 
-      key={el.id}
-      id={el.id}
-      name={el.name}
-      inStock={el.inStock}
-      gallery={el.gallery}
-      description={el.description}
-      category={el.category}
-      attributes={el.attributes}
-      prices={el.prices}
-      brand={el.brand}
-      currentCurrency={this.props.currentCurrency}
-    />)
+    const mappedProducts = products.map((el) => {
+      return <ProductCard 
+        key={el.id}
+        id={el.id}
+        name={el.name}
+        brand={el.brand}
+        inStock={el.inStock}
+        gallery={el.gallery}
+        description={el.description}
+        category={el.category}
+        attributes={el.attributes}
+        prices={el.prices}
+        currentCurrency={this.props.currentCurrency}
+        sendProductToCart={this.props.sendProductToCart}
+        deleteProductFromCart={this.props.deleteProductFromCart}
+      />
+    })
     return (
       <StyledContent>
         <StyledCategory>{categoryText}</StyledCategory>

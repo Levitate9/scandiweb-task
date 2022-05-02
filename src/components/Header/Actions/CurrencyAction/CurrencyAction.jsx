@@ -41,7 +41,14 @@ const CurrencyNavigation = styled.div`
 `
 
 const CurrencySymbol = styled.div`
+  width: 30px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+
   &:after {
+    position: absolute;
+    top: 38px;
     content: '';
     border: solid black;
     border-width: 0 1px 1px 0;
@@ -76,7 +83,6 @@ class CurrencyAction extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <StyledCurrencyAction>
         <CurrencyContainer className={this.state.isOpen ? 'open' : ''} >

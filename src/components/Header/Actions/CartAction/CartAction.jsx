@@ -8,7 +8,7 @@ const StyledCartAction = styled.div`
   justify-content: center;
   width: 20px;
   height: 20px;
-  padding: 0 0 0 10px;
+  padding: 0 0 0 15px;
 `
 
 class CartAction extends React.Component {

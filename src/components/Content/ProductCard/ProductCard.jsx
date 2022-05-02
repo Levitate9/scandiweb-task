@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import cart from '../../../images/whiteCart.png'
 import ProductCardImage from './ProductCardImage/ProductCardImage'
 import AddToCartIcon from './AddToCartIcon/AddToCartIcon'
 import ProductCardContent from './ProductCardContent/ProductCardContent'
@@ -29,7 +28,8 @@ const StyledProductCard = styled.div`
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.3);
   }
 
-  &:hover > .cart {
+  &:hover > .cart,
+  & .cart.selected {
     display: flex;
   }
 
@@ -50,20 +50,34 @@ const StyledProductCard = styled.div`
 
 export default class ProductCard extends React.Component {
   render() {
-    const imgSrc = this.props.gallery[0]
-    const brand = this.props.brand
-    const name = this.props.name
-    console.log(this.props.currentCurrency)
-    const price = this.props.prices.filter((el) => el.currency.label === this.props.currentCurrency.label)[0].amount
-    const symbol = this.props.currentCurrency.symbol
-    const category = this.props.category
-    const id = this.props.id
+    const price = 
+      this.props.prices.filter((el) => el.currency.label === this.props.currentCurrency.label)[0].amount
     return (
       <StyledProductCard className={this.props.inStock ? 'inStock' : 'outOfStock'}>
-        <ProductCardImage inStock={this.props.inStock} category={category} id={id} src={imgSrc} />
-        { this.props.inStock && <AddToCartIcon cart={cart} /> }
-        <ProductCardContent inStock={this.props.inStock} category={category} id={id} brand={brand} name={name}
-          symbol={symbol} price={price} />
+        <ProductCardImage 
+          id={this.props.id}
+          inStock={this.props.inStock} 
+          category={this.props.category} 
+          src={this.props.gallery[0]} 
+        />
+        { this.props.inStock && <AddToCartIcon 
+          id={this.props.id} 
+          name={this.props.name}
+          brand={this.props.brand}
+          gallery={this.props.gallery}
+          attributes={this.props.attributes}
+          prices={this.props.prices}
+          sendProductToCart={this.props.sendProductToCart}
+          deleteProductFromCart={this.props.deleteProductFromCart}
+        /> }
+        <ProductCardContent 
+          id={this.props.id}
+          inStock={this.props.inStock} 
+          category={this.props.category}  
+          brand={this.props.brand} 
+          name={this.props.name}
+          symbol={this.props.currentCurrency.symbol} 
+          price={price} />
       </StyledProductCard>
     )
   }

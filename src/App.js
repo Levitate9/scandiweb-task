@@ -31,15 +31,14 @@ export default class App extends React.Component {
     }
     this.setCurrency = this.setCurrency.bind(this)
     this.setCategory = this.setCategory.bind(this)
+    this.sendProductToCart = this.sendProductToCart.bind(this)
+    this.deleteProductFromCart = this.deleteProductFromCart.bind(this)
   }
 
   setCurrency(newCurrency) {
     const currencies = this.state.currencies
-    const currentCurrency = currencies.filter((el) => el.label === newCurrency)
-    this.setState({
-      ...this.state,
-      currentCurrency: currentCurrency[0]
-    })
+    const currentCurrency = currencies.filter((el) => el.label === newCurrency)[0]
+    this.setState({ ...this.state, currentCurrency: currentCurrency })
   }
 
   setCategory(newCategory) {
@@ -48,6 +47,30 @@ export default class App extends React.Component {
       currentCategory: newCategory
     })
   }
+
+  // setDefaultAttr(attr, value) {
+  //   this.setState({ 
+  //     ...this.state, 
+  //     cartItems: [ 
+  //       this.state.cartItems.map((el) => { 
+  //         return { ...el, [attr]: value }
+  //       })
+  //     ]
+  //   })
+  // }
+
+  sendProductToCart(productId) {
+    const product = this.state.categories[0].products.filter((el) => el.id === productId)[0]
+    this.setState({ ...this.state, cartItems: [...this.state.cartItems, product] })
+  }
+
+  deleteProductFromCart(productId) {
+    this.setState({
+      ...this.state,
+      cartItems: this.state.cartItems.filter((el) => el.id !== productId)
+    })
+  }
+
 
   componentDidMount() {
     this.props.client
@@ -58,7 +81,6 @@ export default class App extends React.Component {
         currencies: result.data.currencies,
         currentCategory: result.data.categories[0].name,
         currentCurrency: result.data.currencies[0],
-        cartItems: result.data.categories[0].products,
         isLoaded: false 
       }))
   }
@@ -67,7 +89,8 @@ export default class App extends React.Component {
     if (this.state.isLoaded) {
       return <Preloader />
     }
-    console.log(this.state.currentCurrency)
+
+    console.log(this.state.cartItems)
     return (
       <BrowserRouter>
         <StyledApp>
@@ -87,6 +110,8 @@ export default class App extends React.Component {
                   categories={this.state.categories} 
                   currentCategory={el.name} 
                   currentCurrency={this.state.currentCurrency}
+                  sendProductToCart={this.sendProductToCart}
+                  deleteProductFromCart={this.deleteProductFromCart}
                 />} />
               )
             } 

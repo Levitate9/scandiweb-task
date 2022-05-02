@@ -81,6 +81,8 @@ export default class AttributeItem extends React.Component {
           return createAttr(TouchID, 'touchID')
         default:
       }
+
+      return null
     })
 
     return (
