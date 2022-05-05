@@ -8,13 +8,21 @@ const StyledSize = styled.div`
   align-items: center;
   width: 63px;
   height: 45px;
-  margin: 0 12px 12px 0;
+  margin: 0 8px 0 0;
   border: 1px solid #1D1F22;
   box-sizing: border-box;
   user-select: none;
 
-  &:nth-child(4n+4) {
-    margin: 0 0 12px 0;
+  &.sizeCartOverlay {
+    width: 24px;
+    height: 24px;
+    font-family: 'Source Sans Pro';
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  &.sizeCartOverlay:nth-child(4n+4) {
+    margin: 0;
   }
 
   &:hover {

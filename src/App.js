@@ -48,19 +48,8 @@ export default class App extends React.Component {
     })
   }
 
-  // setDefaultAttr(attr, value) {
-  //   this.setState({ 
-  //     ...this.state, 
-  //     cartItems: [ 
-  //       this.state.cartItems.map((el) => { 
-  //         return { ...el, [attr]: value }
-  //       })
-  //     ]
-  //   })
-  // }
-
   sendProductToCart(productId) {
-    const product = this.state.categories[0].products.filter((el) => el.id === productId)[0]
+    let product = this.state.categories[0].products.filter((el) => el.id === productId)[0]
     this.setState({ ...this.state, cartItems: [...this.state.cartItems, product] })
   }
 
@@ -70,7 +59,6 @@ export default class App extends React.Component {
       cartItems: this.state.cartItems.filter((el) => el.id !== productId)
     })
   }
-
 
   componentDidMount() {
     this.props.client
@@ -89,7 +77,6 @@ export default class App extends React.Component {
     if (this.state.isLoaded) {
       return <Preloader />
     }
-
     console.log(this.state.cartItems)
     return (
       <BrowserRouter>

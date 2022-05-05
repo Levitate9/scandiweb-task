@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import cart from '../../../../images/cart.png'
+import CartOverlay from './CartOverlay/CartOverlay';
 
 const StyledCartAction = styled.div`
   display: flex;
@@ -14,9 +15,13 @@ const StyledCartAction = styled.div`
 class CartAction extends React.Component {
   render() {
     return (
-      <StyledCartAction>
-        <img src={cart} alt='cart' />
-      </StyledCartAction>
+      <>
+        <StyledCartAction>
+          <img src={cart} alt='cart' />
+        </StyledCartAction>
+        <CartOverlay cartItems={this.props.cartItems} currentCurrency={this.props.currentCurrency} />
+      </>
+      
     )
   }
 }

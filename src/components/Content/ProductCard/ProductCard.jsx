@@ -25,7 +25,7 @@ const StyledProductCard = styled.div`
   }
 
   &:hover {
-    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.3);
+    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
   }
 
   &:hover > .cart,
@@ -61,12 +61,7 @@ export default class ProductCard extends React.Component {
           src={this.props.gallery[0]} 
         />
         { this.props.inStock && <AddToCartIcon 
-          id={this.props.id} 
-          name={this.props.name}
-          brand={this.props.brand}
-          gallery={this.props.gallery}
-          attributes={this.props.attributes}
-          prices={this.props.prices}
+          id={this.props.id}
           sendProductToCart={this.props.sendProductToCart}
           deleteProductFromCart={this.props.deleteProductFromCart}
         /> }

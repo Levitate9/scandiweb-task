@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import CurrencyAction from './CurrencyAction/CurrencyAction'
-import CartAction from './CartAction/CartAction';
-import CartOverlay from '../Actions/CartAction/CartOverlay/CartOverlay'
-
+import CartAction from './CartAction/CartAction'
 
 const StyledActions = styled.div`
   display: flex;
@@ -18,8 +16,7 @@ export default class Actions extends React.Component {
     return (
       <StyledActions>
         <CurrencyAction {...this.props} />
-        <CartAction />
-        <CartOverlay cartItems={this.props.cartItems} />
+        <CartAction cartItems={this.props.cartItems} currentCurrency={this.props.currentCurrency} />
       </StyledActions>
     )
   }

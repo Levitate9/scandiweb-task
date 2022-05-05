@@ -12,6 +12,10 @@ const StyledAttributeItem = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   margin: 12px 0;
+
+  &.cartOverlay {
+    margin: 8px 0 0 0;
+  }
 `
 
 const StyledCategory = styled.div`
@@ -20,9 +24,15 @@ const StyledCategory = styled.div`
   font-weight: 700;
   font-size: 18px;
   line-height: 18px;
-  margin: 8px 0;
+  margin: 0 0 8px 0;
   color: #1D1F22;
   text-transform: uppercase;
+
+  &.cartOverlay {
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: none;
+  }
 `
 
 const StyledAttributesValues = styled.div`
@@ -42,7 +52,7 @@ export default class AttributeItem extends React.Component {
         console.log()
         return this.addSelected('capacity')
       case 'Size':
-        return this.addSelected('size')
+        return this.props.cartOverlay ? this.addSelected('sizeCartOverlay') : this.addSelected('size')
       case 'With USB 3 ports':
         return this.addSelected('usb3')
       case 'Touch ID in keyboard':
@@ -74,7 +84,7 @@ export default class AttributeItem extends React.Component {
     
       switch (this.props.name) {
         case 'Size':
-          return createAttr(Size, 'size')
+          return this.props.cartOverlay ? createAttr(Size, 'sizeCartOverlay') : createAttr(Size, 'size')
         case 'Color':
           return createAttr(Color, 'color')
         case 'Capacity':
@@ -90,8 +100,10 @@ export default class AttributeItem extends React.Component {
     })
 
     return (
-      <StyledAttributeItem>
-        <StyledCategory>{this.props.name}:</StyledCategory>
+      <StyledAttributeItem className={this.props.cartOverlay ? 'cartOverlay' : ''}>
+        <StyledCategory className={this.props.cartOverlay ? 'cartOverlay' : ''}>
+          {this.props.name}:
+        </StyledCategory>
         <StyledAttributesValues>
           { mappedValues }
         </StyledAttributesValues>
