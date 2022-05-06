@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import ProductCard from './ProductCard/ProductCard'
+import CartOverlayBg from './CartOverlayBg/CartOverlayBg'
 
 const StyledContent = styled.div`
   width: 100%;
@@ -48,6 +49,7 @@ export default class Content extends React.Component {
       <StyledContent>
         <StyledCategory>{categoryText}</StyledCategory>
         <StyledProducts>{mappedProducts}</StyledProducts>
+        <CartOverlayBg />
       </StyledContent>
     )
   }

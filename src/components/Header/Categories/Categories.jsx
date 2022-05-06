@@ -10,6 +10,7 @@ const StyledUl = styled.ul`
   list-style: none;
   padding-inline-start: 0;
   flex: 10 1 35vw;
+  margin-left: 100px;
 `
 
 const StyledLi = styled.li`

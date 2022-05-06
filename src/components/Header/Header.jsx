@@ -5,12 +5,16 @@ import Logo from './Logo/Logo'
 import Actions from './Actions/Actions'
 
 const StyledHeader = styled.div`
+  position: fixed;
+  top: 0;
+  z-index: 15;
+  background-color: #ffffff;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   height: 80px;
-  width: 1240px;
+  width: 1440px;
 `
 
 export default class Header extends React.Component {

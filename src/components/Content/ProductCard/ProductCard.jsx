@@ -20,8 +20,12 @@ const StyledProductCard = styled.div`
     margin-left: 100px;
   }
 
+  &:nth-child(3n+3) {
+    margin-right: 100px;
+  }
+
   &:nth-child(3n+2) {
-    margin: 0 40px;
+    margin: 0 40px 103px 40px;
   }
 
   &:hover {

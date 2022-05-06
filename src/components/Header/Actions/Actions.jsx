@@ -9,6 +9,7 @@ const StyledActions = styled.div`
   justify-content: flex-end;
   align-items: center;
   flex: 10 1 35vw;
+  margin-right: 100px;
 `
 
 export default class Actions extends React.Component {
