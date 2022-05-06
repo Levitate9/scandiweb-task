@@ -67,6 +67,7 @@ const CurrencySwitcher = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   width: 114px;
+  background-color: #ffffff;
   box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
   z-index: 1001;
 `
