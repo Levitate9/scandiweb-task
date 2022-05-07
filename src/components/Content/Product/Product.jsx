@@ -8,6 +8,8 @@ import ProductMainPhoto from './ProductMainPhoto/ProductMainPhoto'
 import ProductAttributes from './ProductAttributes/ProductAttributes'
 
 const StyledProduct = styled.div`
+  position: relative;
+  top: 80px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -58,13 +60,15 @@ class Product extends React.Component {
       <StyledProduct>
         <ProductGallery gallery={this.state.gallery} setMainPhoto={this.setMainPhoto} />
         <ProductMainPhoto src={this.state.mainPhoto} />
-        <ProductAttributes 
+        <ProductAttributes
+          id={this.state.id} 
           brand={this.state.brand}
           name={this.state.name}
           attributes={this.state.attributes} 
           currentCurrency={this.props.currentCurrency}
           prices={this.state.prices}
           description={this.state.description}
+          sendProductToCart={this.props.sendProductToCart}
         />
       </StyledProduct>
     )

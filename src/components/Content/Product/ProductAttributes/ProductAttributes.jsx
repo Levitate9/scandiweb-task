@@ -26,7 +26,7 @@ export default class ProductAttributes extends React.Component {
         { mappedAttributeItems }
         <ProductPrice currentCurrency={this.props.currentCurrency} prices={this.props.prices} 
         />
-        <AddToCart />
+        <AddToCart id={this.props.id} sendProductToCart={this.props.sendProductToCart} />
         <ProductDescription description={this.props.description} />
       </StyledAttributes>
     )

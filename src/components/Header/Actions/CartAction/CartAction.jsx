@@ -31,6 +31,7 @@ class CartAction extends React.Component {
           cartItems={this.props.cartItems} 
           currentCurrency={this.props.currentCurrency} 
           isCartOverlayOpen={this.props.isCartOverlayOpen}
+          toggleIsCartOverlayOpen={this.props.toggleIsCartOverlayOpen}
         />
       </>
       

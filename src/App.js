@@ -113,6 +113,7 @@ export default class App extends React.Component {
                 <Route path={`/${el.name}/:id`} key={el.name} element={<Product 
                   client={this.props.client}
                   currentCurrency={this.state.currentCurrency}
+                  sendProductToCart={this.sendProductToCart}
                 />} />  
               )
             }
