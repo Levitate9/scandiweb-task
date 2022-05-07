@@ -17,7 +17,12 @@ export default class Actions extends React.Component {
     return (
       <StyledActions>
         <CurrencyAction {...this.props} />
-        <CartAction cartItems={this.props.cartItems} currentCurrency={this.props.currentCurrency} />
+        <CartAction 
+          cartItems={this.props.cartItems} 
+          currentCurrency={this.props.currentCurrency}
+          isCartOverlayOpen={this.props.isCartOverlayOpen}
+          toggleIsCartOverlayOpen={this.props.toggleIsCartOverlayOpen}
+        />
       </StyledActions>
     )
   }

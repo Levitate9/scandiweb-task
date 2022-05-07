@@ -28,11 +28,13 @@ export default class App extends React.Component {
       cartItems: [],
       currentCategory: '',
       currentCurrency: {},
+      isCartOverlayOpen: false
     }
     this.setCurrency = this.setCurrency.bind(this)
     this.setCategory = this.setCategory.bind(this)
     this.sendProductToCart = this.sendProductToCart.bind(this)
     this.deleteProductFromCart = this.deleteProductFromCart.bind(this)
+    this.toggleIsCartOverlayOpen = this.toggleIsCartOverlayOpen.bind(this)
   }
 
   setCurrency(newCurrency) {
@@ -42,10 +44,7 @@ export default class App extends React.Component {
   }
 
   setCategory(newCategory) {
-    this.setState({
-      ...this.state,
-      currentCategory: newCategory
-    })
+    this.setState({ ...this.state, currentCategory: newCategory })
   }
 
   sendProductToCart(productId) {
@@ -58,6 +57,10 @@ export default class App extends React.Component {
       ...this.state,
       cartItems: this.state.cartItems.filter((el) => el.id !== productId)
     })
+  }
+
+  toggleIsCartOverlayOpen() {
+    this.setState({ ...this.state, isCartOverlayOpen: this.state.isCartOverlayOpen ? false : true })
   }
 
   componentDidMount() {
@@ -77,7 +80,6 @@ export default class App extends React.Component {
     if (this.state.isLoaded) {
       return <Preloader />
     }
-    console.log(this.state.cartItems)
     return (
       <BrowserRouter>
         <StyledApp>
@@ -87,7 +89,9 @@ export default class App extends React.Component {
             currentCurrency={this.state.currentCurrency}
             setCategory={this.setCategory}
             setCurrency={this.setCurrency}
-            cartItems={this.state.cartItems} 
+            cartItems={this.state.cartItems}
+            isCartOverlayOpen={this.state.isCartOverlayOpen}
+            toggleIsCartOverlayOpen={this.toggleIsCartOverlayOpen}
           />
           <Routes>
             <Route path='*' element={<Navigate to='/all' />} />
@@ -99,6 +103,8 @@ export default class App extends React.Component {
                   currentCurrency={this.state.currentCurrency}
                   sendProductToCart={this.sendProductToCart}
                   deleteProductFromCart={this.deleteProductFromCart}
+                  isCartOverlayOpen={this.state.isCartOverlayOpen}
+                  toggleIsCartOverlayOpen={this.toggleIsCartOverlayOpen}
                 />} />
               )
             } 

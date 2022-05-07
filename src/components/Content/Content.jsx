@@ -4,7 +4,9 @@ import ProductCard from './ProductCard/ProductCard'
 import CartOverlayBg from './CartOverlayBg/CartOverlayBg'
 
 const StyledContent = styled.div`
+  position: relative;
   width: 100%;
+  top: 80px;
 `
 
 const StyledCategory = styled.div`
@@ -49,7 +51,9 @@ export default class Content extends React.Component {
       <StyledContent>
         <StyledCategory>{categoryText}</StyledCategory>
         <StyledProducts>{mappedProducts}</StyledProducts>
-        <CartOverlayBg />
+        <CartOverlayBg 
+          isCartOverlayOpen={this.props.isCartOverlayOpen} 
+          toggleIsCartOverlayOpen={this.props.toggleIsCartOverlayOpen} />
       </StyledContent>
     )
   }

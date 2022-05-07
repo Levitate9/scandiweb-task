@@ -27,7 +27,9 @@ export default class Header extends React.Component {
           currencies={this.props.currencies}
           currentCurrency={this.props.currentCurrency}
           setCurrency={this.props.setCurrency}
-          cartItems={this.props.cartItems} 
+          cartItems={this.props.cartItems}
+          isCartOverlayOpen={this.props.isCartOverlayOpen}
+          toggleIsCartOverlayOpen={this.props.toggleIsCartOverlayOpen}
         />
       </StyledHeader>
     )

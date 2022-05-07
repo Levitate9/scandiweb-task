@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledBg = styled.div`
-  position: absolute;
-  visibility: hidden;
+  position: fixed;
+  visibility: ${props => props.isOpen ? 'visible' : 'hidden'};
   width: 1440px;
   height: 100vh;
   top: 78px;
@@ -16,9 +16,13 @@ const StyledBg = styled.div`
 `
 
 export default class CartOverlayBg extends React.Component {
+  toggleBg() {
+    this.props.toggleIsCartOverlayOpen()
+  }
+
   render() {
     return (
-      <StyledBg></StyledBg>
+      <StyledBg isOpen={this.props.isCartOverlayOpen} onClick={this.toggleBg.bind(this)}></StyledBg>
     )
   }
 }

@@ -17,27 +17,20 @@ const StyledCartAction = styled.div`
 `
 
 class CartAction extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { isOpen: false }
-    this.toggleIsOpen = this.toggleIsOpen.bind(this)
-  }
-
   toggleIsOpen() {
-    this.setState({ isOpen: this.state.isOpen ? false : true })
+    this.props.toggleIsCartOverlayOpen()
   }
 
   render() {
     return (
       <>
         <StyledCartAction>
-          <img src={cart} alt='cart' onClick={this.toggleIsOpen} />
+          <img src={cart} alt='cart' onClick={this.toggleIsOpen.bind(this)} />
         </StyledCartAction>
         <CartOverlay 
           cartItems={this.props.cartItems} 
           currentCurrency={this.props.currentCurrency} 
-          isOpen={this.state.isOpen}
-          toggleIsOpen={this.toggleIsOpen}
+          isCartOverlayOpen={this.props.isCartOverlayOpen}
         />
       </>
       

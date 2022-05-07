@@ -25,10 +25,9 @@ const StyledCartOverlay = styled.div`
 
 export default class CartOverlay extends React.Component {
   render() {
-    console.log(this.props)
     return (
       <>
-        <StyledCartOverlay className={this.props.isOpen ? 'open' : ''}>
+        <StyledCartOverlay className={this.props.isCartOverlayOpen ? 'open' : ''}>
           <Header cartLength={this.props.cartItems.length} />
           <Items cartItems={this.props.cartItems} currentCurrency={this.props.currentCurrency} />
           <Total />
