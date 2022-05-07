@@ -8,6 +8,8 @@ import ProductMainPhoto from './ProductMainPhoto/ProductMainPhoto'
 import ProductAttributes from './ProductAttributes/ProductAttributes'
 
 const StyledProduct = styled.div`
+  position: relative;
+  top: 80px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;

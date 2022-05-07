@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 const StyledButtons = styled.div`
@@ -50,10 +51,16 @@ const StyledButtons = styled.div`
 `
 
 export default class Buttons extends React.Component {
+  toggleCartOverlay() {
+    this.props.toggleIsCartOverlayOpen()
+  }
+
   render() {
     return (
       <StyledButtons>
-        <button className='secondary'>view bag</button>
+        <NavLink to='cart'>
+          <button className='secondary' onClick={this.toggleCartOverlay.bind(this)}>view bag</button>
+        </NavLink>
         <button className={this.props.cartLength === 0 ? 'disabled' : 'primary'}>check out</button>
       </StyledButtons>
     )
