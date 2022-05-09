@@ -6,22 +6,27 @@ const StyledSize = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 63px;
-  height: 45px;
-  margin: 0 8px 0 0;
   border: 1px solid #1D1F22;
   box-sizing: border-box;
   user-select: none;
 
-  &.sizeCartOverlay {
+  &.product, &.cart {
+    width: 63px;
+    height: 45px;
+    margin: 0 8px 0 0;
+  }
+
+  &.cartOverlay {
     width: 24px;
     height: 24px;
     font-family: 'Source Sans Pro';
     font-weight: 400;
     font-size: 14px;
+    margin: 0 8px 0 0;
+    padding-top: 1px;
   }
 
-  &.sizeCartOverlay:nth-child(4n+4) {
+  &.cartOverlay:nth-child(4n+4) {
     margin: 0;
   }
 
@@ -46,14 +51,25 @@ const StyledSize = styled.div`
 `
 
 export default class Size extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { isSelected: false }
+  }
+
+  setSelected() {
+    this.props.onSelect()
+    this.setState({ isSelected: true })
+    console.log(this.state.isSelected)
+  }
 
   render() {
+    console.log(this.props.id)
     return (
       <StyledSize
         id={this.props.id} 
         className={this.props.className}
         value={this.props.value}
-        onClick={this.props.onSelect.bind(this)}
+        onClick={this.setSelected.bind(this)}
       >{this.props.value}</StyledSize>
     )
   }

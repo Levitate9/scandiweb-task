@@ -45,20 +45,7 @@ const StyledAttributesValues = styled.div`
 export default class AttributeItem extends React.Component {
 
   componentDidMount() {
-    switch (this.props.className) {
-      case 'Color':
-        return this.addSelected('color')
-      case 'Capacity':
-        console.log()
-        return this.addSelected('capacity')
-      case 'Size':
-        return this.props.cartOverlay ? this.addSelected('sizeCartOverlay') : this.addSelected('size')
-      case 'With USB 3 ports':
-        return this.addSelected('usb3')
-      case 'Touch ID in keyboard':
-        return this.addSelected('touchID')
-      default:
-    }
+    this.addSelected(this.props.className)
   }
 
   addSelected(className) {
@@ -78,28 +65,27 @@ export default class AttributeItem extends React.Component {
   render() {
     console.log(this.props.type)
     const mappedValues = this.props.items.map((el) => {
-      const createAttr = (Component, className) => 
+      const createAttr = (Component) => 
         <Component 
           key={el.id}
           id={el.id}
           displayValue={el.displayValue} 
           value={el.value}
-          className={className}
+          className={this.props.type}
           onSelect={this.onSelect}
-          type={this.props.type}
       />
   
       switch (this.props.name) {
         case 'Size':
-          return createAttr(Size, 'size')
+          return createAttr(Size)
         case 'Color':
-          return createAttr(Color, 'color')
+          return createAttr(Color)
         case 'Capacity':
-          return createAttr(Capacity, 'capacity')
+          return createAttr(Capacity)
         case 'With USB 3 ports':
-          return createAttr(Usb3, 'usb3')
+          return createAttr(Usb3)
         case 'Touch ID in keyboard':
-          return createAttr(TouchID, 'touchID')
+          return createAttr(TouchID)
         default:
       }
 

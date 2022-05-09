@@ -23,7 +23,7 @@ export default class ProductAttributes extends React.Component {
           id={el.id}
           name={el.name} 
           items={el.items}
-          className={el.name}
+          className={this.props.type}
           type={this.props.type}
         />
       })

@@ -58,7 +58,7 @@ export default class Item extends React.Component {
           key={el.id} 
           name={el.name} 
           items={el.items} 
-          className={el.name}
+          className={this.props.type}
           type={this.props.type}
         /> })
     return (

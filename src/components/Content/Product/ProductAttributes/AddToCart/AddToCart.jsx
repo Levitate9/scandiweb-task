@@ -44,7 +44,11 @@ export default class AddToCart extends React.Component {
      }
   }
   addToCart() {
+<<<<<<< HEAD
     this.props.sendProductToCart(this.props.id)
+=======
+    //adToCart method
+>>>>>>> bd99f27c27aec3948d163167bd3966c930dac595
     this.setState({ isProceedToCheckout: true, innerText: 'proceed to checkout' })
   }
 
@@ -55,8 +59,13 @@ export default class AddToCart extends React.Component {
   render() {
     const button = !this.state.isProceedToCheckout 
       ? <StyledAddToCart 
+<<<<<<< HEAD
           onClick={this.state.isProceedToCheckout ? () => <Navigate to='/cart' /> : this.addToCart.bind(this)}
         ><span>{this.state.innerText}</span>
+=======
+      onClick={this.state.isProceedToCheckout ? () => <Navigate to='/cart' /> : this.addToCart.bind(this)}>
+          <span>{this.state.innerText}</span>
+>>>>>>> bd99f27c27aec3948d163167bd3966c930dac595
         </StyledAddToCart>
       : <Link to='/cart'>
           <StyledAddToCart>
