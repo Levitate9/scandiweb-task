@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Item from '../Header/Actions/CartAction/CartOverlay/Items/Item/Item'
+import CartItem from './CartItem/CartItem'
 
 const StyledCart = styled.div`
   width: 1240px;
@@ -83,7 +83,7 @@ const Order = styled.button`
 export default class Cart extends React.Component {
   render() {
     let mappedItems = this.props.items.map((el) => 
-      <Item
+      <CartItem
         key={el.id}
         id={el.id} 
         attributes={el.attributes} 

@@ -1,42 +1,41 @@
 import React from 'react'
 import styled from 'styled-components'
+import CartDescription from './CartDescription/CartDescription'
+import CartQuantity from './CartQuantity/CartQuantity'
+import CartImage from './CartImage/CartImage'
 
 const StyledCartItem = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: flex-start;
   width: 100%;
+  border-top: 1px solid #E5E5E5;
 `
 
-const Brand = styled.div`
-  font-weight: 600;
-  font-size: 30px;
-  line-height: 27px;
-  color: #1D1F22;
-`
-
-const Name = styled(Brand)`
-  font-weight: 400;
-`
-
-const Price = styled.div`
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 24px;
-  color: #1D1F22;
+const CartDescriptionContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 1040px;
 `
 
 export default class CartItem extends React.Component {
   render() {
-    console.log(this.props.prices)
-    const amount = this.props.prices.filter((el) => el.currency.label === this.props.currentCurrency.label)[0].amount
     return (
       <StyledCartItem>
-        <hr />
-        <Brand>{this.props.brand}</Brand>
-        <Name>{this.props.name}</Name>
-        <Price>{this.props.currentCurrency.symbol}{amount}</Price>
+        <CartDescriptionContainer>
+          <CartDescription 
+            brand={this.props.brand}
+            name={this.props.name}
+            currentCurrency={this.props.currentCurrency}
+            prices={this.props.prices}
+            attributes={this.props.attributes}
+          />
+          <CartQuantity />
+        </CartDescriptionContainer>
+        <CartImage />
       </StyledCartItem>
     )
   }
