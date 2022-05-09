@@ -64,7 +64,8 @@ class Product extends React.Component {
           id={this.state.id} 
           brand={this.state.brand}
           name={this.state.name}
-          attributes={this.state.attributes} 
+          attributes={this.state.attributes}
+          type='product' 
           currentCurrency={this.props.currentCurrency}
           prices={this.state.prices}
           description={this.state.description}

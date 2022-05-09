@@ -76,15 +76,22 @@ export default class AttributeItem extends React.Component {
   }
 
   render() {
+    console.log(this.props.type)
     const mappedValues = this.props.items.map((el) => {
-
-      const createAttr = (Component, className) => <Component key={el.id} displayValue={el.displayValue} 
-        value={el.value} id={el.id} className={className} onSelect={this.onSelect}
+      const createAttr = (Component, className) => 
+        <Component 
+          key={el.id}
+          id={el.id}
+          displayValue={el.displayValue} 
+          value={el.value}
+          className={className}
+          onSelect={this.onSelect}
+          type={this.props.type}
       />
-    
+  
       switch (this.props.name) {
         case 'Size':
-          return this.props.cartOverlay ? createAttr(Size, 'sizeCartOverlay') : createAttr(Size, 'size')
+          return createAttr(Size, 'size')
         case 'Color':
           return createAttr(Color, 'color')
         case 'Capacity':
@@ -100,8 +107,8 @@ export default class AttributeItem extends React.Component {
     })
 
     return (
-      <StyledAttributeItem className={this.props.cartOverlay ? 'cartOverlay' : ''}>
-        <StyledCategory className={this.props.cartOverlay ? 'cartOverlay' : ''}>
+      <StyledAttributeItem className={this.props.type || ''}>
+        <StyledCategory className={this.props.type || ''}>
           {this.props.name}:
         </StyledCategory>
         <StyledAttributesValues>

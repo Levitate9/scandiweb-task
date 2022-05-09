@@ -31,7 +31,7 @@ export default class Items extends React.Component {
   }
 
   decQuantity() {
-    this.state.quantity === 1 ? null : this.setState({ quantity: this.state.quantity - 1 })
+    return this.state.quantity === 1 ? null : this.setState({ quantity: this.state.quantity - 1 })
   }
 
   render() {
@@ -46,7 +46,8 @@ export default class Items extends React.Component {
         quantity={this.state.quantity}
         addQuantity={this.addQuantity}
         decQuantity={this.decQuantity}
-        gallery={el.gallery} 
+        gallery={el.gallery}
+        type={this.props.type} 
       />)
     return (
       <StyledItems>

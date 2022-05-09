@@ -16,7 +16,17 @@ const StyledItem = styled.div`
   margin: 0 0 36px 0;
 `
 
-const Column = styled.div`
+const ContainerDescription = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  aling-items: center;
+  width: 168px;
+  height: 190px;
+  margin: 0 8px 0 0;
+`
+
+const ColumnDescription = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -27,14 +37,14 @@ const Column = styled.div`
   z-index: 1;
 `
 
-const ColumnQuantity = styled(Column)`
+const ColumnQuantity = styled(ColumnDescription)`
   align-items: center;
   width: 24px;
   height: 190px;
-  margin: 0 8px 0 4px;
+  margin: 0 0 0 4px;
 `
 
-const ColumnImage = styled(Column)`
+const ContainerImage = styled(ColumnDescription)`
   align-items: stretch;
   width: 121px;
 `
@@ -49,25 +59,27 @@ export default class Item extends React.Component {
           name={el.name} 
           items={el.items} 
           className={el.name}
-          cartOverlay={true}
+          type={this.props.type}
         /> })
     return (
       <StyledItem>
-        <Column>
-          <CartOverlayName brand={this.props.brand} name={this.props.name} />
-          <CartOverlayPrice prices={this.props.prices} currentCurrency={this.props.currentCurrency} />
-          { mappedCartOverlayAttributes }
-        </Column>
-        <ColumnQuantity>
-          <Quantity 
-            quantity={this.props.quantity} 
-            addQuantity={this.props.addQuantity} 
-            decQuantity={this.props.decQuantity} 
-          />
-        </ColumnQuantity>
-        <ColumnImage>
+        <ContainerDescription>
+          <ColumnDescription>
+            <CartOverlayName brand={this.props.brand} name={this.props.name} />
+            <CartOverlayPrice prices={this.props.prices} currentCurrency={this.props.currentCurrency} />
+            { mappedCartOverlayAttributes }
+          </ColumnDescription>
+          <ColumnQuantity>
+            <Quantity 
+              quantity={this.props.quantity} 
+              addQuantity={this.props.addQuantity} 
+              decQuantity={this.props.decQuantity} 
+            />
+          </ColumnQuantity>
+        </ContainerDescription>
+        <ContainerImage>
           <Image gallery={this.props.gallery} />
-        </ColumnImage>
+        </ContainerImage>
       </StyledItem>
     )
   }

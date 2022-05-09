@@ -29,7 +29,7 @@ export default class CartOverlay extends React.Component {
       <>
         <StyledCartOverlay className={this.props.isCartOverlayOpen ? 'open' : ''}>
           <Header cartLength={this.props.cartItems.length} />
-          <Items cartItems={this.props.cartItems} currentCurrency={this.props.currentCurrency} />
+          <Items cartItems={this.props.cartItems} currentCurrency={this.props.currentCurrency} type='cartOverlay' />
           <Total />
           <Buttons 
             cartLength={this.props.cartItems.length} 
