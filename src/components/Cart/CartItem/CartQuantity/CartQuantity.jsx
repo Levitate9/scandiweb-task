@@ -6,11 +6,8 @@ const StyledCartQuantity = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-`
-
-const Button = styled.button`
-  width: 45px;
-  height: 45px;
+  height: 288px;
+  margin: 0 24px 0 0;
 `
 
 const Amount = styled.div`
@@ -19,13 +16,50 @@ const Amount = styled.div`
   line-height: 38.4px;
 `
 
+const Button = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  font-weight: 300;
+  font-size: 36px;
+  border: 1px solid #1D1F22;
+  background-color: #ffffff;
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    border: 1px solid #A6A6A6;
+    cursor: default;
+  }
+
+  &:active:not([disabled]) {
+    background-color: #1D1F22;
+    color: #ffffff;
+    cursor: pointer;
+  }
+`
+
 export default class CartQuantity extends React.Component {
+  add() {
+    this.props.addQuantity()
+  }
+
+  dec() {
+    this.props.decQuantity()
+  }
+
   render() {
     return (
       <StyledCartQuantity>
-        <Button>+</Button>
-        <Amount>1</Amount>
-        <Button>-</Button>
+        <Button onClick={this.add.bind(this)}>+</Button>
+        <Amount>{this.props.quantity}</Amount>
+        <Button onClick={this.dec.bind(this)}>-</Button>
       </StyledCartQuantity>
     )
   }

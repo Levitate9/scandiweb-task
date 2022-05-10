@@ -11,6 +11,7 @@ const StyledCartItem = styled.div`
   align-items: flex-start;
   width: 100%;
   border-top: 1px solid #E5E5E5;
+  padding-top: 24px;
 `
 
 const CartDescriptionContainer = styled.div`
@@ -22,6 +23,21 @@ const CartDescriptionContainer = styled.div`
 `
 
 export default class CartItem extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { quantity: 1 }
+    this.addQuantity = this.addQuantity.bind(this)
+    this.decQuantity = this.decQuantity.bind(this)
+  }
+
+  addQuantity() {
+    this.setState({ quantity: this.state.quantity + 1 })
+  }
+
+  decQuantity() {
+    this.setState({ quantity: this.state.quantity === 1 ? 1 : this.state.quantity - 1 })
+  }
+
   render() {
     return (
       <StyledCartItem>
@@ -33,7 +49,10 @@ export default class CartItem extends React.Component {
             prices={this.props.prices}
             attributes={this.props.attributes}
           />
-          <CartQuantity />
+          <CartQuantity 
+            quantity={this.state.quantity} 
+            addQuantity={this.addQuantity} 
+            decQuantity={this.decQuantity} />
         </CartDescriptionContainer>
         <CartImage />
       </StyledCartItem>
