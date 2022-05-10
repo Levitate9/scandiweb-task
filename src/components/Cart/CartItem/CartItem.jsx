@@ -54,7 +54,7 @@ export default class CartItem extends React.Component {
             addQuantity={this.addQuantity} 
             decQuantity={this.decQuantity} />
         </CartDescriptionContainer>
-        <CartImage />
+        <CartImage gallery={this.props.gallery} />
       </StyledCartItem>
     )
   }
