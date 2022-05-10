@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import CartItemAttribute from '../CartAttribute/CartItemAttribute'
+// import CartItemAttribute from '../CartAttribute/CartItemAttribute'
+import AttributeItem from '../../../Content/Product/ProductAttributes/AttributeItem/AttributeItem'
+
 
 const StyledCartDescription = styled.div`
   display: flex;
@@ -18,6 +20,7 @@ const Brand = styled.div`
 
 const Name = styled(Brand)`
   font-weight: 400;
+  margin-top: 16px;
 `
 
 const Price = styled.div`
@@ -25,17 +28,20 @@ const Price = styled.div`
   font-size: 24px;
   line-height: 24px;
   color: #1D1F22;
+  margin: 20px 0;
 `
 
 export default class CartDescription extends React.Component {
   render() {
     const amount = this.props.prices.filter((el) => el.currency.label === this.props.currentCurrency.label)[0].amount
     const mappedCartItemAttributes = this.props.attributes.map((el) => 
-      <CartItemAttribute 
+      <AttributeItem 
         key={el.id}
         id={el.id}
         name={el.name}
         items={el.items}
+        className='cart'
+        type='cart'
       />
     )
     return (

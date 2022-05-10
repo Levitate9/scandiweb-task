@@ -14,6 +14,8 @@ const AttributeName = styled.div`
   font-size: 18px;
   line-height: 18px;
   color: #1D1F22;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 `
 
 export default class CartItemAttribute extends React.Component {
@@ -22,11 +24,14 @@ export default class CartItemAttribute extends React.Component {
     const mappedValues = this.props.items.map((el) => 
       <CartItemAttributeValue 
         key={el.id}
+        id={el.id}
+        value={el.value}
+        displayValue={el.displayValue}
       />
     )
     return (
       <StyledAttribute>
-        <AttributeName>{this.props.name}</AttributeName>
+        <AttributeName>{this.props.name}:</AttributeName>
         { mappedValues }
       </StyledAttribute>
     )

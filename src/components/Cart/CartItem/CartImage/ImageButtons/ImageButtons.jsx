@@ -8,7 +8,7 @@ const StyledImageButtons = styled.div`
   justify-content: flex-start;
   align-items: center;
   bottom: 16px;
-  right: 16px;
+  right: 21px;
   width: 56px;
   height: 24px;
 `

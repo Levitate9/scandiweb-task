@@ -24,6 +24,11 @@ const StyledSize = styled.div`
     font-size: 14px;
     margin: 0 8px 0 0;
     padding-top: 1px;
+
+    &.selected {
+      color: #ffffff;
+      background-color: #1D1F22;
+    }
   }
 
   &.cartOverlay:nth-child(4n+4) {
@@ -56,14 +61,12 @@ export default class Size extends React.Component {
     this.state = { isSelected: false }
   }
 
-  setSelected() {
-    this.props.onSelect()
+  setSelected(e) {
     this.setState({ isSelected: true })
-    console.log(this.state.isSelected)
+    this.props.onSelect(e)
   }
 
   render() {
-    console.log(this.props.id)
     return (
       <StyledSize
         id={this.props.id} 

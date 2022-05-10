@@ -13,7 +13,7 @@ const StyledAttributeItem = styled.div`
   align-items: flex-start;
   margin: 12px 0;
 
-  &.cartOverlay {
+  &.cartOverlayItem {
     margin: 8px 0 0 0;
   }
 `
@@ -28,7 +28,7 @@ const StyledCategory = styled.div`
   color: #1D1F22;
   text-transform: uppercase;
 
-  &.cartOverlay {
+  &.cartOverlayCategory {
     font-weight: 400;
     font-size: 14px;
     text-transform: none;
@@ -45,10 +45,10 @@ const StyledAttributesValues = styled.div`
 export default class AttributeItem extends React.Component {
 
   componentDidMount() {
-    this.addSelected(this.props.className)
+    this.addSelected(this.props.className, 0)
   }
 
-  addSelected(className) {
+  addSelected(className) { 
     document.getElementsByClassName(className)[0].classList.add('selected')
   }
 
@@ -63,7 +63,6 @@ export default class AttributeItem extends React.Component {
   }
 
   render() {
-    console.log(this.props.type)
     const mappedValues = this.props.items.map((el) => {
       const createAttr = (Component) => 
         <Component 
@@ -72,7 +71,7 @@ export default class AttributeItem extends React.Component {
           displayValue={el.displayValue} 
           value={el.value}
           className={this.props.type}
-          onSelect={this.onSelect}
+          onSelect={this.onSelect.bind(this)}
       />
   
       switch (this.props.name) {
@@ -93,8 +92,8 @@ export default class AttributeItem extends React.Component {
     })
 
     return (
-      <StyledAttributeItem className={this.props.type || ''}>
-        <StyledCategory className={this.props.type || ''}>
+      <StyledAttributeItem className={`${this.props.type}Item` || ''}>
+        <StyledCategory className={`${this.props.type}Category` || ''}>
           {this.props.name}:
         </StyledCategory>
         <StyledAttributesValues>
