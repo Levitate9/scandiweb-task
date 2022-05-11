@@ -2,9 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledColor = styled.div`
-  width: 32px;
-  height: 32px;
   background-color: ${props => props.value};
+  ${props => props.id === 'White' && `outline: 1px solid #bababa;`}
+
+  &.product, &.cart {
+    width: 32px;
+    height: 32px;
+  }
+
+  &.cartOverlay {
+    width: 16px;
+    height: 16px;
+  }
 
   &:nth-child(6n+6) {
     margin: 0;
@@ -27,11 +36,15 @@ const StyledColor = styled.div`
     cursor: default;
   }
 
-  &:hover .tooltipcolor {
+  &:hover .tooltipproduct, 
+  &:hover .tooltipcart, 
+  &:hover .tooltipcartOverlay {
     visibility: visible;
   }
 
-  &:hover.disabled .tooltipcolor {
+  &:hover.disabled .tooltipproduct, 
+  &:hover.disabled .tooltipcart, 
+  &:hover.disabled .tooltipcartOverlay {
     visibility: hidden;
   }
 }
@@ -43,10 +56,20 @@ const Background = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 36px;
-  height: 36px;
   background-color: transparent;
   margin: 0 8px 8px 0;
+
+  &.product, &.cart {
+    width: 36px;
+    height: 36px;
+    margin: 0 10px 10px 0;
+  }
+
+  &.cartOverlay {
+    width: 20px;
+    height: 20px;
+    margin: 0 6px 6px 0;
+  }
 `
 
 const Tooltip = styled.span`
@@ -78,21 +101,19 @@ const Tooltip = styled.span`
 `
 
 export default class Color extends React.Component {
-
-  componentDidMount() {
-    if (this.props.id === 'White') {
-      document.getElementById('White').style.outline = '1px solid #bababa'
-    }
+  setSelected(e) {
+    this.props.setSelectedValue(e.target.id)
   }
 
   render() {
+    console.log(this.props.displayValue)
     return (
-      <Background>
+      <Background className={this.props.className}>
         <StyledColor 
           id={this.props.id} 
-          className={this.props.className} 
+          className={`${this.props.className} ${this.props.selectedValue === this.props.displayValue ? 'selected' : ''}`} 
           value={this.props.value}
-          onClick={this.props.onSelect.bind(this)}
+          onClick={this.setSelected.bind(this)}
         ><Tooltip className={`tooltip${this.props.className}`}>{this.props.displayValue}</Tooltip>
         </StyledColor>
       </Background>

@@ -11,7 +11,12 @@ const StyledCartItem = styled.div`
   align-items: flex-start;
   width: 100%;
   border-top: 1px solid #E5E5E5;
+  margin-top: 24px;
   padding-top: 24px;
+
+  &:first-child {
+    margin-top: 0;
+  }
 `
 
 const CartDescriptionContainer = styled.div`

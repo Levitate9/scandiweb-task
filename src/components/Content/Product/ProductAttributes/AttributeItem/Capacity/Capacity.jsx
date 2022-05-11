@@ -2,11 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledCapacity = styled.div`
-  width: 48px;
-  margin: 0 10px 10px 0;
-  padding: 4px 8px;
   border-radius: 3px;
   outline: 1px solid #bababa;
+
+  &.product, 
+  &.cart {
+    width: 48px;
+    margin: 0 10px 10px 0;
+    padding: 4px 8px;
+    font-size: 16px;
+  }
+
+  &.cartOverlay {
+    width: 48px;
+    margin: 0 6px 6px 2px;
+    padding: 4px 4px;
+  }
 
   &:hover {
     cursor: pointer;
@@ -33,14 +44,17 @@ const StyledCapacity = styled.div`
 `
 
 export default class Capacity extends React.Component {
+  setSelected(e) {
+    this.props.setSelectedValue(e.target.id)
+  }
 
   render() {
     return (
       <StyledCapacity
         id={this.props.id} 
-        className={this.props.className}
+        className={`${this.props.className} ${this.props.selectedValue === this.props.value ? 'selected' : ''}`}
         value={this.props.value}
-        onClick={this.props.onSelect.bind(this)}
+        onClick={this.setSelected.bind(this)}
       >{this.props.value}</StyledCapacity>
     )
   }

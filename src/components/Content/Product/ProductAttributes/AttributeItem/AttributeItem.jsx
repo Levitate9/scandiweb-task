@@ -43,23 +43,14 @@ const StyledAttributesValues = styled.div`
 `
 
 export default class AttributeItem extends React.Component {
-
-  componentDidMount() {
-    this.addSelected(this.props.className, 0)
+  constructor(props) {
+    super(props)
+    this.state = { selectedValue: this.props.items[0].displayValue }
+    this.setSelectedValue = this.setSelectedValue.bind(this)
   }
 
-  addSelected(className) { 
-    document.getElementsByClassName(className)[0].classList.add('selected')
-  }
-
-  addDisabled(className) {
-    document.getElementsByClassName(className)[0].classList.add('disabled')
-  }
-
-  onSelect(e) {
-    let divs = document.getElementsByClassName(this.props.className)
-    Array.from(divs).map((el) => el.classList.contains('selected') && el.classList.remove('selected'))
-    document.getElementById(e.target.id).classList.add('selected')
+  setSelectedValue(value) { 
+    this.setState({ ...this.state, selectedValue: value })
   }
 
   render() {
@@ -71,7 +62,8 @@ export default class AttributeItem extends React.Component {
           displayValue={el.displayValue} 
           value={el.value}
           className={this.props.type}
-          onSelect={this.onSelect.bind(this)}
+          selectedValue={this.state.selectedValue}
+          setSelectedValue={this.setSelectedValue}
       />
   
       switch (this.props.name) {
@@ -87,7 +79,6 @@ export default class AttributeItem extends React.Component {
           return createAttr(TouchID)
         default:
       }
-
       return null
     })
 

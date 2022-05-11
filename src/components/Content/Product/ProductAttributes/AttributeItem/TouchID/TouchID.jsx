@@ -29,14 +29,17 @@ const StyledTouchID = styled.div`
 `
 
 export default class TouchID extends React.Component {
+  setSelected(e) {
+    this.props.setSelectedValue(e.target.id)
+  }
 
   render() {
     return (
       <StyledTouchID
-        id={`${this.props.className}-${this.props.id}`}
+        id={this.props.id}
         value={this.props.value}
-        className={this.props.className}
-        onClick={this.props.onSelect.bind(this)}
+        className={`${this.props.className} ${this.props.selectedValue === this.props.value ? 'selected' : ''}`}
+        onClick={this.setSelected.bind(this)}
       >{this.props.displayValue}</StyledTouchID>
     )
   }

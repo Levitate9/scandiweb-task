@@ -22,7 +22,7 @@ const ContainerDescription = styled.div`
   justify-content: space-between;
   aling-items: center;
   width: 168px;
-  height: 190px;
+  height: auto;
   margin: 0 8px 0 0;
 `
 
@@ -33,7 +33,7 @@ const ColumnDescription = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   width: 136px;
-  height: 190px;
+  height: auto;
   z-index: 1;
 `
 
@@ -47,6 +47,7 @@ const ColumnQuantity = styled(ColumnDescription)`
 const ContainerImage = styled(ColumnDescription)`
   align-items: stretch;
   width: 121px;
+  height: 190px;
 `
 
 export default class Item extends React.Component {
