@@ -48,7 +48,9 @@ const ProductImg = styled.div`
   width: 356px;
   height: 338px;
   background-image: url(${props => props.src});
-  background-size: cover;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
   z-index: 8;
 `
 
