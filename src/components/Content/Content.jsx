@@ -53,7 +53,8 @@ export default class Content extends React.Component {
         <StyledProducts>{mappedProducts}</StyledProducts>
         <CartOverlayBg 
           isCartOverlayOpen={this.props.isCartOverlayOpen} 
-          toggleIsCartOverlayOpen={this.props.toggleIsCartOverlayOpen} />
+          toggleIsCartOverlayOpen={this.props.toggleIsCartOverlayOpen} 
+        />
       </StyledContent>
     )
   }

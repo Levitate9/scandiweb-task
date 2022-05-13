@@ -6,7 +6,9 @@ const StyledGalleryItem = styled.div`
   height: 80px;
   margin: 0 0 40px 0;
   background-image: url(${props => props.src});
-  background-size: cover;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
 
   &:hover {
     cursor: pointer;

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import CartItem from './CartItem/CartItem'
+import CartOverlayBg from '../Content/CartOverlayBg/CartOverlayBg'
 
 const StyledCart = styled.div`
   width: 1240px;

@@ -7,6 +7,7 @@ import Content from './components/Content/Content'
 import styled from 'styled-components'
 import Product from './components/Content/Product/Product'
 import Cart from './components/Cart/Cart';
+import CartOverlayBg from './components/Content/CartOverlayBg/CartOverlayBg'
 
 const StyledApp = styled.div`
   font-family: 'Raleway', sans-serif;
@@ -103,8 +104,6 @@ export default class App extends React.Component {
                   currentCurrency={this.state.currentCurrency}
                   sendProductToCart={this.sendProductToCart}
                   deleteProductFromCart={this.deleteProductFromCart}
-                  isCartOverlayOpen={this.state.isCartOverlayOpen}
-                  toggleIsCartOverlayOpen={this.toggleIsCartOverlayOpen}
                 />} />
               )
             } 
@@ -119,9 +118,13 @@ export default class App extends React.Component {
             }
             <Route exact path={`/cart`} element={<Cart
               items={this.state.cartItems} 
-              currentCurrency={this.state.currentCurrency} 
+              currentCurrency={this.state.currentCurrency}
             />} />
           </Routes>
+          <CartOverlayBg 
+            isCartOverlayOpen={this.state.isCartOverlayOpen} 
+            toggleIsCartOverlayOpen={this.state.toggleCartOverlayOpen} 
+          />
         </StyledApp>
       </BrowserRouter>
     )
