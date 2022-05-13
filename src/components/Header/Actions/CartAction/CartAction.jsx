@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import cart from '../../../../images/cart.png'
 import CartOverlay from './CartOverlay/CartOverlay';
+import CartActionBadge from './CartActionBadge/CartActionBadge'
 
 const StyledCartAction = styled.div`
   display: flex;
@@ -33,6 +34,12 @@ class CartAction extends React.Component {
           isCartOverlayOpen={this.props.isCartOverlayOpen}
           toggleIsCartOverlayOpen={this.props.toggleIsCartOverlayOpen}
         />
+        { this.props.cartItems.length > 0 && 
+            <CartActionBadge 
+              amount={this.props.cartItems.length} 
+              toggleIsCartOverlayOpen={this.props.toggleIsCartOverlayOpen} 
+            /> 
+        }
       </>
       
     )

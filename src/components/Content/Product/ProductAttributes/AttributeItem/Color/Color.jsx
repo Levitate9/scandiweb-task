@@ -106,7 +106,6 @@ export default class Color extends React.Component {
   }
 
   render() {
-    console.log(this.props.displayValue)
     return (
       <Background className={this.props.className}>
         <StyledColor 
