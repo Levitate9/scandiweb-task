@@ -7,11 +7,11 @@ const StyledButtons = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 16px 16px 32px 16px;
-  width: 293px;
+  padding: 16px 16px 32px 16px;
+  width: 310px;
 
   & .primary {
-    width: 140px;
+    width: 150px;
     height: 43px;
     text-transform: uppercase;
     color: white;
@@ -20,7 +20,7 @@ const StyledButtons = styled.div`
   }
 
   & .secondary {
-    width: 140px;
+    width: 150px;
     height: 43px;
     text-transform: uppercase;
     color: #1D1F22;

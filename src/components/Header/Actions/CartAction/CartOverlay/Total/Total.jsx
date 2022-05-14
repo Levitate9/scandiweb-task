@@ -6,8 +6,8 @@ const StyledTotal = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 293px;
-  margin: 16px;
+  width: 310px;
+  padding: 16px;
 
   & .total {
     font-weight: 600;
@@ -23,7 +23,7 @@ export default class Total extends React.Component {
     return (
       <StyledTotal>
         <span className='total'>Total</span>
-        <span className='price'>$0.00</span>
+        <span className='price'>{this.props.currentCurrency.symbol}{this.props.globalTotal}</span>
       </StyledTotal>
     )
   }

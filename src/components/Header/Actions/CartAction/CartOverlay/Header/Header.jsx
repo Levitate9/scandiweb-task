@@ -5,8 +5,8 @@ const StyledHeader = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  margin: 32px 16px 16px 16px;
-  width: 293px;
+  padding: 32px 16px 16px 16px;
+  width: 310px;
   font-weight: 700;
   
   & span {

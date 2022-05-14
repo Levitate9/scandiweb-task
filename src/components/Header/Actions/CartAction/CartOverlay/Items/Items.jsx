@@ -3,37 +3,23 @@ import styled from 'styled-components'
 import Item from './Item/Item'
 
 const StyledItems = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 293px;
+  width: 312px;
   min-height: 222px;
   max-height: 444px;
   margin: 16px;
   overflow-y: auto;
 
   & .emptyCart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 222px;
     font-weight: 500;
   }
 `
 
 export default class Items extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { quantity: 1 }
-    this.addQuantity = this.addQuantity.bind(this)
-    this.decQuantity = this.decQuantity.bind(this)
-  }
-
-  addQuantity() {
-    this.setState({ quantity: this.state.quantity + 1 })
-  }
-
-  decQuantity() {
-    return this.state.quantity === 1 ? null : this.setState({ quantity: this.state.quantity - 1 })
-  }
-
   render() {
     const mappedItems = this.props.cartItems.length > 0 && this.props.cartItems.map((el) => 
       <Item 
@@ -43,16 +29,15 @@ export default class Items extends React.Component {
         prices={el.prices} 
         currentCurrency={this.props.currentCurrency}
         attributes={el.attributes}
-        quantity={this.state.quantity}
-        addQuantity={this.addQuantity}
-        decQuantity={this.decQuantity}
         gallery={el.gallery}
-        type={this.props.type} 
+        type={this.props.type}
       />)
     return (
       <StyledItems>
         { this.props.cartItems.length === 0
-          ? <div className='emptyCart'>You cart is<br />currently empty</div>
+          ? <div className='emptyCart'>
+              <div>You cart is<br />currently empty</div>
+            </div>
           : mappedItems }
       </StyledItems>
     )

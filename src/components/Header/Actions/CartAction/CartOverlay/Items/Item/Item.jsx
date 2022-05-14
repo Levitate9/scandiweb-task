@@ -10,10 +10,10 @@ import Image from './Image/Image'
 const StyledItem = styled.div`
   display: flex;
   flex-direction: row;
-  jusify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  margin: 0 0 36px 0;
+  margin: 0 0 28px 0;
 `
 
 const ContainerDescription = styled.div`
@@ -22,7 +22,7 @@ const ContainerDescription = styled.div`
   justify-content: space-between;
   aling-items: center;
   width: 168px;
-  height: auto;
+  min-height: 190px;
   margin: 0 8px 0 0;
 `
 
@@ -40,7 +40,7 @@ const ColumnDescription = styled.div`
 const ColumnQuantity = styled(ColumnDescription)`
   align-items: center;
   width: 24px;
-  height: 190px;
+  height: auto;
   margin: 0 0 0 4px;
 `
 
@@ -51,6 +51,25 @@ const ContainerImage = styled(ColumnDescription)`
 `
 
 export default class Item extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { quantity: 1 }
+    this.addQuantity = this.addQuantity.bind(this)
+    this.decQuantity = this.decQuantity.bind(this)
+  }
+
+  addQuantity() {
+    this.setState({ ...this.state, quantity: this.state.quantity + 1 })
+  }
+
+  decQuantity() {
+    if (this.state.quantity === 1) { 
+      this.setState({ ...this.state, quantity: 1 }) 
+    } else { 
+      this.setState({ ...this.state, quantity: this.state.quantity - 1 }) 
+    }
+  }
+
   render() {
     const mappedCartOverlayAttributes = 
       this.props.attributes.map((el) => {
@@ -72,9 +91,9 @@ export default class Item extends React.Component {
           </ColumnDescription>
           <ColumnQuantity>
             <Quantity 
-              quantity={this.props.quantity} 
-              addQuantity={this.props.addQuantity} 
-              decQuantity={this.props.decQuantity} 
+              quantity={this.state.quantity} 
+              addQuantity={this.addQuantity} 
+              decQuantity={this.decQuantity} 
             />
           </ColumnQuantity>
         </ContainerDescription>
