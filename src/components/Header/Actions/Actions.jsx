@@ -16,12 +16,20 @@ export default class Actions extends React.Component {
   render() {
     return (
       <StyledActions>
-        <CurrencyAction {...this.props} />
+        <CurrencyAction 
+          currentCurrency={this.props.currentCurrency} 
+          currencies={this.props.currencies}
+          setCurrency={this.props.setCurrency}
+        />
         <CartAction 
           cartItems={this.props.cartItems} 
           currentCurrency={this.props.currentCurrency}
           isCartOverlayOpen={this.props.isCartOverlayOpen}
           toggleIsCartOverlayOpen={this.props.toggleIsCartOverlayOpen}
+          globalTotal={this.props.globalTotal}
+          incGlobalTotal={this.props.incGlobalTotal}
+          decGlobalTotal={this.props.decGlobalTotal}
+          currencies={this.props.currencies}
         />
       </StyledActions>
     )

@@ -53,21 +53,34 @@ const ContainerImage = styled(ColumnDescription)`
 export default class Item extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { quantity: 1 }
+    this.state = { 
+      quantity: 1
+    }
     this.addQuantity = this.addQuantity.bind(this)
     this.decQuantity = this.decQuantity.bind(this)
   }
 
   addQuantity() {
     this.setState({ ...this.state, quantity: this.state.quantity + 1 })
+    this.props.incGlobalTotal(this.props.prices, this.state.quantity)
   }
 
   decQuantity() {
     if (this.state.quantity === 1) { 
-      this.setState({ ...this.state, quantity: 1 }) 
+      this.setState({ ...this.state, quantity: 1 })
+      //тут будет удаление товара из картОверлэй 
     } else { 
-      this.setState({ ...this.state, quantity: this.state.quantity - 1 }) 
+      this.setState({ ...this.state, quantity: this.state.quantity - 1 })
+      this.props.decGlobalTotal(this.props.prices, this.state.quantity) 
     }
+  }
+
+  componentDidMount() {
+    this.props.incGlobalTotal(this.props.prices, this.state.quantity)
+  }
+
+  componentWillUnmount() {
+    this.props.decGlobalTotal(this.props.prices, this.state.quantity)
   }
 
   render() {

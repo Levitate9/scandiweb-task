@@ -31,6 +31,8 @@ export default class Items extends React.Component {
         attributes={el.attributes}
         gallery={el.gallery}
         type={this.props.type}
+        incGlobalTotal={this.props.incGlobalTotal}
+        decGlobalTotal={this.props.decGlobalTotal}
       />)
     return (
       <StyledItems>

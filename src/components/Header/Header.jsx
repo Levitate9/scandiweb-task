@@ -30,6 +30,9 @@ export default class Header extends React.Component {
           cartItems={this.props.cartItems}
           isCartOverlayOpen={this.props.isCartOverlayOpen}
           toggleIsCartOverlayOpen={this.props.toggleIsCartOverlayOpen}
+          globalTotal={this.props.globalTotal}
+          incGlobalTotal={this.props.incGlobalTotal}
+          decGlobalTotal={this.props.decGlobalTotal}
         />
       </StyledHeader>
     )

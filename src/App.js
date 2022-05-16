@@ -29,13 +29,16 @@ export default class App extends React.Component {
       cartItems: [],
       currentCategory: '',
       currentCurrency: {},
-      isCartOverlayOpen: false
+      isCartOverlayOpen: false,
+      globalTotal: []
     }
     this.setCurrency = this.setCurrency.bind(this)
     this.setCategory = this.setCategory.bind(this)
     this.sendProductToCart = this.sendProductToCart.bind(this)
     this.deleteProductFromCart = this.deleteProductFromCart.bind(this)
     this.toggleIsCartOverlayOpen = this.toggleIsCartOverlayOpen.bind(this)
+    this.incGlobalTotal = this.incGlobalTotal.bind(this)
+    this.decGlobalTotal = this.decGlobalTotal.bind(this)
   }
 
   setCurrency(newCurrency) {
@@ -62,6 +65,40 @@ export default class App extends React.Component {
 
   toggleIsCartOverlayOpen() {
     this.setState({ ...this.state, isCartOverlayOpen: this.state.isCartOverlayOpen ? false : true })
+  }
+
+  incGlobalTotal(prices, quantity) {
+    let itemTotal = prices.map((el) => { return { label: el.currency.label, total: el.amount * quantity } })
+
+    let newGlobalTotal = []
+    if (this.state.globalTotal.length > 0) {
+      this.state.globalTotal.map((el, i) => {
+        let targetTotal = prices[i].amount
+        return newGlobalTotal.push({ label: el.label, total: el.total + targetTotal })
+      })
+    } else {
+      newGlobalTotal.push(...itemTotal)
+    }
+    this.setState({ ...this.state, globalTotal: newGlobalTotal })
+  }
+
+  decGlobalTotal(prices, quantity) {
+    if (this.state.globalTotal.length === 0) {
+      return null
+    } else {
+      let itemTotal = prices.map((el) => { return { label: el.currency.label, total: el.amount * quantity } })
+
+      var newGlobalTotal = []
+      if (this.state.globalTotal.length > 0) {
+        this.state.globalTotal.map((el, i) => {
+          let targetTotal = prices[i].amount
+          return newGlobalTotal.push({ label: el.label, total: el.total - targetTotal })
+        })
+      } else {
+        newGlobalTotal.push(...itemTotal)
+      }
+      this.setState({ ...this.state, globalTotal: newGlobalTotal })
+    }
   }
 
   componentDidMount() {
@@ -93,6 +130,9 @@ export default class App extends React.Component {
             cartItems={this.state.cartItems}
             isCartOverlayOpen={this.state.isCartOverlayOpen}
             toggleIsCartOverlayOpen={this.toggleIsCartOverlayOpen}
+            globalTotal={this.state.globalTotal}
+            incGlobalTotal={this.incGlobalTotal}
+            decGlobalTotal={this.decGlobalTotal}
           />
           <Routes>
             <Route path='*' element={<Navigate to='/all' />} />
@@ -123,7 +163,7 @@ export default class App extends React.Component {
           </Routes>
           <CartOverlayBg 
             isCartOverlayOpen={this.state.isCartOverlayOpen} 
-            toggleIsCartOverlayOpen={this.state.toggleCartOverlayOpen} 
+            toggleIsCartOverlayOpen={this.toggleIsCartOverlayOpen} 
           />
         </StyledApp>
       </BrowserRouter>

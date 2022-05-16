@@ -33,6 +33,10 @@ class CartAction extends React.Component {
           currentCurrency={this.props.currentCurrency} 
           isCartOverlayOpen={this.props.isCartOverlayOpen}
           toggleIsCartOverlayOpen={this.props.toggleIsCartOverlayOpen}
+          globalTotal={this.props.globalTotal}
+          incGlobalTotal={this.props.incGlobalTotal}
+          decGlobalTotal={this.props.decGlobalTotal}
+          currencies={this.props.currencies}
         />
         { this.props.cartItems.length > 0 && 
             <CartActionBadge 
