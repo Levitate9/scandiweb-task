@@ -6,8 +6,10 @@ import AttributeItem
     from '../../../../../../Content/Product/ProductAttributes/AttributeItem/AttributeItem'
 import Quantity from './Quantity/Quantity'
 import Image from './Image/Image'
+import ItemRemoveLayer from './ItemRomoveLayer/ItemRemoveLayer'
 
 const StyledItem = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -66,9 +68,8 @@ export default class Item extends React.Component {
   }
 
   decQuantity() {
-    if (this.state.quantity === 1) { 
-      this.setState({ ...this.state, quantity: 1 })
-      //тут будет удаление товара из картОверлэй 
+    if (this.state.quantity === 0) { 
+      this.setState({ ...this.state, quantity: 0 })
     } else { 
       this.setState({ ...this.state, quantity: this.state.quantity - 1 })
       this.props.decGlobalTotal(this.props.prices, this.state.quantity) 
@@ -113,6 +114,17 @@ export default class Item extends React.Component {
         <ContainerImage>
           <Image gallery={this.props.gallery} />
         </ContainerImage>
+        <ItemRemoveLayer 
+          id={this.props.id} 
+          brand={this.props.brand}
+          name={this.props.name} 
+          deleteProductFromCart={this.props.deleteProductFromCart}
+          quantity={this.state.quantity}
+          addQuantity={this.addQuantity}
+          decGlobalTotal={this.props.decGlobalTotal}
+          attributes={this.props.attributes}
+          prices={this.props.prices}
+        />
       </StyledItem>
     )
   }

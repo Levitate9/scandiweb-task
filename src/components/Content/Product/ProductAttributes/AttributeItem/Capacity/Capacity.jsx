@@ -14,9 +14,10 @@ const StyledCapacity = styled.div`
   }
 
   &.cartOverlay {
-    width: 48px;
+    width: 40px;
     margin: 0 6px 6px 2px;
     padding: 4px 4px;
+    font-size: 14px;
   }
 
   &:hover {

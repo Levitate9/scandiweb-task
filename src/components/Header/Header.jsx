@@ -33,6 +33,8 @@ export default class Header extends React.Component {
           globalTotal={this.props.globalTotal}
           incGlobalTotal={this.props.incGlobalTotal}
           decGlobalTotal={this.props.decGlobalTotal}
+          deleteProductFromCart={this.props.deleteProductFromCart}
+          resetGlobalTotal={this.props.resetGlobalTotal}
         />
       </StyledHeader>
     )

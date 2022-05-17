@@ -54,6 +54,7 @@ export default class AddToCartIcon extends React.Component {
   render() {
     return (
       <StyledButton 
+        id={this.props.id}
         isSelected={this.state.isSelected}
         className={`cart ${this.state.isSelected ? 'selected' : ''}`} 
         onClick={this.state.isSelected ? this.deleteFromCart.bind(this) : this.sendToCart.bind(this)}

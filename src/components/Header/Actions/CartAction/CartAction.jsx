@@ -37,6 +37,8 @@ class CartAction extends React.Component {
           incGlobalTotal={this.props.incGlobalTotal}
           decGlobalTotal={this.props.decGlobalTotal}
           currencies={this.props.currencies}
+          deleteProductFromCart={this.props.deleteProductFromCart}
+          resetGlobalTotal={this.props.resetGlobalTotal}
         />
         { this.props.cartItems.length > 0 && 
             <CartActionBadge 

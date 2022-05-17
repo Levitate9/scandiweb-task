@@ -30,6 +30,8 @@ export default class Actions extends React.Component {
           incGlobalTotal={this.props.incGlobalTotal}
           decGlobalTotal={this.props.decGlobalTotal}
           currencies={this.props.currencies}
+          deleteProductFromCart={this.props.deleteProductFromCart}
+          resetGlobalTotal={this.props.resetGlobalTotal}
         />
       </StyledActions>
     )

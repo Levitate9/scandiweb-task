@@ -19,15 +19,14 @@ const StyledTotal = styled.div`
 `
 
 export default class Total extends React.Component {
-  render() {
-    let total 
-    if (this.props.globalTotal.length > 0) {
+  render() {  
+    let total
+    if (this.props.globalTotal.length > 0 && this.props.cartItems.length > 0) {
       total = this.props.globalTotal.filter((el) => el.label === this.props.currentCurrency.label)[0].total
       total = Number(total.toFixed(2))
     } else {
       total = 0
     }
-    
     return (
       <StyledTotal>
         <span className='total'>Total</span>

@@ -2,11 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledTouchID = styled.div`
-  width: 28px;
-  padding: 4px 8px;
   margin: 0 10px 0 0;
   border-radius: 3px;
   outline: 1px solid #bababa;
+
+  &.product, 
+  &.cart {
+    width: 28px;
+    padding: 4px 8px;
+    font-size: 16px;
+  }
+
+  &.cartOverlay {
+    width: 24px;
+    padding: 4px 6px;
+    font-size: 14px;
+  }
 
   &:hover {
     cursor: pointer;

@@ -20,10 +20,17 @@ const StyledItems = styled.div`
 `
 
 export default class Items extends React.Component {
+  componentWillUnmout() {
+    if (this.props.cartItems.length === 0) {
+      this.props.resetGlobalTotal()
+    }
+  }
+
   render() {
     const mappedItems = this.props.cartItems.length > 0 && this.props.cartItems.map((el) => 
       <Item 
-        key={el.id} 
+        key={el.id}
+        id={el.id}
         brand={el.brand} 
         name={el.name} 
         prices={el.prices} 
@@ -33,6 +40,7 @@ export default class Items extends React.Component {
         type={this.props.type}
         incGlobalTotal={this.props.incGlobalTotal}
         decGlobalTotal={this.props.decGlobalTotal}
+        deleteProductFromCart={this.props.deleteProductFromCart}
       />)
     return (
       <StyledItems>
