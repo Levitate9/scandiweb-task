@@ -29,9 +29,7 @@ export default class Total extends React.Component {
     if (this.props.cartItems.length === 0) {
       total = 0
     } else {
-      total = totalArr.reduce((sum, current) => {
-        return sum + current
-      }, 0)
+      total = totalArr.reduce((sum, current) => { return sum + current }, 0)
       total = Number(total.toFixed(2))
     }
 

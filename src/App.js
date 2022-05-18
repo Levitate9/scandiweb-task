@@ -136,6 +136,8 @@ export default class App extends React.Component {
             <Route exact path={`/cart`} element={<Cart
               items={this.state.cartItems} 
               currentCurrency={this.state.currentCurrency}
+              increaseCartItemQuantity={this.increaseCartItemQuantity}
+              decreaseCartItemQuantity={this.decreaseCartItemQuantity}
             />} />
           </Routes>
           <CartOverlayBg 

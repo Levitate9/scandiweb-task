@@ -10,13 +10,8 @@ const StyledCartItem = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  border-top: 1px solid #E5E5E5;
-  margin-top: 24px;
-  padding-top: 24px;
-
-  &:first-child {
-    margin-top: 0;
-  }
+  border-bottom: 1px solid #E5E5E5;
+  padding: 24px 0;
 `
 
 const CartDescriptionContainer = styled.div`
@@ -28,24 +23,9 @@ const CartDescriptionContainer = styled.div`
 `
 
 export default class CartItem extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { quantity: 1 }
-    this.addQuantity = this.addQuantity.bind(this)
-    this.decQuantity = this.decQuantity.bind(this)
-  }
-
-  addQuantity() {
-    this.setState({ quantity: this.state.quantity + 1 })
-  }
-
-  decQuantity() {
-    this.setState({ quantity: this.state.quantity === 1 ? 1 : this.state.quantity - 1 })
-  }
-
   render() {
     return (
-      <StyledCartItem>
+      <StyledCartItem className='cartItem'>
         <CartDescriptionContainer>
           <CartDescription 
             brand={this.props.brand}
@@ -54,10 +34,12 @@ export default class CartItem extends React.Component {
             prices={this.props.prices}
             attributes={this.props.attributes}
           />
-          <CartQuantity 
-            quantity={this.state.quantity} 
-            addQuantity={this.addQuantity} 
-            decQuantity={this.decQuantity} />
+          <CartQuantity
+            id={this.props.id} 
+            quantity={this.props.quantity} 
+            increaseCartItemQuantity={this.props.increaseCartItemQuantity}
+            decreaseCartItemQuantity={this.props.decreaseCartItemQuantity}
+          />
         </CartDescriptionContainer>
         <CartImage gallery={this.props.gallery} />
       </StyledCartItem>
