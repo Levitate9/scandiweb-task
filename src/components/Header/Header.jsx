@@ -33,6 +33,7 @@ export default class Header extends React.Component {
           deleteProductFromCart={this.props.deleteProductFromCart}
           increaseCartItemQuantity={this.props.increaseCartItemQuantity}
           decreaseCartItemQuantity={this.props.decreaseCartItemQuantity}
+          calculateTotal={this.props.calculateTotal}
         />
       </StyledHeader>
     )

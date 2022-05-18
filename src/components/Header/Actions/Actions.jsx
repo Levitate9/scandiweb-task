@@ -30,6 +30,7 @@ export default class Actions extends React.Component {
           deleteProductFromCart={this.props.deleteProductFromCart}
           increaseCartItemQuantity={this.props.increaseCartItemQuantity}
           decreaseCartItemQuantity={this.props.decreaseCartItemQuantity}
+          calculateTotal={this.props.calculateTotal}
         />
       </StyledActions>
     )

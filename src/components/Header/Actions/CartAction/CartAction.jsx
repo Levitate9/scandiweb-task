@@ -37,6 +37,7 @@ class CartAction extends React.Component {
           deleteProductFromCart={this.props.deleteProductFromCart}
           increaseCartItemQuantity={this.props.increaseCartItemQuantity}
           decreaseCartItemQuantity={this.props.decreaseCartItemQuantity}
+          calculateTotal={this.props.calculateTotal}
         />
         { this.props.cartItems.length > 0 && 
             <CartActionBadge 

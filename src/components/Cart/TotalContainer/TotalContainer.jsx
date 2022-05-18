@@ -63,22 +63,10 @@ const TotalValue = styled(TaxValue)`
 
 export default class TotalContainer extends React.Component {
   render() {
-    let total
-    let totalArr = this.props.items.length > 0 &&
-      this.props.items.map((el) => {
-        let amount = el.prices.filter((price) => price.currency.label === this.props.currentCurrency.label)[0].amount
-        return amount * el.quantity
-      })
-    if (this.props.items.length === 0) {
-      total = 0
-    } else {
-      total = totalArr.reduce((sum, current) => { return sum + current}, 0)
-      total = Number(total.toFixed(2))
-    }
-
+    let total = this.props.calculateTotal(this.props.cartItems, this.props.currentCurrency)
     let symbol = this.props.currentCurrency.symbol
     let tax = Number((total * 0.21).toFixed(2))
-    let qtyArr = this.props.items.map((el) => { return el.quantity })
+    let qtyArr = this.props.cartItems.map((el) => { return el.quantity })
     let qty = qtyArr.reduce((sum, current) => { return sum + current}, 0) 
 
     return (

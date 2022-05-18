@@ -38,6 +38,7 @@ export default class App extends React.Component {
     this.toggleIsCartOverlayOpen = this.toggleIsCartOverlayOpen.bind(this)
     this.increaseCartItemQuantity = this.increaseCartItemQuantity.bind(this)
     this.decreaseCartItemQuantity = this.decreaseCartItemQuantity.bind(this)
+    this.calculateTotal = this.calculateTotal.bind(this)
   }
 
   setCurrency(newCurrency) {
@@ -78,6 +79,21 @@ export default class App extends React.Component {
     this.setState({ ...this.state, cartItems: [...otherProducts, product] })
   }
 
+  calculateTotal(cartItems, currentCurrency) {
+    let total
+    let totalArr = cartItems.length > 0 &&
+      cartItems.map((el) => {
+        let amount = el.prices.filter((price) => price.currency.label === currentCurrency.label)[0].amount
+        return amount * el.quantity
+      })
+    if (cartItems.length === 0) {
+      return total = 0
+    } else {
+      total = totalArr.reduce((sum, current) => { return sum + current}, 0)
+      return total = Number(total.toFixed(2))
+    }
+  }
+
   componentDidMount() {
     this.props.client
       .query({ query: GET_START_DATA })
@@ -110,6 +126,7 @@ export default class App extends React.Component {
             deleteProductFromCart={this.deleteProductFromCart}
             increaseCartItemQuantity={this.increaseCartItemQuantity}
             decreaseCartItemQuantity={this.decreaseCartItemQuantity}
+            calculateTotal={this.calculateTotal}
           />
           <Routes>
             <Route path='*' element={<Navigate to='/all' />} />
@@ -134,10 +151,11 @@ export default class App extends React.Component {
               )
             }
             <Route exact path={`/cart`} element={<Cart
-              items={this.state.cartItems} 
+              cartItems={this.state.cartItems} 
               currentCurrency={this.state.currentCurrency}
               increaseCartItemQuantity={this.increaseCartItemQuantity}
               decreaseCartItemQuantity={this.decreaseCartItemQuantity}
+              calculateTotal={this.calculateTotal}
             />} />
           </Routes>
           <CartOverlayBg 

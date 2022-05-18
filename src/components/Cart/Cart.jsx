@@ -46,7 +46,7 @@ const Order = styled.button`
 
 export default class Cart extends React.Component {
   render() {
-    let mappedItems = this.props.items.map((el) => 
+    let mappedItems = this.props.cartItems.map((el) => 
       <CartItem
         key={el.id}
         id={el.id} 
@@ -66,7 +66,11 @@ export default class Cart extends React.Component {
       <StyledCart>
         <Header>cart</Header>
         { mappedItems }
-        <TotalContainer items={this.props.items} currentCurrency={this.props.currentCurrency} />
+        <TotalContainer 
+          cartItems={this.props.cartItems} 
+          currentCurrency={this.props.currentCurrency}
+          calculateTotal={this.props.calculateTotal}
+        />
         <Order><span>order</span></Order>
       </StyledCart>
     )

@@ -40,6 +40,7 @@ export default class CartOverlay extends React.Component {
         <Total 
           currentCurrency={this.props.currentCurrency} 
           cartItems={this.props.cartItems}
+          calculateTotal={this.props.calculateTotal}
         />
         <Buttons 
           cartLength={this.props.cartItems.length} 
