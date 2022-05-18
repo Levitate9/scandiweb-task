@@ -25,12 +25,6 @@ const StyledCartOverlay = styled.div`
 `
 
 export default class CartOverlay extends React.Component {
-  componentDidMount() {
-    if (this.props.cartItems.length === 0) {
-      this.props.resetGlobalTotal()
-    }
-  }
-
   render() {
     return (
       <StyledCartOverlay className={this.props.isCartOverlayOpen ? 'open' : ''}>
@@ -39,14 +33,12 @@ export default class CartOverlay extends React.Component {
           cartItems={this.props.cartItems} 
           currentCurrency={this.props.currentCurrency} 
           type='cartOverlay'
-          incGlobalTotal={this.props.incGlobalTotal}
-          decGlobalTotal={this.props.decGlobalTotal}
           deleteProductFromCart={this.props.deleteProductFromCart}
-          resetGlobalTotal={this.props.resetGlobalTotal}
+          increaseCartItemQuantity={this.props.increaseCartItemQuantity}
+          decreaseCartItemQuantity={this.props.decreaseCartItemQuantity}
         />
         <Total 
           currentCurrency={this.props.currentCurrency} 
-          globalTotal={this.props.globalTotal}
           cartItems={this.props.cartItems}
         />
         <Buttons 

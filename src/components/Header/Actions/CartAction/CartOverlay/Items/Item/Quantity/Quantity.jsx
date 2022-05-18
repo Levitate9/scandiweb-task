@@ -55,11 +55,11 @@ export default class Quantity extends React.Component {
     return (
       <>
         <AddQuantity>
-          <Button onClick={this.props.addQuantity}>+</Button>
+          <Button onClick={this.props.increaseQuantity}>+</Button>
         </AddQuantity>
         <Amount>{this.props.quantity}</Amount>
         <DecQuantity>
-          <Button onClick={this.props.decQuantity}>-</Button>
+          <Button onClick={this.props.decreaseQuantity}>-</Button>
         </DecQuantity>
       </>
     )

@@ -30,16 +30,14 @@ export default class App extends React.Component {
       currentCategory: '',
       currentCurrency: {},
       isCartOverlayOpen: false,
-      globalTotal: []
     }
     this.setCurrency = this.setCurrency.bind(this)
     this.setCategory = this.setCategory.bind(this)
     this.sendProductToCart = this.sendProductToCart.bind(this)
     this.deleteProductFromCart = this.deleteProductFromCart.bind(this)
     this.toggleIsCartOverlayOpen = this.toggleIsCartOverlayOpen.bind(this)
-    this.incGlobalTotal = this.incGlobalTotal.bind(this)
-    this.decGlobalTotal = this.decGlobalTotal.bind(this)
-    this.resetGlobalTotal = this.resetGlobalTotal.bind(this)
+    this.increaseCartItemQuantity = this.increaseCartItemQuantity.bind(this)
+    this.decreaseCartItemQuantity = this.decreaseCartItemQuantity.bind(this)
   }
 
   setCurrency(newCurrency) {
@@ -54,57 +52,30 @@ export default class App extends React.Component {
 
   sendProductToCart(productId) {
     let product = this.state.categories[0].products.filter((el) => el.id === productId)[0]
-    product = { ...product, quantity: 1 }
+    product = { ...product, quantity: 1, order: this.state.cartItems.length + 1 }
     this.setState({ ...this.state, cartItems: [...this.state.cartItems, product] })
   }
 
   deleteProductFromCart(productId) {
-    this.setState({
-      ...this.state,
-      cartItems: this.state.cartItems.filter((el) => el.id !== productId)
-    })
+    this.setState({ ...this.state, cartItems: this.state.cartItems.filter((el) => el.id !== productId) })
   }
 
   toggleIsCartOverlayOpen() {
     this.setState({ ...this.state, isCartOverlayOpen: this.state.isCartOverlayOpen ? false : true })
   }
 
-  incGlobalTotal(prices, quantity) {
-    let itemTotal = prices.map((el) => { return { label: el.currency.label, total: el.amount * quantity } })
-
-    let newGlobalTotal = []
-    if (this.state.globalTotal.length > 0) {
-      this.state.globalTotal.map((el, i) => {
-        let targetTotal = prices[i].amount
-        return newGlobalTotal.push({ label: el.label, total: el.total + targetTotal })
-      })
-    } else {
-      newGlobalTotal.push(...itemTotal)
-    }
-    this.setState({ ...this.state, globalTotal: newGlobalTotal })
+  increaseCartItemQuantity(productId) {
+    let product = this.state.cartItems.filter((el) => el.id === productId)[0]
+    let otherProducts = this.state.cartItems.filter((el) => el.id !== productId)
+    product = { ...product, quantity: product.quantity + 1 }
+    this.setState({ ...this.state, cartItems: [...otherProducts, product] })
   }
 
-  decGlobalTotal(prices, quantity) {
-    if (this.state.globalTotal.length === 0) {
-      return null
-    } else {
-      let itemTotal = prices.map((el) => { return { label: el.currency.label, amount: el.amount * quantity } })
-      
-      var newGlobalTotal = []
-      if (this.state.globalTotal.length > 0) {
-        this.state.globalTotal.map((el, i) => {
-          let targetTotal = prices[i].amount
-          return newGlobalTotal.push({ label: el.label, total: el.total - targetTotal })
-        })
-      } else {
-        newGlobalTotal.push(...itemTotal)
-      }
-      this.setState({ ...this.state, globalTotal: newGlobalTotal })
-    }
-  }
-
-  resetGlobalTotal() {
-    this.setState({ ...this.state, globalTotal: [] })
+  decreaseCartItemQuantity(productId) {
+    let product = this.state.cartItems.filter((el) => el.id === productId)[0]
+    let otherProducts = this.state.cartItems.filter((el) => el.id !== productId)
+    product = { ...product, quantity: product.quantity - 1 }
+    this.setState({ ...this.state, cartItems: [...otherProducts, product] })
   }
 
   componentDidMount() {
@@ -136,11 +107,9 @@ export default class App extends React.Component {
             cartItems={this.state.cartItems}
             isCartOverlayOpen={this.state.isCartOverlayOpen}
             toggleIsCartOverlayOpen={this.toggleIsCartOverlayOpen}
-            globalTotal={this.state.globalTotal}
-            incGlobalTotal={this.incGlobalTotal}
-            decGlobalTotal={this.decGlobalTotal}
             deleteProductFromCart={this.deleteProductFromCart}
-            resetGlobalTotal={this.resetGlobalTotal}
+            increaseCartItemQuantity={this.increaseCartItemQuantity}
+            decreaseCartItemQuantity={this.decreaseCartItemQuantity}
           />
           <Routes>
             <Route path='*' element={<Navigate to='/all' />} />

@@ -55,33 +55,16 @@ const ContainerImage = styled(ColumnDescription)`
 export default class Item extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { 
-      quantity: 1
-    }
-    this.addQuantity = this.addQuantity.bind(this)
-    this.decQuantity = this.decQuantity.bind(this)
+    this.increaseQuantity = this.increaseQuantity.bind(this)
+    this.decreaseQuantity = this.decreaseQuantity.bind(this)
   }
 
-  addQuantity() {
-    this.setState({ ...this.state, quantity: this.state.quantity + 1 })
-    this.props.incGlobalTotal(this.props.prices, this.state.quantity)
+  increaseQuantity() {
+    this.props.increaseCartItemQuantity(this.props.id)
   }
 
-  decQuantity() {
-    if (this.state.quantity === 0) { 
-      this.setState({ ...this.state, quantity: 0 })
-    } else { 
-      this.setState({ ...this.state, quantity: this.state.quantity - 1 })
-      this.props.decGlobalTotal(this.props.prices, this.state.quantity) 
-    }
-  }
-
-  componentDidMount() {
-    this.props.incGlobalTotal(this.props.prices, this.state.quantity)
-  }
-
-  componentWillUnmount() {
-    this.props.decGlobalTotal(this.props.prices, this.state.quantity)
+  decreaseQuantity() {
+    this.props.decreaseCartItemQuantity(this.props.id)
   }
 
   render() {
@@ -105,9 +88,9 @@ export default class Item extends React.Component {
           </ColumnDescription>
           <ColumnQuantity>
             <Quantity 
-              quantity={this.state.quantity} 
-              addQuantity={this.addQuantity} 
-              decQuantity={this.decQuantity} 
+              quantity={this.props.quantity} 
+              increaseQuantity={this.increaseQuantity}
+              decreaseQuantity={this.decreaseQuantity} 
             />
           </ColumnQuantity>
         </ContainerDescription>
@@ -117,13 +100,12 @@ export default class Item extends React.Component {
         <ItemRemoveLayer 
           id={this.props.id} 
           brand={this.props.brand}
-          name={this.props.name} 
-          deleteProductFromCart={this.props.deleteProductFromCart}
-          quantity={this.state.quantity}
-          addQuantity={this.addQuantity}
-          decGlobalTotal={this.props.decGlobalTotal}
+          name={this.props.name}
           attributes={this.props.attributes}
-          prices={this.props.prices}
+          prices={this.props.prices} 
+          deleteProductFromCart={this.props.deleteProductFromCart}
+          quantity={this.props.quantity}
+          increaseQuantity={this.increaseQuantity}
         />
       </StyledItem>
     )

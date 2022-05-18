@@ -21,12 +21,20 @@ const StyledTotal = styled.div`
 export default class Total extends React.Component {
   render() {  
     let total
-    if (this.props.globalTotal.length > 0 && this.props.cartItems.length > 0) {
-      total = this.props.globalTotal.filter((el) => el.label === this.props.currentCurrency.label)[0].total
-      total = Number(total.toFixed(2))
-    } else {
+    let totalArr = this.props.cartItems.length > 0 &&
+      this.props.cartItems.map((el) => {
+        let amount = el.prices.filter((price) => price.currency.label === this.props.currentCurrency.label)[0].amount
+        return amount * el.quantity
+      })
+    if (this.props.cartItems.length === 0) {
       total = 0
+    } else {
+      total = totalArr.reduce((sum, current) => {
+        return sum + current
+      }, 0)
+      total = Number(total.toFixed(2))
     }
+
     return (
       <StyledTotal>
         <span className='total'>Total</span>

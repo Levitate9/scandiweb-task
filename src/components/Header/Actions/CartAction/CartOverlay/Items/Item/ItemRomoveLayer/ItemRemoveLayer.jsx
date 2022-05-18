@@ -63,11 +63,6 @@ const ButtonsContainer = styled.div`
 `
 
 export default class ItemRemoveLayer extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { localQuantity: this.props.quantity }
-  }
-
   removeFromCart() {
     this.props.deleteProductFromCart(this.props.id)
     document.getElementById(this.props.id).click()
@@ -93,7 +88,7 @@ export default class ItemRemoveLayer extends React.Component {
         </Text>
         <ButtonsContainer>
           <button onClick={this.removeFromCart.bind(this)}>delete</button>
-          <button onClick={this.props.addQuantity}>no</button>
+          <button onClick={this.props.increaseQuantity}>no</button>
         </ButtonsContainer>
       </StyledItemRemoveLayer>
     )

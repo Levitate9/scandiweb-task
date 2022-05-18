@@ -27,7 +27,10 @@ export default class Items extends React.Component {
   }
 
   render() {
-    const mappedItems = this.props.cartItems.length > 0 && this.props.cartItems.map((el) => 
+    let cartItems = this.props.cartItems.length && this.props.cartItems.sort((a, b) => {
+      return a.order - b.order
+    })
+    const mappedItems = this.props.cartItems.length > 0 && cartItems.map((el) => 
       <Item 
         key={el.id}
         id={el.id}
@@ -38,9 +41,10 @@ export default class Items extends React.Component {
         attributes={el.attributes}
         gallery={el.gallery}
         type={this.props.type}
-        incGlobalTotal={this.props.incGlobalTotal}
-        decGlobalTotal={this.props.decGlobalTotal}
         deleteProductFromCart={this.props.deleteProductFromCart}
+        increaseCartItemQuantity={this.props.increaseCartItemQuantity}
+        decreaseCartItemQuantity={this.props.decreaseCartItemQuantity}
+        quantity={el.quantity}
       />)
     return (
       <StyledItems>
