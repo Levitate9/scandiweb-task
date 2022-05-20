@@ -89,7 +89,7 @@ export default class App extends React.Component {
     if (cartItems.length === 0) {
       return total = 0
     } else {
-      total = totalArr.reduce((sum, current) => { return sum + current}, 0)
+      total = totalArr.reduce((sum, current) => { return sum + current }, 0)
       return total = Number(total.toFixed(2))
     }
   }
@@ -156,6 +156,7 @@ export default class App extends React.Component {
               increaseCartItemQuantity={this.increaseCartItemQuantity}
               decreaseCartItemQuantity={this.decreaseCartItemQuantity}
               calculateTotal={this.calculateTotal}
+              deleteProductFromCart={this.deleteProductFromCart}
             />} />
           </Routes>
           <CartOverlayBg 

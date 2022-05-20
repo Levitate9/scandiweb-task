@@ -46,20 +46,12 @@ const Button = styled.div`
 `
 
 export default class CartQuantity extends React.Component {
-  increaseQuantity() {
-    this.props.increaseCartItemQuantity(this.props.id)
-  }
-
-  decreaseQuantity() {
-    this.props.decreaseCartItemQuantity(this.props.id)
-  }
-
   render() {
     return (
       <StyledCartQuantity>
-        <Button onClick={this.increaseQuantity.bind(this)}>+</Button>
+        <Button onClick={this.props.increaseQuantity}>+</Button>
         <Amount>{this.props.quantity}</Amount>
-        <Button onClick={this.decreaseQuantity.bind(this)}>-</Button>
+        <Button onClick={this.props.decreaseQuantity}>-</Button>
       </StyledCartQuantity>
     )
   }

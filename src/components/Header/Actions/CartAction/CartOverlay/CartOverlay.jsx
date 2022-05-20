@@ -32,7 +32,7 @@ export default class CartOverlay extends React.Component {
         <Items 
           cartItems={this.props.cartItems} 
           currentCurrency={this.props.currentCurrency} 
-          type='cartOverlay'
+          type={this.props.type}
           deleteProductFromCart={this.props.deleteProductFromCart}
           increaseCartItemQuantity={this.props.increaseCartItemQuantity}
           decreaseCartItemQuantity={this.props.decreaseCartItemQuantity}

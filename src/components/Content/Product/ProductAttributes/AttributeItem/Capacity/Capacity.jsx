@@ -15,7 +15,7 @@ const StyledCapacity = styled.div`
 
   &.cartOverlay {
     width: 40px;
-    margin: 0 6px 6px 2px;
+    margin: 0 6px 6px 0;
     padding: 4px 4px;
     font-size: 14px;
   }

@@ -8,23 +8,19 @@ const StyledItemRemoveLayer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: fit-content;
+  height: ${props => props.height}px;
   background-color: #1D1F22;
   color: #ffffff;
   opacity: 0.8;
   z-index: 2;
 
+
   &.delete {
     display: flex;
-    height: 190px;
+  }
 
-    &.twoAttr {
-      height: 202px;
-    }
-
-    &.threeAttr {
-      height: 256px;
-    }
+  &.delete.cart {
+    margin: -24px 0;
   }
 `
 
@@ -63,24 +59,32 @@ const ButtonsContainer = styled.div`
 `
 
 export default class ItemRemoveLayer extends React.Component {
+  // constructor(props) {
+  //   super(props)
+  //   this.state = { height: 336 }
+  // }
+
+  // componentDidMount() {
+  //   let itemHeight = document.getElementById(this.props.type) && document.getElementById(this.props.type).clientHeight
+  //   if (itemHeight === 0) {
+  //     console.log('force update')
+  //     return this.forceUpdate()
+  //   }
+  //   console.log(itemHeight)
+  //   this.setState({ ...this.state, height: itemHeight })
+  // }
+
   removeFromCart() {
     this.props.deleteProductFromCart(this.props.id)
     document.getElementById(this.props.id).click()
   }
 
   render() {
-    let length
-    if (this.props.attributes.length === 2) {
-      length = 'twoAttr'
-    } else if (this.props.attributes.length === 3) {
-      length = 'threeAttr'
-    } else {
-      length = ''
-    }
     return (
       <StyledItemRemoveLayer 
-          height={this.props.height} 
-          className={`${this.props.quantity === 0 ? 'delete' : ''} ${length}`}>
+        height={this.props.height}
+        className={`${this.props.type} ${this.props.quantity === 0 ? 'delete' : ''}`}
+      >
         <Text>
           <span>Delete</span><br/>
           <span>{this.props.brand} {this.props.name}</span><br/>

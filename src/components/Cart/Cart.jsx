@@ -60,6 +60,7 @@ export default class Cart extends React.Component {
         quantity={el.quantity}
         increaseCartItemQuantity={this.props.increaseCartItemQuantity}
         decreaseCartItemQuantity={this.props.decreaseCartItemQuantity}
+        deleteProductFromCart={this.props.deleteProductFromCart}
       />)
 
     return (

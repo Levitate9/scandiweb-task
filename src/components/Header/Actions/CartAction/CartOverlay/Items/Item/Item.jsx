@@ -78,8 +78,11 @@ export default class Item extends React.Component {
           className={this.props.type}
           type={this.props.type}
         /> })
+
+    let itemHeight = 
+      document.getElementById(this.props.type) && document.getElementById(this.props.type).clientHeight
     return (
-      <StyledItem>
+      <StyledItem id={this.props.type}>
         <ContainerDescription>
           <ColumnDescription>
             <CartOverlayName brand={this.props.brand} name={this.props.name} />
@@ -102,10 +105,11 @@ export default class Item extends React.Component {
           brand={this.props.brand}
           name={this.props.name}
           attributes={this.props.attributes}
-          prices={this.props.prices} 
           deleteProductFromCart={this.props.deleteProductFromCart}
           quantity={this.props.quantity}
           increaseQuantity={this.increaseQuantity}
+          type={this.props.type}
+          height={itemHeight}
         />
       </StyledItem>
     )
