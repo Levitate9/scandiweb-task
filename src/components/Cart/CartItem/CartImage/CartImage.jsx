@@ -47,7 +47,7 @@ export default class CartImage extends React.Component {
     return (
       <StyledCartImage>
         <Image src={imageSrc} />
-        <ImageButtons prevImg={this.prevImg} nextImg={this.nextImg} />
+        { this.props.gallery.length > 1 && <ImageButtons prevImg={this.prevImg} nextImg={this.nextImg} /> }
       </StyledCartImage>
     )
   }

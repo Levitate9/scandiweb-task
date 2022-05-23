@@ -42,7 +42,7 @@ class CartAction extends React.Component {
         />
         { this.props.cartItems.length > 0 && 
             <CartActionBadge 
-              amount={this.props.cartItems.length} 
+              cartItems={this.props.cartItems}
               toggleIsCartOverlayOpen={this.props.toggleIsCartOverlayOpen} 
             /> 
         }

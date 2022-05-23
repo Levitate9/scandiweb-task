@@ -32,9 +32,10 @@ export default class CartActionBadge extends React.Component {
     this.props.toggleIsCartOverlayOpen()
   }
   render() {
+    let quantity = this.props.cartItems.reduce((sum, current) => sum + current.quantity, 0)
     return (
       <StyledCartActionBadge onClick={this.toggleIsOpen.bind(this)}>
-        {this.props.amount}
+        { quantity }
       </StyledCartActionBadge>
     )
   }
