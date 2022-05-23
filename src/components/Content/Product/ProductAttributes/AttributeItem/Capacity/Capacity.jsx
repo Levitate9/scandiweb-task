@@ -46,14 +46,14 @@ const StyledCapacity = styled.div`
 
 export default class Capacity extends React.Component {
   setSelected(e) {
-    this.props.setSelectedValue(e.target.id)
+    this.props.toggleSelected(this.props.attrName, e.target.id)
   }
 
   render() {
     return (
       <StyledCapacity
         id={this.props.id} 
-        className={`${this.props.className} ${this.props.selectedValue === this.props.value ? 'selected' : ''}`}
+        className={`${this.props.className} ${this.props.isSelected ? 'selected' : ''}`}
         value={this.props.value}
         onClick={this.setSelected.bind(this)}
       >{this.props.value}</StyledCapacity>

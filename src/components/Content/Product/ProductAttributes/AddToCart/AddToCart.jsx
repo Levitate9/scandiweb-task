@@ -44,7 +44,7 @@ export default class AddToCart extends React.Component {
      }
   }
   addToCart() {
-    this.props.sendProductToCart(this.props.id)
+    this.props.sendProductToCart(this.props.product)
     this.setState({ isProceedToCheckout: true, innerText: 'proceed to checkout' })
   }
 

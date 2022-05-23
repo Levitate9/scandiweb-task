@@ -102,7 +102,7 @@ const Tooltip = styled.span`
 
 export default class Color extends React.Component {
   setSelected(e) {
-    this.props.setSelectedValue(e.target.id)
+    this.props.toggleSelected(this.props.attrName, e.target.id)
   }
 
   render() {
@@ -110,7 +110,7 @@ export default class Color extends React.Component {
       <Background className={this.props.className}>
         <StyledColor 
           id={this.props.id} 
-          className={`${this.props.className} ${this.props.selectedValue === this.props.displayValue ? 'selected' : ''}`} 
+          className={`${this.props.className} ${this.props.isSelected ? 'selected' : ''}`} 
           value={this.props.value}
           onClick={this.setSelected.bind(this)}
         ><Tooltip className={`tooltip${this.props.className}`}>{this.props.displayValue}</Tooltip>

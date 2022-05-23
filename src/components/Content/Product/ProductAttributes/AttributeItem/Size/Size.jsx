@@ -57,14 +57,14 @@ const StyledSize = styled.div`
 
 export default class Size extends React.Component {
   setSelected(e) {
-    this.props.setSelectedValue(e.target.id)
+    this.props.toggleSelected(this.props.attrName, e.target.id)
   }
 
   render() {
     return (
       <StyledSize
         id={this.props.id} 
-        className={`${this.props.className} ${this.props.selectedValue === this.props.value ? 'selected' : ''}`}
+        className={`${this.props.className} ${this.props.isSelected ? 'selected' : ''}`}
         value={this.props.value}
         onClick={this.setSelected.bind(this)}
       >{this.props.value}</StyledSize>

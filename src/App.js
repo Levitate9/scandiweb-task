@@ -51,8 +51,7 @@ export default class App extends React.Component {
     this.setState({ ...this.state, currentCategory: newCategory })
   }
 
-  sendProductToCart(productId) {
-    let product = this.state.categories[0].products.filter((el) => el.id === productId)[0]
+  sendProductToCart(product) {
     product = { ...product, quantity: 1, order: this.state.cartItems.length + 1 }
     this.setState({ ...this.state, cartItems: [...this.state.cartItems, product] })
   }
@@ -142,13 +141,15 @@ export default class App extends React.Component {
               )
             } 
             {
-              this.state.categories.map(el =>
-                <Route path={`/${el.name}/:id`} key={el.name} element={<Product 
-                  client={this.props.client}
+              this.state.categories.map(el => {
+                let products = this.state.categories.filter((category) => category.name === el.name)[0].products
+                return <Route path={`/${el.name}/:id`} key={el.name} element={<Product 
+                  // client={this.props.client}
+                  products={products}
                   currentCurrency={this.state.currentCurrency}
                   sendProductToCart={this.sendProductToCart}
                 />} />  
-              )
+              })
             }
             <Route exact path={`/cart`} element={<Cart
               cartItems={this.state.cartItems} 

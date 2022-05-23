@@ -41,14 +41,14 @@ const StyledUsb3 = styled.div`
 
 export default class Usb3 extends React.Component {
   setSelected(e) {
-    this.props.setSelectedValue(e.target.id)
+    this.props.toggleSelected(this.props.attrName, e.target.id)
   }
 
   render() {
     return (
       <StyledUsb3 
         id={this.props.id}
-        className={`${this.props.className} ${this.props.selectedValue === this.props.value ? 'selected' : ''}`} 
+        className={`${this.props.className} ${this.props.isSelected ? 'selected' : ''}`} 
         value={this.props.value}
         onClick={this.setSelected.bind(this)}
       >{this.props.displayValue}</StyledUsb3>

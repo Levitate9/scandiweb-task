@@ -43,16 +43,6 @@ const StyledAttributesValues = styled.div`
 `
 
 export default class AttributeItem extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { selectedValue: this.props.items[0].displayValue }
-    this.setSelectedValue = this.setSelectedValue.bind(this)
-  }
-
-  setSelectedValue(value) { 
-    this.setState({ ...this.state, selectedValue: value })
-  }
-
   render() {
     const mappedValues = this.props.items.map((el) => {
       const createAttr = (Component) => 
@@ -62,8 +52,9 @@ export default class AttributeItem extends React.Component {
           displayValue={el.displayValue} 
           value={el.value}
           className={this.props.type}
-          selectedValue={this.state.selectedValue}
-          setSelectedValue={this.setSelectedValue}
+          isSelected={el.isSelected}
+          toggleSelected={this.props.toggleSelected}
+          attrName={this.props.name}
       />
   
       switch (this.props.name) {

@@ -16,24 +16,25 @@ const StyledAttributes = styled.div`
 
 export default class ProductAttributes extends React.Component {
   render() {
-    const mappedAttributeItems = 
-      this.props.attributes.map((el) => {
-        return <AttributeItem 
-          key={el.id}
-          id={el.id}
-          name={el.name} 
-          items={el.items}
-          className={this.props.type}
-          type={this.props.type}
-        />
-      })
+    const mappedAttributeItems = this.props.attributes.map((el) => {
+      return <AttributeItem 
+        key={el.id}
+        id={el.id}
+        name={el.name} 
+        items={el.items}
+        className={this.props.type}
+        type={this.props.type}
+        toggleSelected={this.props.toggleSelected}
+      />
+    })
+
     return (
       <StyledAttributes>
         <ProductName brand={this.props.brand} name={this.props.name} />
-        { mappedAttributeItems }
+        { mappedAttributeItems || null }
         <ProductPrice currentCurrency={this.props.currentCurrency} prices={this.props.prices} 
         />
-        <AddToCart id={this.props.id} sendProductToCart={this.props.sendProductToCart} />
+        <AddToCart id={this.props.id} sendProductToCart={this.props.sendProductToCart} product={this.props.product} />
         <ProductDescription description={this.props.description} />
       </StyledAttributes>
     )
