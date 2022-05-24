@@ -52,11 +52,12 @@ export default class AttributeItem extends React.Component {
           displayValue={el.displayValue} 
           value={el.value}
           className={this.props.type}
+          type={this.props.type}
           isSelected={el.isSelected}
           toggleSelected={this.props.toggleSelected}
           attrName={this.props.name}
       />
-  
+      
       switch (this.props.name) {
         case 'Size':
           return createAttr(Size)

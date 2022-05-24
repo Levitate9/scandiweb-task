@@ -68,7 +68,11 @@ const Background = styled.div`
   &.cartOverlay {
     width: 20px;
     height: 20px;
-    margin: 0 6px 6px 0;
+    margin: 0 6px 6px 2px;
+  }
+
+  &.cartOverlay:last-child {
+    margin: 0 0 6px 2px;
   }
 `
 
@@ -106,11 +110,12 @@ export default class Color extends React.Component {
   }
 
   render() {
+    let disabled = (this.props.type !== 'product' && 'disabled') || ''
     return (
       <Background className={this.props.className}>
         <StyledColor 
           id={this.props.id} 
-          className={`${this.props.className} ${this.props.isSelected ? 'selected' : ''}`} 
+          className={`${this.props.className} ${this.props.isSelected ? 'selected' : disabled}`} 
           value={this.props.value}
           onClick={this.setSelected.bind(this)}
         ><Tooltip className={`tooltip${this.props.className}`}>{this.props.displayValue}</Tooltip>

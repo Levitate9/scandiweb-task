@@ -33,6 +33,7 @@ export default class Content extends React.Component {
     const mappedProducts = products.map((el) => {
       return <ProductCard 
         key={el.id}
+        product={el}
         id={el.id}
         name={el.name}
         brand={el.brand}

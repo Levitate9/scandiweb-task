@@ -22,7 +22,7 @@ const StyledSize = styled.div`
     font-family: 'Source Sans Pro';
     font-weight: 400;
     font-size: 14px;
-    margin: 0 8px 0 0;
+    margin: 0 8px 0 2px;
     padding-top: 1px;
 
     &.selected {
@@ -61,10 +61,11 @@ export default class Size extends React.Component {
   }
 
   render() {
+    let disabled = (this.props.type !== 'product' && 'disabled') || ''
     return (
       <StyledSize
         id={this.props.id} 
-        className={`${this.props.className} ${this.props.isSelected ? 'selected' : ''}`}
+        className={`${this.props.className} ${this.props.isSelected ? 'selected' : disabled}`}
         value={this.props.value}
         onClick={this.setSelected.bind(this)}
       >{this.props.value}</StyledSize>

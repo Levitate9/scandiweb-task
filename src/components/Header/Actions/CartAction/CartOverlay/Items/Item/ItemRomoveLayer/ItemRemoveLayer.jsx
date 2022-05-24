@@ -59,24 +59,9 @@ const ButtonsContainer = styled.div`
 `
 
 export default class ItemRemoveLayer extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = { height: 336 }
-  // }
-
-  // componentDidMount() {
-  //   let itemHeight = document.getElementById(this.props.type) && document.getElementById(this.props.type).clientHeight
-  //   if (itemHeight === 0) {
-  //     console.log('force update')
-  //     return this.forceUpdate()
-  //   }
-  //   console.log(itemHeight)
-  //   this.setState({ ...this.state, height: itemHeight })
-  // }
-
   removeFromCart() {
     this.props.deleteProductFromCart(this.props.id)
-    document.getElementById(this.props.id).click()
+    document.getElementById(this.props.id) && document.getElementById(this.props.id).click()
   }
 
   render() {

@@ -38,7 +38,20 @@ export default class AddToCartIcon extends React.Component {
   }
 
   sendToCart() {
-    this.props.sendProductToCart(this.props.id)
+    let product = this.props.product
+    let attributes = product.attributes.map((attr) => {
+      let items = attr.items.map((item, index) => { return { ...item, isSelected: false, order: index + 1 } })
+      items = items.sort((a, b) => a.order - b.order)
+      return { ...attr, items: items }
+    })
+    attributes = attributes.map((attr, index) => {
+      let item = attr.items[0]
+      item = { ...item, isSelected: true }
+      return { ...attr, items: [ item, ...attr.items.filter((el) => el.value !== item.value) ], order: index + 1 }
+    })
+    attributes = attributes.sort((a, b) => a.order - b.order)
+    product = { ...product, attributes: attributes }
+    this.props.sendProductToCart(product)
     this.toggleSelected()
   }
 

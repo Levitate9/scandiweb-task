@@ -48,16 +48,11 @@ export default class AddToCart extends React.Component {
     this.setState({ isProceedToCheckout: true, innerText: 'proceed to checkout' })
   }
 
-  proceedToCheckout() {
-    <Navigate to='/cart'/>
-  }
-
   render() {
     const button = !this.state.isProceedToCheckout 
       ? <StyledAddToCart 
           onClick={this.state.isProceedToCheckout ? () => <Navigate to='/cart' /> : this.addToCart.bind(this)}
         ><span>{this.state.innerText}</span>
-
         </StyledAddToCart>
       : <Link to='/cart'>
           <StyledAddToCart>

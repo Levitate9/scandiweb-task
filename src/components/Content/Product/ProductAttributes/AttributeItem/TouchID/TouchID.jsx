@@ -9,12 +9,14 @@ const StyledTouchID = styled.div`
   &.product, 
   &.cart {
     width: 28px;
+    margin: 0 10px 0 0;
     padding: 4px 8px;
     font-size: 16px;
   }
 
   &.cartOverlay {
     width: 24px;
+    margin: 0 6px 0 2px;
     padding: 4px 6px;
     font-size: 14px;
   }
@@ -45,11 +47,12 @@ export default class TouchID extends React.Component {
   }
 
   render() {
+    let disabled = (this.props.type !== 'product' && 'disabled') || ''
     return (
       <StyledTouchID
         id={this.props.id}
         value={this.props.value}
-        className={`${this.props.className} ${this.props.isSelected ? 'selected' : ''}`}
+        className={`${this.props.className} ${this.props.isSelected ? 'selected' : disabled}`}
         onClick={this.setSelected.bind(this)}
       >{this.props.displayValue}</StyledTouchID>
     )

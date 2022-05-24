@@ -97,6 +97,7 @@ class Product extends React.Component {
           sendProductToCart={this.props.sendProductToCart}
           toggleSelected={this.toggleSelected}
           product={this.state.product}
+          cartItems={this.props.cartItems}
         />
       </StyledProduct>
     )

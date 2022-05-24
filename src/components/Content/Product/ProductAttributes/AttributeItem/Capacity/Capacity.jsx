@@ -15,7 +15,7 @@ const StyledCapacity = styled.div`
 
   &.cartOverlay {
     width: 40px;
-    margin: 0 6px 6px 0;
+    margin: 0 6px 6px 2px;
     padding: 4px 4px;
     font-size: 14px;
   }
@@ -50,10 +50,11 @@ export default class Capacity extends React.Component {
   }
 
   render() {
+    let disabled = (this.props.type !== 'product' && 'disabled') || ''
     return (
       <StyledCapacity
         id={this.props.id} 
-        className={`${this.props.className} ${this.props.isSelected ? 'selected' : ''}`}
+        className={`${this.props.className} ${this.props.isSelected ? 'selected' : disabled}`}
         value={this.props.value}
         onClick={this.setSelected.bind(this)}
       >{this.props.value}</StyledCapacity>
