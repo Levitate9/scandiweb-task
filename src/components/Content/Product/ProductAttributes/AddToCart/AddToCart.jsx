@@ -26,8 +26,6 @@ const StyledAddToCart = styled.button`
     }
   }
 
-
-
   & span {
     font-weight: 600;
     font-size: 16px;
@@ -46,6 +44,14 @@ export default class AddToCart extends React.Component {
   addToCart() {
     this.props.sendProductToCart(this.props.product)
     this.setState({ isProceedToCheckout: true, innerText: 'proceed to checkout' })
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.cartItems.length !== this.props.cartItems.length) {
+      !this.props.cartItems.find((el) => el.id === prevProps.id) && this.setState({ 
+        isProceedToCheckout: false, innerText: 'add to cart' 
+      })
+    }
   }
 
   render() {
