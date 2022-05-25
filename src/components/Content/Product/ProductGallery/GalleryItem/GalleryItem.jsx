@@ -20,20 +20,7 @@ const StyledGalleryItem = styled.div`
 `
 
 export default class GalleryItem extends React.Component {
-
-  componentDidMount() {
-    if (document.getElementsByClassName('galleryImage')[0].classList.contains('selected')) {
-      return null
-    } else {
-      return document.getElementsByClassName('galleryImage')[0].classList.add('selected') 
-    }
-  }
-  
   onItemSelected(e) {
-    let divs = document.getElementsByClassName('galleryImage')
-    Array.from(divs).map((el) => el.classList.contains('galleryImage') && el.classList.remove('selected'))
-    document.getElementById(e.target.id).classList.add('selected')
-
     this.props.setMainPhoto(e.target.id)
   }
 
@@ -41,7 +28,7 @@ export default class GalleryItem extends React.Component {
     return (
       <StyledGalleryItem 
         src={this.props.src}
-        className='galleryImage' 
+        className={`galleryImage ${this.props.src === this.props.mainPhotoSrc ? 'selected' : ''}`} 
         id={this.props.id}
         onClick={this.onItemSelected.bind(this)} >
       </StyledGalleryItem>

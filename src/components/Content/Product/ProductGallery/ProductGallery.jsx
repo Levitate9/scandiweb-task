@@ -14,7 +14,12 @@ const StyledGallery = styled.div`
 export default class ProductGallery extends React.Component {
   render() {
     const mappedGalleryItems =  
-      this.props.gallery.map((el) => <GalleryItem src={el} key={el} id={el} setMainPhoto={this.props.setMainPhoto} />)
+      this.props.gallery.map((el) => <GalleryItem 
+        key={el} 
+        id={el}
+        src={el}
+        mainPhotoSrc={this.props.mainPhotoSrc}
+        setMainPhoto={this.props.setMainPhoto} />)
     return (
       <StyledGallery>
         { mappedGalleryItems }

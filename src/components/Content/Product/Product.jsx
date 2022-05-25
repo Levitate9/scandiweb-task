@@ -83,7 +83,11 @@ class Product extends React.Component {
     }
     return (
       <StyledProduct>
-        <ProductGallery gallery={this.state.gallery} setMainPhoto={this.setMainPhoto} />
+        <ProductGallery 
+          gallery={this.state.gallery} 
+          setMainPhoto={this.setMainPhoto} 
+          mainPhotoSrc={this.state.mainPhoto} 
+        />
         <ProductMainPhoto src={this.state.mainPhoto} />
         <ProductAttributes
           id={this.state.id} 

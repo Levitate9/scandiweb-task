@@ -77,7 +77,8 @@ export default class ProductCard extends React.Component {
           brand={this.props.brand} 
           name={this.props.name}
           symbol={this.props.currentCurrency.symbol} 
-          price={price} />
+          price={price} 
+        />
       </StyledProductCard>
     )
   }
