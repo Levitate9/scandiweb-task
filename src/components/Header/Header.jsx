@@ -29,7 +29,9 @@ export default class Header extends React.Component {
           setCurrency={this.props.setCurrency}
           cartItems={this.props.cartItems}
           isCartOverlayOpen={this.props.isCartOverlayOpen}
+          isCurrencySwitcherOpen={this.props.isCurrencySwitcherOpen}
           toggleIsCartOverlayOpen={this.props.toggleIsCartOverlayOpen}
+          toggleIsCurrencySwitcherOpen={this.props.toggleIsCurrencySwitcherOpen}
           deleteProductFromCart={this.props.deleteProductFromCart}
           increaseCartItemQuantity={this.props.increaseCartItemQuantity}
           decreaseCartItemQuantity={this.props.decreaseCartItemQuantity}

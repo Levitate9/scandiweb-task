@@ -73,21 +73,15 @@ const CurrencySwitcher = styled.div`
 `
 
 class CurrencyAction extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { isOpen: false }
-    this.toggleIsOpen = this.toggleIsOpen.bind(this)
-  }
-
   toggleIsOpen() {
-    this.setState({ isOpen: this.state.isOpen ? false : true })
+    this.props.toggleIsCurrencySwitcherOpen()
   }
 
   render() {
     return (
       <StyledCurrencyAction>
-        <CurrencyContainer className={this.state.isOpen ? 'open' : ''} >
-          <CurrencyNavigation onClick={this.toggleIsOpen} className='currencyNavigation'>
+        <CurrencyContainer className={this.props.isCurrencySwitcherOpen ? 'open' : ''} >
+          <CurrencyNavigation onClick={this.toggleIsOpen.bind(this)} className='currencyNavigation'>
             <CurrencySymbol className='currencySymbol'>
               {this.props.currentCurrency.symbol}
             </CurrencySymbol>

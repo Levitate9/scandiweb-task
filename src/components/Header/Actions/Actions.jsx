@@ -20,6 +20,8 @@ export default class Actions extends React.Component {
           currentCurrency={this.props.currentCurrency} 
           currencies={this.props.currencies}
           setCurrency={this.props.setCurrency}
+          isCurrencySwitcherOpen={this.props.isCurrencySwitcherOpen}
+          toggleIsCurrencySwitcherOpen={this.props.toggleIsCurrencySwitcherOpen}
         />
         <CartAction 
           cartItems={this.props.cartItems} 

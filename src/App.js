@@ -7,7 +7,7 @@ import Content from './components/Content/Content'
 import styled from 'styled-components'
 import Product from './components/Content/Product/Product'
 import Cart from './components/Cart/Cart';
-import CartOverlayBg from './components/Content/CartOverlayBg/CartOverlayBg'
+import BackdropLayer from './components/Content/BackdropLayer/BackdropLayer'
 
 const StyledApp = styled.div`
   font-family: 'Raleway', sans-serif;
@@ -30,12 +30,14 @@ export default class App extends React.Component {
       currentCategory: '',
       currentCurrency: {},
       isCartOverlayOpen: false,
+      isCurrencySwitcherOpen: false
     }
     this.setCurrency = this.setCurrency.bind(this)
     this.setCategory = this.setCategory.bind(this)
     this.sendProductToCart = this.sendProductToCart.bind(this)
     this.deleteProductFromCart = this.deleteProductFromCart.bind(this)
     this.toggleIsCartOverlayOpen = this.toggleIsCartOverlayOpen.bind(this)
+    this.toggleIsCurrencySwitcherOpen = this.toggleIsCurrencySwitcherOpen.bind(this)
     this.increaseCartItemQuantity = this.increaseCartItemQuantity.bind(this)
     this.decreaseCartItemQuantity = this.decreaseCartItemQuantity.bind(this)
     this.calculateTotal = this.calculateTotal.bind(this)
@@ -62,6 +64,10 @@ export default class App extends React.Component {
 
   toggleIsCartOverlayOpen() {
     this.setState({ ...this.state, isCartOverlayOpen: this.state.isCartOverlayOpen ? false : true })
+  }
+
+  toggleIsCurrencySwitcherOpen() {
+    this.setState({ ...this.state, isCurrencySwitcherOpen: this.state.isCurrencySwitcherOpen ? false : true })
   }
 
   increaseCartItemQuantity(productId) {
@@ -121,7 +127,9 @@ export default class App extends React.Component {
             setCurrency={this.setCurrency}
             cartItems={this.state.cartItems}
             isCartOverlayOpen={this.state.isCartOverlayOpen}
+            isCurrencySwitcherOpen={this.state.isCurrencySwitcherOpen}
             toggleIsCartOverlayOpen={this.toggleIsCartOverlayOpen}
+            toggleIsCurrencySwitcherOpen={this.toggleIsCurrencySwitcherOpen}
             deleteProductFromCart={this.deleteProductFromCart}
             increaseCartItemQuantity={this.increaseCartItemQuantity}
             decreaseCartItemQuantity={this.decreaseCartItemQuantity}
@@ -160,9 +168,11 @@ export default class App extends React.Component {
               deleteProductFromCart={this.deleteProductFromCart}
             />} />
           </Routes>
-          <CartOverlayBg 
-            isCartOverlayOpen={this.state.isCartOverlayOpen} 
-            toggleIsCartOverlayOpen={this.toggleIsCartOverlayOpen} 
+          <BackdropLayer 
+            isCartOverlayOpen={this.state.isCartOverlayOpen}
+            isCurrencySwitcherOpen={this.state.isCurrencySwitcherOpen}
+            toggleIsCartOverlayOpen={this.toggleIsCartOverlayOpen}
+            toggleIsCurrencySwitcherOpen={this.toggleIsCurrencySwitcherOpen}
           />
         </StyledApp>
       </BrowserRouter>
