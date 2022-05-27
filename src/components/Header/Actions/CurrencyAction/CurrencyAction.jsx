@@ -48,7 +48,7 @@ const CurrencySymbol = styled.div`
 
   &:after {
     position: absolute;
-    top: 38px;
+    top: 12px;
     content: '';
     border: solid black;
     border-width: 0 1px 1px 0;
@@ -61,7 +61,8 @@ const CurrencySymbol = styled.div`
 
 const CurrencySwitcher = styled.div`
   position: absolute;
-  top: 65px;
+  top: 52px;
+  right: -12px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

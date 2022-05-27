@@ -2,14 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 import CurrencyAction from './CurrencyAction/CurrencyAction'
 import CartAction from './CartAction/CartAction'
+import BackdropLayer from '../../Content/BackdropLayer/BackdropLayer'
 
 const StyledActions = styled.div`
+  position: fixed;
+  top: 28px;
+  right: 130px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
   flex: 10 1 35vw;
-  margin-right: 100px;
+  z-index: 13;
 `
 
 export default class Actions extends React.Component {
@@ -33,6 +37,12 @@ export default class Actions extends React.Component {
           increaseCartItemQuantity={this.props.increaseCartItemQuantity}
           decreaseCartItemQuantity={this.props.decreaseCartItemQuantity}
           calculateTotal={this.props.calculateTotal}
+        />
+        <BackdropLayer 
+          isCartOverlayOpen={this.props.isCartOverlayOpen}
+          isCurrencySwitcherOpen={this.props.isCurrencySwitcherOpen}
+          toggleIsCartOverlayOpen={this.props.toggleIsCartOverlayOpen}
+          toggleIsCurrencySwitcherOpen={this.props.toggleIsCurrencySwitcherOpen}
         />
       </StyledActions>
     )

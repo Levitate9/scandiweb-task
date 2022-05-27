@@ -7,7 +7,7 @@ import Content from './components/Content/Content'
 import styled from 'styled-components'
 import Product from './components/Content/Product/Product'
 import Cart from './components/Cart/Cart';
-import BackdropLayer from './components/Content/BackdropLayer/BackdropLayer'
+import Actions from './components/Header/Actions/Actions'
 
 const StyledApp = styled.div`
   font-family: 'Raleway', sans-serif;
@@ -119,22 +119,7 @@ export default class App extends React.Component {
     return (
       <BrowserRouter>
         <StyledApp>
-          <Header 
-            categories={this.state.categories}
-            currencies={this.state.currencies} 
-            currentCurrency={this.state.currentCurrency}
-            setCategory={this.setCategory}
-            setCurrency={this.setCurrency}
-            cartItems={this.state.cartItems}
-            isCartOverlayOpen={this.state.isCartOverlayOpen}
-            isCurrencySwitcherOpen={this.state.isCurrencySwitcherOpen}
-            toggleIsCartOverlayOpen={this.toggleIsCartOverlayOpen}
-            toggleIsCurrencySwitcherOpen={this.toggleIsCurrencySwitcherOpen}
-            deleteProductFromCart={this.deleteProductFromCart}
-            increaseCartItemQuantity={this.increaseCartItemQuantity}
-            decreaseCartItemQuantity={this.decreaseCartItemQuantity}
-            calculateTotal={this.calculateTotal}
-          />
+          <Header categories={this.state.categories} setCategory={this.setCategory} />
           <Routes>
             <Route path='*' element={<Navigate to='/all' />} />
             { 
@@ -168,11 +153,19 @@ export default class App extends React.Component {
               deleteProductFromCart={this.deleteProductFromCart}
             />} />
           </Routes>
-          <BackdropLayer 
+          <Actions 
+            currencies={this.state.currencies}
+            currentCurrency={this.state.currentCurrency}
+            setCurrency={this.setCurrency}
+            cartItems={this.state.cartItems}
             isCartOverlayOpen={this.state.isCartOverlayOpen}
             isCurrencySwitcherOpen={this.state.isCurrencySwitcherOpen}
             toggleIsCartOverlayOpen={this.toggleIsCartOverlayOpen}
             toggleIsCurrencySwitcherOpen={this.toggleIsCurrencySwitcherOpen}
+            deleteProductFromCart={this.deleteProductFromCart}
+            increaseCartItemQuantity={this.increaseCartItemQuantity}
+            decreaseCartItemQuantity={this.decreaseCartItemQuantity}
+            calculateTotal={this.calculateTotal}
           />
         </StyledApp>
       </BrowserRouter>

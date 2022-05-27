@@ -11,8 +11,8 @@ const StyledCartOverlay = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  top: 78px;
-  right: 72px;
+  top: 52px;
+  right: -50px;
   width: 342px;
   max-height: 677px;
   z-index: 15;
