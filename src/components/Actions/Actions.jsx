@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import CurrencyAction from './CurrencyAction/CurrencyAction'
 import CartAction from './CartAction/CartAction'
-import BackdropLayer from '../../Content/BackdropLayer/BackdropLayer'
+import BackdropLayer from '../Content/BackdropLayer/BackdropLayer'
 
 const StyledActions = styled.div`
   position: fixed;

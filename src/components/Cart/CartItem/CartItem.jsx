@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import CartDescription from './CartDescription/CartDescription'
 import CartQuantity from './CartQuantity/CartQuantity'
 import CartImage from './CartImage/CartImage'
-import ItemRemoveLayer from '../../Header/Actions/CartAction/CartOverlay/Items/Item/ItemRomoveLayer/ItemRemoveLayer'
+import ItemRemoveLayer from '../../Actions/CartAction/CartOverlay/Items/Item/ItemRemoveLayer/ItemRemoveLayer'
 
 const StyledCartItem = styled.div`
   position: relative;

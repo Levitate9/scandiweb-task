@@ -44,8 +44,8 @@ const Label = styled(Symbol)`
 `
 
 export default class CurrencyItem extends React.Component {
-  toggleCurrency(e) {
-    this.props.setCurrency(e.target.innerHTML)
+  toggleCurrency() {
+    this.props.setCurrency(this.props.label)
     this.props.toggleIsOpen()
   }
 

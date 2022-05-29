@@ -7,7 +7,7 @@ import Content from './components/Content/Content'
 import styled from 'styled-components'
 import Product from './components/Content/Product/Product'
 import Cart from './components/Cart/Cart';
-import Actions from './components/Header/Actions/Actions'
+import Actions from './components/Actions/Actions'
 
 const StyledApp = styled.div`
   font-family: 'Raleway', sans-serif;

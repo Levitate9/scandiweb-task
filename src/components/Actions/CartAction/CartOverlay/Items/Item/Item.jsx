@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import CartOverlayName from './CartOverlayName/CartOverlayName'
 import CartOverlayPrice from './CartOverlayPrice/CartOverlayPrice'
 import AttributeItem
-    from '../../../../../../Content/Product/ProductAttributes/AttributeItem/AttributeItem'
+    from '../../../../../Content/Product/ProductAttributes/AttributeItem/AttributeItem'
 import Quantity from './Quantity/Quantity'
 import Image from './Image/Image'
-import ItemRemoveLayer from './ItemRomoveLayer/ItemRemoveLayer'
+import ItemRemoveLayer from './ItemRemoveLayer/ItemRemoveLayer'
 
 const StyledItem = styled.div`
   position: relative;

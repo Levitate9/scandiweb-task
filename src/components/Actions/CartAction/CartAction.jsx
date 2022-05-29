@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import cart from '../../../../images/cart.png'
+import cart from '../../../images/cart.png'
 import CartOverlay from './CartOverlay/CartOverlay'
 import CartActionBadge from './CartActionBadge/CartActionBadge'
 
