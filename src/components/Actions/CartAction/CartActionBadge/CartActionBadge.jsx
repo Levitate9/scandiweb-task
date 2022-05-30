@@ -3,8 +3,8 @@ import styled from 'styled-components'
 
 const StyledCartActionBadge = styled.div`
   position: absolute;
-  top: 18px;
-  right: 88px;
+  top: -8px;
+  right: -12px;
   display: flex;
   flex-direction: column;
   justify-content: center;
