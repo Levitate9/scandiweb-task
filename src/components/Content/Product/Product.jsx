@@ -32,6 +32,7 @@ class Product extends React.Component {
       attributes: product.attributes,
       prices: product.prices,
       mainPhoto: product.gallery[0],
+      inStock: product.inStock
     }
     this.setMainPhoto = this.setMainPhoto.bind(this)
     this.setDefaultSelected = this.setDefaultSelected.bind(this)
@@ -102,6 +103,7 @@ class Product extends React.Component {
           toggleSelected={this.toggleSelected}
           product={this.state.product}
           cartItems={this.props.cartItems}
+          inStock={this.state.inStock}
         />
       </StyledProduct>
     )

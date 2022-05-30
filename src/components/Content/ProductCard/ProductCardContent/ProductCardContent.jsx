@@ -45,16 +45,12 @@ export default class ProductCardContent extends React.Component {
     return (
       <StyledContent>
         <StyledName>
-          { (this.props.inStock) 
-              ? <StyledNavLink 
-                  to={`/${this.props.category}/${this.props.id}`} 
-                  className='brand'
-                >{`${this.props.brand} ${this.props.name}`}</StyledNavLink> 
-              : <div>{`${this.props.brand} ${this.props.name}`}</div>
-          }
-      </StyledName>
-      <StyledPrice>{`${this.props.symbol} ${this.props.price}`}</StyledPrice>
-    </StyledContent>
+          <StyledNavLink to={`/${this.props.category}/${this.props.id}`} className='brand'>
+            { `${this.props.brand} ${this.props.name}` }
+          </StyledNavLink> 
+        </StyledName>
+        <StyledPrice>{`${this.props.symbol} ${this.props.price}`}</StyledPrice>
+      </StyledContent>
     )
   }
 }

@@ -38,6 +38,7 @@ export default class ProductAttributes extends React.Component {
           sendProductToCart={this.props.sendProductToCart} 
           product={this.props.product}
           cartItems={this.props.cartItems}
+          inStock={this.props.inStock}
         />
         <ProductDescription description={this.props.description} />
       </StyledAttributes>

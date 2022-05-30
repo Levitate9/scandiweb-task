@@ -58,8 +58,8 @@ export default class ProductCardImage extends React.Component {
   render() {
     return (
       <StyledImg>
-        { this.props.inStock && <StyledNavLink to={`/${this.props.category}/${this.props.id}`} /> }
-        <StyledWrapper className='info'><span>out of stock</span></StyledWrapper>
+        <StyledNavLink to={`/${this.props.category}/${this.props.id}`} /> 
+        { !this.props.inStock && <StyledWrapper className='info'><span>out of stock</span></StyledWrapper> }
         <ProductImg src={this.props.src}></ProductImg>
       </StyledImg>
     )
