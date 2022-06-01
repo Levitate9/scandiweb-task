@@ -54,8 +54,26 @@ export default class App extends React.Component {
   }
 
   sendProductToCart(product) {
-    product = { ...product, quantity: 1, order: this.state.cartItems.length + 1 }
-    this.setState({ ...this.state, cartItems: [...this.state.cartItems, product] })
+    const createPostfix = (product) => {
+      let attributes = product.attributes.map((attribute) => {
+        let item = attribute.items.filter((item) => item.isSelected === true)[0]
+        return `-${attribute.name.toLowerCase()}-${item.displayValue.toLowerCase()}`
+      })
+      attributes = attributes.map((attr) => attr.replace(/\s/g, '-'))
+      let postfix = attributes.join('')
+      return { ...product, id: `${product.id}${postfix}`, quantity: 1, order: this.state.cartItems.length + 1}
+    }
+
+    product = createPostfix(product)
+    
+    if (this.state.cartItems.filter((el) => el.id === product.id).length > 0) {
+      product = this.state.cartItems.filter((el) => el.id === product.id)[0]
+      product = { ...product, quantity: product.quantity + 1 }
+      let restProducts = this.state.cartItems.filter((el) => el.id !== product.id)
+      this.setState({ ...this.state, cartItems: [...restProducts, product ] })
+    } else {
+      this.setState({ ...this.state, cartItems: [...this.state.cartItems, product] })
+    }
   }
 
   deleteProductFromCart(productId) {

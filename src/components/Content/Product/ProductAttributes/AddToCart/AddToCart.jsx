@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link, Navigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const StyledAddToCart = styled.button`
@@ -46,21 +45,18 @@ const StyledAddToCart = styled.button`
 export default class AddToCart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { 
-      isProceedToCheckout: false,
-      innerText: 'add to cart'
-     }
-  }
-  addToCart() {
-    this.props.sendProductToCart(this.props.product)
-    this.setState({ isProceedToCheckout: true, innerText: 'proceed to checkout' })
+    this.state = { innerText: 'add to cart' }
+    this.productAdded = this.productAdded.bind(this)
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.cartItems.length !== this.props.cartItems.length) {
-      !this.props.cartItems.find((el) => el.id === prevProps.id) && 
-      this.setState({ isProceedToCheckout: false, innerText: 'add to cart' })
-    }
+  addToCart() {
+    this.props.sendProductToCart(this.props.product)
+    this.productAdded()
+  }
+
+  productAdded() {
+    this.setState({ innerText: 'product added' })
+    setTimeout(() => this.setState({ innerText: 'add to cart' }), 1000)
   }
 
   componentDidMount() {
@@ -68,20 +64,13 @@ export default class AddToCart extends React.Component {
   }
 
   render() {
-    const button = !this.state.isProceedToCheckout 
-      ? <StyledAddToCart 
-          onClick={ this.props.inStock 
-            ? (this.state.isProceedToCheckout ? () => <Navigate to='/cart' /> : this.addToCart.bind(this))
-            : null
-          }
-          className={ !this.props.inStock ? 'disabled' : '' }
-        ><span>{this.state.innerText}</span>
-        </StyledAddToCart>
-      : <Link to='/cart' onClick={ this.props.inStock ? () => <Navigate to='/cart' /> : null }>
-          <StyledAddToCart className={ !this.props.inStock ? 'disabled' : '' }>
-            <span>{this.state.innerText}</span>
-          </StyledAddToCart>
-        </Link> 
-    return button
+    return (
+      <StyledAddToCart 
+        onClick={ this.props.inStock ? this.addToCart.bind(this) : null }
+        className={ this.props.inStock ? '' : 'disabled' }
+      >
+        <span>{this.state.innerText}</span>
+      </StyledAddToCart>
+    )
   }
 }

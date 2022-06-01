@@ -9,6 +9,7 @@ const StyledProductDescription = styled.div`
   line-height: 26px;
   color: #1D1F22;
   text-align: left;
+  margin-bottom: 50px;
 `
 
 export default class ProductDescription extends React.Component {
