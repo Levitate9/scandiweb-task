@@ -79,6 +79,7 @@ const Background = styled.div`
 const Tooltip = styled.span`
   visibility: hidden;
   position: absolute;
+  font-family: 'Source Sans Pro';
   font-size: 12px;
   width: 50px;
   margin-left: -25px;
@@ -86,7 +87,7 @@ const Tooltip = styled.span`
   border-radius: 3px;
   color: #1D1F22;
   background-color: #ffffff;
-  top: 130%;
+  top: 120%;
   left: 50%;
   text-align: center;
   box-shadow: 0px 2px 15px rgba(168, 172, 176, 0.3);

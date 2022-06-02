@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledCapacity = styled.div`
+  font-family: 'Source Sans Pro';
   border-radius: 3px;
   outline: 1px solid #bababa;
 
@@ -45,8 +46,8 @@ const StyledCapacity = styled.div`
 `
 
 export default class Capacity extends React.Component {
-  setSelected(e) {
-    this.props.toggleSelected(this.props.attrName, e.target.id)
+  setSelected() {
+    this.props.toggleSelected(this.props.attrName, this.props.id)
   }
 
   render() {

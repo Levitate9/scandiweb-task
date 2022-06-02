@@ -9,6 +9,7 @@ const StyledSize = styled.div`
   border: 1px solid #1D1F22;
   box-sizing: border-box;
   user-select: none;
+  font-family: 'Source Sans Pro';
 
   &.product, &.cart {
     width: 63px;
@@ -19,7 +20,6 @@ const StyledSize = styled.div`
   &.cartOverlay {
     width: 24px;
     height: 24px;
-    font-family: 'Source Sans Pro';
     font-weight: 400;
     font-size: 14px;
     margin: 0 8px 0 2px;

@@ -5,6 +5,7 @@ const StyledTouchID = styled.div`
   margin: 0 10px 0 0;
   border-radius: 3px;
   outline: 1px solid #bababa;
+  font-family: 'Source Sans Pro';
 
   &.product, 
   &.cart {
