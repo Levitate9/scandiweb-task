@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const StyledCapacity = styled.div`
   font-family: 'Source Sans Pro';
   border-radius: 3px;
-  outline: 1px solid #bababa;
+  outline: 1px solid #1D1F22;
 
   &.product, 
   &.cart {
@@ -32,6 +32,7 @@ const StyledCapacity = styled.div`
   &.selected {
     color: #ffffff;
     background-color: #1D1F22;
+    outline: 1px solid #1D1F22;
   }
 
   &.disabled {

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import ProductCard from './ProductCard/ProductCard'
+import { GET_CATEGORY_PRODUCTS } from '../../graphql/Queries'
 
 const StyledContent = styled.div`
   position: relative;
@@ -24,12 +25,32 @@ const StyledProducts = styled.div`
 `
 
 export default class Content extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { products: [] }
+    this.getCategoryProducts = this.getCategoryProducts.bind(this)
+  }
+
+  getCategoryProducts() {
+    this.props.client
+      .query({ query: GET_CATEGORY_PRODUCTS, variables: { "name": { "title": this.props.currentCategory } } })
+      .then((result) => this.setState({ products: result.data.category.products }))
+  }
+
+  componentDidMount() {
+    this.getCategoryProducts()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentCategory !== this.props.currentCategory) {
+      this.getCategoryProducts()
+    }
+  }
+
   render() {
-    const category = this.props.currentCategory
     const upperCaseFunc = (text) => text.substring(0, 1).toUpperCase() + text.substring(1)
-    const categoryText = category.replace(/^\w/, upperCaseFunc)
-    const products = this.props.categories.filter((el) => el.name === category)[0].products
-    const mappedProducts = products.map((el) => {
+    const categoryText = this.props.currentCategory.replace(/^\w/, upperCaseFunc)
+    const mappedProducts = this.state.products.length > 0 && this.state.products.map((el) => {
       return <ProductCard 
         key={el.id}
         product={el}

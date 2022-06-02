@@ -143,6 +143,7 @@ export default class App extends React.Component {
             { 
               this.state.categories.map(el => 
                 <Route exact path={`/${el.name}/*`} key={el.name} element={<Content
+                  client={this.props.client}
                   categories={this.state.categories} 
                   currentCategory={el.name} 
                   currentCurrency={this.state.currentCurrency}
