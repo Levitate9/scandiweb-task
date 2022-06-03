@@ -144,7 +144,6 @@ export default class App extends React.Component {
               this.state.categories.map(el => 
                 <Route exact path={`/${el.name}/*`} key={el.name} element={<Content
                   client={this.props.client}
-                  categories={this.state.categories} 
                   currentCategory={el.name} 
                   currentCurrency={this.state.currentCurrency}
                   sendProductToCart={this.sendProductToCart}
@@ -154,12 +153,12 @@ export default class App extends React.Component {
             } 
             {
               this.state.categories.map(el => {
-                let products = this.state.categories.filter((category) => category.name === el.name)[0].products
                 return <Route path={`/${el.name}/:id`} key={el.name} element={<Product 
-                  products={products}
+                  client={this.props.client}
                   cartItems={this.state.cartItems}
                   currentCurrency={this.state.currentCurrency}
                   sendProductToCart={this.sendProductToCart}
+                  
                 />} />  
               })
             }

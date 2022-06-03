@@ -5,6 +5,7 @@ import Preloader from '../../common/Preloader'
 import ProductGallery from './ProductGallery/ProductGallery'
 import ProductMainPhoto from './ProductMainPhoto/ProductMainPhoto'
 import ProductAttributes from './ProductAttributes/ProductAttributes'
+import { GET_PRODUCT } from '../../../graphql/Queries'
 
 const StyledProduct = styled.div`
   position: relative;
@@ -20,27 +21,31 @@ const StyledProduct = styled.div`
 class Product extends React.Component {
   constructor(props) {
     super(props)
-    let product = this.props.products.filter((el) => el.id === this.props.params.id)[0]
-    this.state = { 
-      product: product,
-      id: product.id,
-      name: product.name,
-      brand: product.brand,
-      gallery: product.gallery,
-      description: product.description,
-      category: product.category,
-      attributes: product.attributes,
-      prices: product.prices,
-      mainPhoto: product.gallery[0],
-      inStock: product.inStock
-    }
+    this.state = { product: {} }
+    this.getProduct = this.getProduct.bind(this)
     this.setMainPhoto = this.setMainPhoto.bind(this)
     this.setDefaultSelected = this.setDefaultSelected.bind(this)
     this.toggleSelected = this.toggleSelected.bind(this)
   }
 
+  getProduct() {
+    this.props.client
+      .query({ query: GET_PRODUCT, variables: { "id": this.props.params.id } })
+      .then((result) => this.setState({ 
+        product: result.data.product, 
+        ...result.data.product,
+        mainPhoto: result.data.product.gallery[0]
+      }))
+  }
+
   componentDidMount() {
-    this.setDefaultSelected()
+    this.getProduct()
+  }
+
+  componentDidUpdate() {
+    if (!this.state.attributes[0].items[0].hasOwnProperty('isSelected')) {
+      this.setDefaultSelected()
+    }
   }
 
   setDefaultSelected() {
@@ -52,11 +57,11 @@ class Product extends React.Component {
     attributes = attributes.map((attr, index) => {
       let item = attr.items[0]
       item = { ...item, isSelected: true }
-      return { ...attr, items: [ item, ...attr.items.filter((el) => el.value !== item.value) ], order: index + 1 }
+      return { ...attr, items: [item, ...attr.items.filter((el) => el.value !== item.value)], order: index + 1 }
     })
     attributes = attributes.sort((a, b) => a.order - b.order)
-    this.setState({ 
-      ...this.state, product: { ...this.state.product, attributes: attributes }, attributes: attributes 
+    this.setState({
+      ...this.state, product: { ...this.state.product, attributes: attributes }, attributes: attributes
     })
   }
 
@@ -82,7 +87,7 @@ class Product extends React.Component {
     if (this.state.isLoading) {
       return <Preloader />
     }
-    return (
+    return this.state.product.attributes && (
       <StyledProduct>
         <ProductGallery 
           gallery={this.state.gallery} 
