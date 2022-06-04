@@ -43,7 +43,7 @@ class Product extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!this.state.attributes[0].items[0].hasOwnProperty('isSelected')) {
+    if (this.state.attributes.length > 0 && !this.state.attributes[0].items[0].hasOwnProperty('isSelected')) {
       this.setDefaultSelected()
     }
   }

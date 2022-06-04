@@ -1,10 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Color from './Color/Color'
-import Size from './Size/Size'
-import Capacity from './Capacity/Capacity'
-import Usb3 from './Usb3/Usb3'
-import TouchID from './TouchID/TouchID'
+import AttributeValue from './AttributeValue/AttributeValue'
 
 const StyledAttributeItem = styled.div`
   display: flex;
@@ -44,35 +40,16 @@ const StyledAttributesValues = styled.div`
 
 export default class AttributeItem extends React.Component {
   render() {
-    const mappedValues = this.props.items.map((el) => {
-      const createAttr = (Component) => 
-        <Component 
-          key={el.id}
-          id={el.id}
-          displayValue={el.displayValue} 
-          value={el.value}
-          className={this.props.type}
-          type={this.props.type}
-          isSelected={el.isSelected}
-          toggleSelected={this.props.toggleSelected}
-          attrName={this.props.name}
-      />
-      
-      switch (this.props.name) {
-        case 'Size':
-          return createAttr(Size)
-        case 'Color':
-          return createAttr(Color)
-        case 'Capacity':
-          return createAttr(Capacity)
-        case 'With USB 3 ports':
-          return createAttr(Usb3)
-        case 'Touch ID in keyboard':
-          return createAttr(TouchID)
-        default:
-      }
-      return null
-    })
+    const mappedValues = this.props.items.map((el) => <AttributeValue 
+      key={el.id}
+      id={el.id}
+      displayValue={el.displayValue} 
+      value={el.value}
+      type={this.props.type}
+      isSelected={el.isSelected}
+      toggleSelected={this.props.toggleSelected}
+      attrName={this.props.name}
+    />)
 
     return (
       <StyledAttributeItem className={`${this.props.type}Item` || ''}>
