@@ -20,26 +20,17 @@ const Image = styled.div`
 export default class CartImage extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { 
-      index: 0, 
-      length: this.props.gallery.length - 1
-    }
+    this.state = { index: 0, length: this.props.gallery.length - 1 }
     this.prevImg = this.prevImg.bind(this)
     this.nextImg = this.nextImg.bind(this)
   }
 
   prevImg() {
-    this.setState({
-      ...this.state,
-      index: this.state.index === 0 ? this.state.length : this.state.index - 1
-    })
+    this.setState({ ...this.state, index: this.state.index === 0 ? this.state.length : this.state.index - 1 })
   }
 
   nextImg() {
-    this.setState({ 
-      ...this.state, 
-      index: this.state.index === this.state.length ? 0 : this.state.index + 1
-    })
+    this.setState({ ...this.state, index: this.state.index === this.state.length ? 0 : this.state.index + 1 })
   }
 
   render() {

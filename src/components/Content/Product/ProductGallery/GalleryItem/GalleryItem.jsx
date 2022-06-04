@@ -20,8 +20,8 @@ const StyledGalleryItem = styled.div`
 `
 
 export default class GalleryItem extends React.Component {
-  onItemSelected(e) {
-    this.props.setMainPhoto(e.target.id)
+  onItemSelected() {
+    this.props.setMainPhoto(this.props.id)
   }
 
   render() {

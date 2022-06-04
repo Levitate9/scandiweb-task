@@ -61,7 +61,6 @@ const ButtonsContainer = styled.div`
 export default class ItemRemoveLayer extends React.Component {
   removeFromCart() {
     this.props.deleteProductFromCart(this.props.id)
-    document.getElementById(this.props.id) && document.getElementById(this.props.id).click()
   }
 
   render() {

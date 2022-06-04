@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createRef } from 'react'
 import styled from 'styled-components'
 import CartDescription from './CartDescription/CartDescription'
 import CartQuantity from './CartQuantity/CartQuantity'
@@ -27,6 +27,8 @@ const CartDescriptionContainer = styled.div`
 export default class CartItem extends React.Component {
   constructor(props) {
     super(props)
+    this.state = { height: 0 }
+    this.ref = createRef()
     this.increaseQuantity = this.increaseQuantity.bind(this)
     this.decreaseQuantity = this.decreaseQuantity.bind(this)
   }
@@ -39,11 +41,13 @@ export default class CartItem extends React.Component {
     this.props.decreaseCartItemQuantity(this.props.id)
   }
 
+  componentDidMount() {
+    this.setState({ height: this.ref.current.clientHeight })
+  }
+
   render() {
-    let itemHeight = 
-      document.getElementById(this.props.type) && document.getElementById(this.props.type).clientHeight
     return (
-      <StyledCartItem className='cartItem' id={this.props.type}>
+      <StyledCartItem className='cartItem' id={this.props.type} ref={this.ref}>
         <CartDescriptionContainer>
           <CartDescription 
             brand={this.props.brand}
@@ -68,7 +72,7 @@ export default class CartItem extends React.Component {
           increaseQuantity={this.increaseQuantity}
           deleteProductFromCart={this.props.deleteProductFromCart}
           type={this.props.type}
-          height={itemHeight}
+          height={this.state.height}
         />
       </StyledCartItem>
     )

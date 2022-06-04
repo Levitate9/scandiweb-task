@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-// import CartItemAttribute from '../CartAttribute/CartItemAttribute'
 import AttributeItem from '../../../Content/Product/ProductAttributes/AttributeItem/AttributeItem'
 
 

@@ -43,8 +43,8 @@ const StyledNavLink = styled(NavLink)`
 `
 
 export default class Categories extends React.Component {
-  onCategoryChange(e) {
-    this.props.setCategory(e.target.innerHTML)
+  onCategoryChange() {
+    this.props.setCategory(this.props.id)
   }
 
   render() {
@@ -55,7 +55,7 @@ export default class Categories extends React.Component {
             <StyledNavLink
               to={`/${el.name}`}
               className={(navData) => (navData.isActive ? 'active' : '')}
-            ><span value={el.name} onClick={this.onCategoryChange.bind(this)}>{el.name}</span></StyledNavLink>
+            ><span id={el.name} onClick={this.onCategoryChange.bind(this)}>{el.name}</span></StyledNavLink>
           </StyledLi>
         )}
       </StyledUl>

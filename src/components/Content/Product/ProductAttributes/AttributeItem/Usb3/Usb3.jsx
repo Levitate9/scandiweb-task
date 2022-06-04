@@ -43,8 +43,8 @@ const StyledUsb3 = styled.div`
 `
 
 export default class Usb3 extends React.Component {
-  setSelected(e) {
-    this.props.toggleSelected(this.props.attrName, e.target.id)
+  setSelected() {
+    this.props.toggleSelected(this.props.attrName, this.props.id)
   }
 
   render() {
