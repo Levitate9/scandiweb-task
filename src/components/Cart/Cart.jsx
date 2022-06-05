@@ -46,7 +46,10 @@ const Order = styled.button`
 
 export default class Cart extends React.Component {
   render() {
-    let mappedItems = this.props.cartItems.map((el) => 
+    let cartItems = this.props.cartItems.length > 0 && this.props.cartItems.sort((a, b) => {
+      return a.order - b.order
+    })
+    let mappedItems = this.props.cartItems.length > 0 && cartItems.map((el) => 
       <CartItem
         key={el.id}
         id={el.id} 

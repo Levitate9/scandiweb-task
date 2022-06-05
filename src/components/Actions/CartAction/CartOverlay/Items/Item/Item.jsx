@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createRef } from 'react'
 import styled from 'styled-components'
 import CartOverlayName from './CartOverlayName/CartOverlayName'
 import CartOverlayPrice from './CartOverlayPrice/CartOverlayPrice'
@@ -55,6 +55,8 @@ const ContainerImage = styled(ColumnDescription)`
 export default class Item extends React.Component {
   constructor(props) {
     super(props)
+    this.state = { height: 0 }
+    this.ref = createRef()
     this.increaseQuantity = this.increaseQuantity.bind(this)
     this.decreaseQuantity = this.decreaseQuantity.bind(this)
   }
@@ -65,6 +67,10 @@ export default class Item extends React.Component {
 
   decreaseQuantity() {
     this.props.decreaseCartItemQuantity(this.props.id)
+  }
+
+  componentDidMount() {
+    this.setState({ height: this.ref.current.clientHeight })
   }
 
   render() {
@@ -79,10 +85,8 @@ export default class Item extends React.Component {
           type={this.props.type}
         /> })
 
-    let itemHeight = 
-      document.getElementById(this.props.type) && document.getElementById(this.props.type).clientHeight
     return (
-      <StyledItem id={this.props.type}>
+      <StyledItem id={this.props.type} ref={this.ref}>
         <ContainerDescription>
           <ColumnDescription>
             <CartOverlayName brand={this.props.brand} name={this.props.name} />
@@ -109,7 +113,7 @@ export default class Item extends React.Component {
           quantity={this.props.quantity}
           increaseQuantity={this.increaseQuantity}
           type={this.props.type}
-          height={itemHeight}
+          height={this.state.height}
         />
       </StyledItem>
     )

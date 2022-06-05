@@ -27,7 +27,7 @@ export default class Items extends React.Component {
   }
 
   render() {
-    let cartItems = this.props.cartItems.length && this.props.cartItems.sort((a, b) => {
+    let cartItems = this.props.cartItems.length > 0 && this.props.cartItems.sort((a, b) => {
       return a.order - b.order
     })
     const mappedItems = this.props.cartItems.length > 0 && cartItems.map((el) => 
