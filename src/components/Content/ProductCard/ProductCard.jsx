@@ -68,7 +68,8 @@ export default class ProductCard extends React.Component {
           id={this.props.id}
           product={this.props.product}
           sendProductToCart={this.props.sendProductToCart}
-          deleteProductFromCart={this.props.deleteProductFromCart}
+          removeProductFromCart={this.props.removeProductFromCart}
+          cartItems={this.props.cartItems}
         /> }
         <ProductCardContent 
           id={this.props.id}

@@ -32,11 +32,6 @@ const StyledButton = styled.button`
 `
 
 export default class AddToCartIcon extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state ={ isSelected: false }
-  }
-
   sendToCart() {
     let product = this.props.product
     let attributes = product.attributes.map((attr) => {
@@ -52,25 +47,19 @@ export default class AddToCartIcon extends React.Component {
     attributes = attributes.sort((a, b) => a.order - b.order)
     product = { ...product, attributes: attributes }
     this.props.sendProductToCart(product)
-    this.toggleSelected()
   }
 
   deleteFromCart() {
-    this.props.deleteProductFromCart(this.props.id)
-    this.toggleSelected()
-  }
-
-  toggleSelected() {
-    this.setState({ isSelected: this.state.isSelected ? false : true })
+    this.props.removeProductFromCart(this.props.id)
   }
 
   render() {
+    let itemsOnCart = this.props.cartItems.filter((item) => item.id.includes(this.props.id))
     return (
       <StyledButton 
         id={this.props.id}
-        isSelected={this.state.isSelected}
-        className={`cart ${this.state.isSelected ? 'selected' : ''}`} 
-        onClick={this.state.isSelected ? this.deleteFromCart.bind(this) : this.sendToCart.bind(this)}
+        className={`cart ${itemsOnCart.length > 0 ? 'selected' : ''}`} 
+        onClick={itemsOnCart.length > 0 ? this.deleteFromCart.bind(this) : this.sendToCart.bind(this)}
       ><img src={cart} alt='cart' />
       </StyledButton> 
     )

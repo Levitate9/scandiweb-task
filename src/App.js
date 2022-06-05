@@ -36,6 +36,7 @@ export default class App extends React.Component {
     this.setCategory = this.setCategory.bind(this)
     this.sendProductToCart = this.sendProductToCart.bind(this)
     this.deleteProductFromCart = this.deleteProductFromCart.bind(this)
+    this.removeProductFromCart = this.removeProductFromCart.bind(this)
     this.toggleIsCartOverlayOpen = this.toggleIsCartOverlayOpen.bind(this)
     this.toggleIsCurrencySwitcherOpen = this.toggleIsCurrencySwitcherOpen.bind(this)
     this.increaseCartItemQuantity = this.increaseCartItemQuantity.bind(this)
@@ -61,7 +62,7 @@ export default class App extends React.Component {
       })
       attributes = attributes.map((attr) => attr.replace(/\s/g, '-'))
       let postfix = attributes.join('')
-      return { ...product, id: `${product.id}${postfix}`, quantity: 1, order: this.state.cartItems.length + 1}
+      return { ...product, id: `${product.id}${postfix}`, quantity: 1, order: this.state.cartItems.length + 1 }
     }
 
     product = createPostfix(product)
@@ -78,6 +79,11 @@ export default class App extends React.Component {
 
   deleteProductFromCart(productId) {
     this.setState({ ...this.state, cartItems: this.state.cartItems.filter((el) => el.id !== productId) })
+  }
+
+  //for category page only
+  removeProductFromCart(productId) {
+    this.setState({ ...this.state, cartItems: this.state.cartItems.filter((el) => !el.id.includes(productId)) })
   }
 
   toggleIsCartOverlayOpen() {
@@ -147,7 +153,8 @@ export default class App extends React.Component {
                   currentCategory={el.name} 
                   currentCurrency={this.state.currentCurrency}
                   sendProductToCart={this.sendProductToCart}
-                  deleteProductFromCart={this.deleteProductFromCart}
+                  removeProductFromCart={this.removeProductFromCart}
+                  cartItems={this.state.cartItems}
                 />} />
               )
             } 

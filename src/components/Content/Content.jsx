@@ -65,7 +65,8 @@ export default class Content extends React.Component {
         prices={el.prices}
         currentCurrency={this.props.currentCurrency}
         sendProductToCart={this.props.sendProductToCart}
-        deleteProductFromCart={this.props.deleteProductFromCart}
+        removeProductFromCart={this.props.removeProductFromCart}
+        cartItems={this.props.cartItems}
       />
     })
     return (
