@@ -103,7 +103,7 @@ const Background = styled.div`
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  margin: 0 8px 8px 0;
+  margin: 8px 8px 0 0;
 
   &.product, &.cart {
     width: 63px;

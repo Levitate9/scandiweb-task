@@ -20,7 +20,6 @@ const StyledCategory = styled.div`
   font-weight: 700;
   font-size: 18px;
   line-height: 18px;
-  margin: 0 0 8px 0;
   color: #1D1F22;
   text-transform: uppercase;
 
