@@ -16,12 +16,51 @@ const StyledAttributeValue = styled.div`
   box-sizing: border-box;
   user-select: none;
 
+  &.product,
+  &.cart {
+    margin: 10px 10px 0 0;
+  }
+
+  &.cartOverlay {
+    font-size: 14px;
+    margin: 8px 8px 0 0;
+
+    &.capacity {
+      width: 56px;
+      height: 25px;
+    }
+
+    &.size {
+      width: 24px;
+      height: 24px;
+    }
+
+    &.usb3,
+    &.touchID {
+      width: 40px;
+      height: 25px;
+    }
+  }
+
+  &.cartOverlay:last-child {
+    margin: 8px 0 2px 0;
+  }
+
   &.color {
     background-color: ${props => props.value};
     ${props => props.id === 'White' && `outline: 1px solid #bababa;`}
     border: none;
-    width: 32px;
-    height: 32px;
+
+    &.product,
+    &.cart {
+      width: 32px;
+      height: 32px;
+    }
+
+    &.cartOverlay {
+      width: 16px;
+      height: 16px;
+    }
   }
 
   &:hover.product {
@@ -43,7 +82,8 @@ const StyledAttributeValue = styled.div`
   }
 
   &.color.selected {
-    outline: none !important;
+    outline: 1px solid #5ECE7B;
+    outline-offset: 2px;
   }
 
   &.capacity.disabled,
@@ -59,65 +99,9 @@ const StyledAttributeValue = styled.div`
     cursor: default;
   }
 
-  &.cartOverlay {
-    width: 24px;
-    height: 24px;
-    font-size: 14px;
-  }
-
   &.cartOverlay.usb3,
   &.cartOverlay.touchID {
     width: 40px;
-  }
-
-  &.cartOverlay.capacity {
-    width: 50px;
-  }
-
-
-  &.cartOverlay.color {
-    width: 16px;
-    height: 16px;
-  }
-`
-
-const Background = styled.div`
-  position: relative;
-  visibility: ${props => props.attrName === 'Color' ? 'visible' : 'hidden' };
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  margin: 7px 6px 0 0;
-
-  &.product, &.cart {
-    width: 63px;
-    height: 45px;
-    margin: 10px 10px 0 0;
-  }
-
-  &.color {
-    width: 34px;
-    height: 34px;
-  }
-
-  &.cartOverlay.color {
-    width: 18px;
-    height: 18px;
-  }
-
-  &.cartOverlay.color:last-child {
-    margin: 7px 0 0 0;
-  }
-
-  &.cartOverlay.color.selected {
-    border: 1px solid #5ECE7B !important;
-  }
-
-  &.cart.color.selected,
-  &.product.color.selected {
-    outline: 1px solid #5ECE7B !important;
   }
 `
 
@@ -138,20 +122,15 @@ export default class AttributeValue extends React.Component {
 
     let disabled = (this.props.type !== 'product' && 'disabled') || ''
     return ( 
-      <Background 
-        className={`${this.props.type} ${attrClass} ${this.props.isSelected ? 'selected' : ''}`} 
-        attrName={this.props.attrName}
-      >
-        <StyledAttributeValue
-          id={this.props.id}
-          value={this.props.value}
-          className={`${this.props.type} ${attrClass} ${this.props.isSelected ? 'selected' : disabled}`}
-          onClick={this.props.type === 'product' ? this.setSelected.bind(this) : null}
-        >{ this.props.attrName === 'Color' 
-            ? null 
-            : this.props.attrName === 'Size' ? this.props.value : this.props.displayValue }      
-        </StyledAttributeValue>
-      </Background>
+      <StyledAttributeValue
+        id={this.props.id}
+        value={this.props.value}
+        className={`${this.props.type} ${attrClass} ${this.props.isSelected ? 'selected' : disabled}`}
+        onClick={this.props.type === 'product' ? this.setSelected.bind(this) : null}
+      >{ this.props.attrName === 'Color' 
+          ? null 
+          : this.props.attrName === 'Size' ? this.props.value : this.props.displayValue }      
+      </StyledAttributeValue>
     )
   }
 }
