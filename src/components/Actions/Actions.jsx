@@ -5,15 +5,13 @@ import CartAction from './CartAction/CartAction'
 import BackdropLayer from './BackdropLayer/BackdropLayer'
 
 const StyledActions = styled.div`
-  position: fixed;
-  top: 28px;
-  right: 130px;
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
   flex: 10 1 35vw;
-  z-index: 13;
+  margin-right: 100px;
 `
 
 export default class Actions extends React.Component {

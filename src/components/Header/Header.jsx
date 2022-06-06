@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Categories from './Categories/Categories'
 import Logo from './Logo/Logo'
+import Actions from '../Actions/Actions';
 
 const StyledHeader = styled.div`
   position: fixed;
@@ -16,23 +17,26 @@ const StyledHeader = styled.div`
   width: 1440px;
 `
 
-const ActionsPlug = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  flex: 10 1 35vw;
-  height: 18.89px;
-  margin: 18px 100px 18px 0;
-`
-
 export default class Header extends React.Component {
   render() {
     return (
       <StyledHeader>
         <Categories categories={this.props.categories} setCategory={this.props.setCategory} />
         <Logo />
-        <ActionsPlug />
+        <Actions 
+            currencies={this.props.currencies}
+            currentCurrency={this.props.currentCurrency}
+            setCurrency={this.props.setCurrency}
+            cartItems={this.props.cartItems}
+            isCartOverlayOpen={this.props.isCartOverlayOpen}
+            isCurrencySwitcherOpen={this.props.isCurrencySwitcherOpen}
+            toggleIsCartOverlayOpen={this.props.toggleIsCartOverlayOpen}
+            toggleIsCurrencySwitcherOpen={this.props.toggleIsCurrencySwitcherOpen}
+            deleteProductFromCart={this.props.deleteProductFromCart}
+            increaseCartItemQuantity={this.props.increaseCartItemQuantity}
+            decreaseCartItemQuantity={this.props.decreaseCartItemQuantity}
+            calculateTotal={this.props.calculateTotal}
+          />
       </StyledHeader>
     )
   }
