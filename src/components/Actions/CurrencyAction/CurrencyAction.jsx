@@ -78,6 +78,12 @@ class CurrencyAction extends React.Component {
     this.props.toggleIsCurrencySwitcherOpen()
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentCurrency.label !== this.props.currentCurrency.label) {
+      this.props.toggleIsCurrencySwitcherOpen()
+    }
+  }
+
   render() {
     return (
       <StyledCurrencyAction>
@@ -93,7 +99,7 @@ class CurrencyAction extends React.Component {
                 symbol={el.symbol}
                 label={el.label}
                 setCurrency={this.props.setCurrency}
-                toggleIsOpen={this.toggleIsOpen}
+                toggleIsCurrencySwitcherOpen={this.props.toggleIsCurrencySwitcherOpen}
               /> )}
           </CurrencySwitcher>
         </CurrencyContainer>

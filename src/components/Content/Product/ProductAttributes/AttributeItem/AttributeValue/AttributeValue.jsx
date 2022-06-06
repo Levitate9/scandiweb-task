@@ -108,7 +108,7 @@ const Background = styled.div`
   &.product, &.cart {
     width: 63px;
     height: 45px;
-    margin: 0 10px 10px 0;
+    margin: 10px 10px 0 0;
   }
 
   &.color {

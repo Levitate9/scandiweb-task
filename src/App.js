@@ -45,8 +45,7 @@ export default class App extends React.Component {
   }
 
   setCurrency(newCurrency) {
-    const currencies = this.state.currencies
-    const currentCurrency = currencies.filter((el) => el.label === newCurrency)[0]
+    const currentCurrency = this.state.currencies.filter((el) => el.label === newCurrency)[0]
     this.setState({ ...this.state, currentCurrency: currentCurrency })
   }
 
