@@ -6,26 +6,33 @@ import AttributeItem
 const StyledCartOverlayDescription = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: flex-start;
-  position: relative;
-  width: 136px;
-  overflow-x: hidden;
-  white-space: nowrap;
-`
 
-const BrandAndName = styled.div`
+  &.cartOverlay {
+    justify-content: space-between;
+    position: relative;
+    width: 136px;
+    overflow-x: hidden;
+    white-space: nowrap;
+  }
+
+  &.cart {
+    justify-content: flex-start;
+  }
 `
 
 const Brand = styled.div`
-  font-weight: 300;
-  font-size: 16px;
-  width: 136px;
-  line-height: 26px;
   color: #1D1F22;
-  text-align: left;
 
-  &:after {
+  &.cartOverlay {
+    font-weight: 300;
+    font-size: 16px;
+    width: 136px;
+    line-height: 26px;
+    text-align: left;
+  }
+  
+  &.cartOverlay:after {
     content: '';
     position: absolute;
     right: 0;
@@ -34,19 +41,37 @@ const Brand = styled.div`
     height: 26px;
     background: linear-gradient(90deg, transparent, #ffffff 50%);
   }
+
+  &.cart {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 27px;
+    text-align: left;
+  }
 `
 
 const Name = styled(Brand)`
+  &.cart {
+    font-weight: 400;
+    margin-top: 16px;
+  }
 `
 
 const Price = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  font-weight: 500;
-  text-align: left;
-  margin-top: 4px;
+  &.cartOverlay {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: left;
+    margin-top: 4px;
+  }
+
+  &.cart {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    margin: 20px 0;
+  }
 `
 
 export default class CartOverlayDescription extends React.Component {
@@ -58,18 +83,18 @@ export default class CartOverlayDescription extends React.Component {
         key={el.id} 
         name={el.name} 
         items={el.items} 
-        className='cartOverlay'
-        type='cartOverlay'
+        className={this.props.type}
+        type={this.props.type}
       /> 
     })
 
     return (
-      <StyledCartOverlayDescription>
-        <BrandAndName>
-          <Brand>{this.props.brand}</Brand>
-          <Name>{this.props.name}</Name>
-        </BrandAndName>
-        <Price>{this.props.currentCurrency.symbol}{amount}</Price>
+      <StyledCartOverlayDescription className={this.props.type}>
+        <div>
+          <Brand className={this.props.type}>{this.props.brand}</Brand>
+          <Name className={this.props.type}>{this.props.name}</Name>
+        </div>
+        <Price className={this.props.type}>{this.props.currentCurrency.symbol}{amount}</Price>
         { mappedCartOverlayItems }
       </StyledCartOverlayDescription>
     )

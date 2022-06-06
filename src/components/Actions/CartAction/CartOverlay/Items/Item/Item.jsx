@@ -13,7 +13,15 @@ const StyledItem = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  margin: 0 0 28px 0;
+
+  &.cartOverlay {
+    margin: 0 0 28px 0;
+  }
+
+  &.cart {
+    border-bottom: 1px solid #E5E5E5;
+    padding: 24px 0;
+  }
 `
 
 const CartOverlayDescriptionContainer = styled.div`
@@ -21,8 +29,16 @@ const CartOverlayDescriptionContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   aling-items: center;
-  width: 168px;
-  min-height: 190px;
+
+  &.cartOverlay {
+    width: 168px;
+    min-height: 190px;
+    height: fit-content;
+  }
+
+  &.cart {
+    width: 1040px;
+  }
 `
 
 export default class Item extends React.Component {
@@ -51,22 +67,24 @@ export default class Item extends React.Component {
       this.setState({ height: this.ref.current.clientHeight })
     }
   }
-
+  
   render() {
     return (
-      <StyledItem id={this.props.type} ref={this.ref}>
-        <CartOverlayDescriptionContainer>
+      <StyledItem id={this.props.type} className={this.props.type} ref={this.ref}>
+        <CartOverlayDescriptionContainer className={this.props.type}>
           <CartOverlayDescription
             brand={this.props.brand} 
             name={this.props.name}
             currentCurrency={this.props.currentCurrency} 
             prices={this.props.prices} 
             attributes={this.props.attributes}
+            type={this.props.type}
           />
           <CartOverlayQuantity
             quantity={this.props.quantity} 
             increaseQuantity={this.increaseQuantity}
-            decreaseQuantity={this.decreaseQuantity} 
+            decreaseQuantity={this.decreaseQuantity}
+            type={this.props.type}
           />
         </CartOverlayDescriptionContainer>
         <CartOverlayImage gallery={this.props.gallery} type={this.props.type} />

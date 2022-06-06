@@ -16,7 +16,7 @@ const StyledButton = styled.button`
   border-radius: 50%;
   border: none;
   background-color: #1D1F22;
-  z-index: 11;
+  z-index: 10;
 
   &.cart:hover,
   &.cart.selected {

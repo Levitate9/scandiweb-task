@@ -4,8 +4,16 @@ import ImageButtons from './ImageButtons/ImageButtons'
 
 const StyledCartOverlayImage = styled.div`
   position: relative;
-  width: 121px;
-  height: 190px;
+
+  &.cartOverlay {
+    width: 121px;
+    height: 190px;
+  }
+
+  &.cart {
+    width: 200px;
+    height: 288px;
+  }
 `
 
 const Image = styled.div`
@@ -36,7 +44,7 @@ export default class CartOverlayImage extends React.Component {
   render() {
     const imageSrc = this.props.gallery[this.state.index]
     return (
-      <StyledCartOverlayImage>
+      <StyledCartOverlayImage className={this.props.type}>
         <Image src={imageSrc} />
         { this.props.gallery.length > 1 && this.props.type === 'cart' &&
           <ImageButtons prevImg={this.prevImg} nextImg={this.nextImg} /> }

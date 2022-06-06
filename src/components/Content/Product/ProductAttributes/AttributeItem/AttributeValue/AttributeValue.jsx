@@ -24,10 +24,6 @@ const StyledAttributeValue = styled.div`
     height: 32px;
   }
 
-  &.color.selected {
-    outline: 2px solid #5ECE7B !important;
-  }
-  
   &:hover.product {
     cursor: pointer;
   }
@@ -46,26 +42,21 @@ const StyledAttributeValue = styled.div`
     background-color: #1D1F22;
   }
 
-  &.disabled {
+  &.color.selected {
+    outline: none !important;
+  }
+
+  &.capacity.disabled,
+  &.size.disabled,
+  &.usb3.disabled,
+  &.touchID.disabled {
     color: #A6A6A6;
     background-color: rgba(166, 166, 166, 0.2);
     border: 1px solid #A6A6A6;
   }
-  
+ 
   &:hover.disabled {
     cursor: default;
-  }
-
-  &:hover .tooltipproduct, 
-  &:hover .tooltipcart, 
-  &:hover .tooltipcartOverlay {
-    visibility: visible;
-  }
-
-  &:hover.disabled .tooltipproduct, 
-  &:hover.disabled .tooltipcart, 
-  &:hover.disabled .tooltipcartOverlay {
-    visibility: hidden;
   }
 
   &.cartOverlay {
@@ -88,22 +79,17 @@ const StyledAttributeValue = styled.div`
     width: 16px;
     height: 16px;
   }
-
-  &.cartOverlay.color.disabled,
-  &.cart.color.disabled {
-    outline: none !important;
-  }
 `
 
 const Background = styled.div`
   position: relative;
   visibility: ${props => props.attrName === 'Color' ? 'visible' : 'hidden' };
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  margin: 8px 8px 0 0;
+  margin: 7px 6px 0 0;
 
   &.product, &.cart {
     width: 63px;
@@ -112,42 +98,26 @@ const Background = styled.div`
   }
 
   &.color {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
   }
 
   &.cartOverlay.color {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
-`
 
-const Tooltip = styled.span`
-  visibility: hidden;
-  position: absolute;
-  font-family: 'Source Sans Pro';
-  font-size: 12px;
-  width: 50px;
-  margin-left: -25px;
-  padding: 5px 0;
-  border-radius: 3px;
-  color: #1D1F22;
-  background-color: #ffffff;
-  top: 120%;
-  left: 50%;
-  text-align: center;
-  box-shadow: 0px 2px 15px rgba(168, 172, 176, 0.3);
-  z-index: 1;
+  &.cartOverlay.color:last-child {
+    margin: 7px 0 0 0;
+  }
 
-  &::after {
-    content: " ";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent #ffffff transparent;
+  &.cartOverlay.color.selected {
+    border: 1px solid #5ECE7B !important;
+  }
+
+  &.cart.color.selected,
+  &.product.color.selected {
+    outline: 1px solid #5ECE7B !important;
   }
 `
 
@@ -168,14 +138,17 @@ export default class AttributeValue extends React.Component {
 
     let disabled = (this.props.type !== 'product' && 'disabled') || ''
     return ( 
-      <Background className={`${this.props.type} ${attrClass}`} attrName={this.props.attrName}>
+      <Background 
+        className={`${this.props.type} ${attrClass} ${this.props.isSelected ? 'selected' : ''}`} 
+        attrName={this.props.attrName}
+      >
         <StyledAttributeValue
           id={this.props.id}
           value={this.props.value}
           className={`${this.props.type} ${attrClass} ${this.props.isSelected ? 'selected' : disabled}`}
           onClick={this.props.type === 'product' ? this.setSelected.bind(this) : null}
         >{ this.props.attrName === 'Color' 
-            ? <Tooltip className={`tooltip${this.props.type}`}>{this.props.displayValue}</Tooltip> 
+            ? null 
             : this.props.attrName === 'Size' ? this.props.value : this.props.displayValue }      
         </StyledAttributeValue>
       </Background>

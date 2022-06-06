@@ -6,13 +6,29 @@ const StyledCartOverlayQuantity = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 190px;
-  margin: 0 8px 0 0;
+
+  &.cartOverlay {
+    height: 190px;
+    margin: 0 8px 0 0;
+  }
+
+  &.cart {
+    height: 288px;
+    margin: 0 24px 0 0;
+  }
 `
 const Amount = styled.div`
   font-weight: 500;
-  font-size: 16px;
-  line-height: 25.6px;
+
+  &.cartOverlay {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  &.cart {
+    font-size: 24px;
+    line-height: 38px;
+  }
 `
 
 const Button = styled.button`
@@ -20,13 +36,22 @@ const Button = styled.button`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 24px;
-  height: 24px;
   font-weight: 300;
-  font-size: 14px;
   border: 1px solid #1D1F22;
   background-color: #ffffff;
   user-select: none;
+  
+  &.cartOverlay {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+  }
+
+  &.cart {
+    width: 45px;
+    height: 45px;
+    font-size: 25px;
+  }
 
   &:hover {
     cursor: pointer;
@@ -47,10 +72,10 @@ const Button = styled.button`
 export default class CartOverlayQuantity extends React.Component {
   render() {
     return (
-      <StyledCartOverlayQuantity>
-        <Button onClick={this.props.increaseQuantity}>+</Button>
-        <Amount>{this.props.quantity}</Amount>
-        <Button onClick={this.props.decreaseQuantity}>-</Button>
+      <StyledCartOverlayQuantity className={this.props.type}>
+        <Button className={this.props.type} onClick={this.props.increaseQuantity}>+</Button>
+        <Amount className={this.props.type}>{this.props.quantity}</Amount>
+        <Button className={this.props.type} onClick={this.props.decreaseQuantity}>-</Button>
       </StyledCartOverlayQuantity>
     )
   }
