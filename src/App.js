@@ -158,7 +158,7 @@ export default class App extends React.Component {
             calculateTotal={this.calculateTotal}
           />
           <Routes>
-            <Route path='*' element={<Navigate to='/all' />} />
+            <Route path='*' element={<Navigate to={this.state.categories[0].name} />} />
             { 
               this.state.categories.map(el => 
                 <Route exact path={`/${el.name}/*`} key={el.name} element={<Content
