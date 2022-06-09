@@ -10,36 +10,31 @@ const StyledAttributeValue = styled.div`
   font-family: 'Source Sans Pro';
   font-size: 16px;
   font-weight: 400;
-  width: 63px;
-  height: 45px;
   border: 1px solid #1D1F22;
   box-sizing: border-box;
   user-select: none;
+  padding: 2px 4px;
 
   &.product,
   &.cart {
-    margin: 10px 10px 0 0;
+    min-width: 63px;
+    min-height: 45px;
+    margin: 10px 12px 0 0;
+  }
+
+  &.product:nth-child(5n + 5),
+  &.cart:nth-child(5n + 5) {
+    margin: 10px 0 0 0;
+  }
+
+  &.product:last-child,
+  &.cart:last-child {
+    margin: 10px 0 0 0;
   }
 
   &.cartOverlay {
     font-size: 14px;
-    margin: 8px 8px 0 0;
-
-    &.capacity {
-      width: 56px;
-      height: 25px;
-    }
-
-    &.size {
-      width: 24px;
-      height: 24px;
-    }
-
-    &.usb3,
-    &.touchID {
-      width: 40px;
-      height: 25px;
-    }
+    margin: 8px 8px 0 2px;
   }
 
   &.cartOverlay:last-child {
@@ -53,13 +48,13 @@ const StyledAttributeValue = styled.div`
 
     &.product,
     &.cart {
-      width: 32px;
-      height: 32px;
+      min-width: 32px;
+      min-height: 32px;
     }
 
     &.cartOverlay {
-      width: 16px;
-      height: 16px;
+      min-width: 16px;
+      min-height: 16px;
     }
   }
 
@@ -73,10 +68,7 @@ const StyledAttributeValue = styled.div`
     cursor: default
   }
 
-  &.capacity.selected,
-  &.size.selected,
-  &.usb3.selected,
-  &.touchID.selected {
+  &.selected {
     color: #ffffff;
     background-color: #1D1F22;
   }
@@ -84,24 +76,7 @@ const StyledAttributeValue = styled.div`
   &.color.selected {
     outline: 1px solid #5ECE7B;
     outline-offset: 2px;
-  }
-
-  &.capacity.disabled,
-  &.size.disabled,
-  &.usb3.disabled,
-  &.touchID.disabled {
-    color: #A6A6A6;
-    background-color: rgba(166, 166, 166, 0.2);
-    border: 1px solid #A6A6A6;
-  }
- 
-  &:hover.disabled {
-    cursor: default;
-  }
-
-  &.cartOverlay.usb3,
-  &.cartOverlay.touchID {
-    width: 40px;
+    background-color: ${props => props.value};
   }
 `
 
@@ -111,19 +86,12 @@ export default class AttributeValue extends React.Component {
   }
 
   render() {
-    let attrClass 
-    if (this.props.attrName === 'With USB 3 ports') {
-      attrClass = 'usb3'
-    } else if (this.props.attrName === 'Touch ID in keyboard') {
-      attrClass = 'touchID'
-    } else {
-      attrClass = this.props.attrName.toLowerCase()
-    }
-
+    let attrClass = this.props.attrName.toLowerCase()
     let disabled = (this.props.type !== 'product' && 'disabled') || ''
     return ( 
       <StyledAttributeValue
         id={this.props.id}
+        attrName={this.props.attrName}
         value={this.props.value}
         className={`${this.props.type} ${attrClass} ${this.props.isSelected ? 'selected' : disabled}`}
         onClick={this.props.type === 'product' ? this.setSelected.bind(this) : null}
